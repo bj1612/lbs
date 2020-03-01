@@ -49,22 +49,22 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a  href="index.html">home</a></li>
-                                            <li><a href="about.html">about</a></li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                            <li><a  href="index.aspx">home</a></li>
+                                            <li><a href="#">Complaint <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">single-blog</a></li>
+                                                    <li><a href="single-blog.html">Institute Level</a></li>
+                                                    <li><a href="single-blog.html">Department Level</a></li>
+                                                    <li><a href="single-blog.html">University Level</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="elements.html">elements</a></li>
-                                                
-                                                </ul>
-                                            </li>
-                                            <li><a href="service.html">services</a></li>
+                                            <li><a href="service.html">About</a></li>
                                             <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="elements.html">Register</a></li>
+                                                    <li><a href="elements.html">Login</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
