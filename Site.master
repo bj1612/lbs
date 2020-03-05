@@ -64,7 +64,7 @@
                                                     <li><a href="login.aspx">Login</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="service.html">About</a></li>
+                                            <li><a href="about.aspx">About</a></li>
                                         </ul>
                                     </nav>
                                 </div>
