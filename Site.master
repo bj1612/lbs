@@ -40,7 +40,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-3">
                                 <div class="logo">
-                                    <a href="index.html">
+                                    <a href="index.aspx">
                                         <img src="img/logo.png" alt="">
                                     </a>
                                 </div>
@@ -52,19 +52,19 @@
                                             <li><a  href="index.aspx">home</a></li>
                                             <li><a href="#">Complaint <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="single-blog.html">Institute Level</a></li>
-                                                    <li><a href="single-blog.html">Department Level</a></li>
-                                                    <li><a href="single-blog.html">University Level</a></li>
+                                                    <li><a href="institute_level.aspx">Institute Level</a></li>
+                                                    <li><a href="department_level.aspx">Department Level</a></li>
+                                                    <li><a href="university_level.aspx">University Level</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="track_complaint.aspx">Track Complaint</a></li>
+                                            <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="register.aspx">Register</a></li>
+                                                    <li><a href="login.aspx">Login</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="service.html">About</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="elements.html">Register</a></li>
-                                                    <li><a href="elements.html">Login</a></li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
