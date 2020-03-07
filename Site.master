@@ -50,13 +50,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a  href="index.aspx">home</a></li>
-                                            <li><a href="#">Complaint <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="institute_level.aspx">Institute Level</a></li>
-                                                    <li><a href="department_level.aspx">Department Level</a></li>
-                                                    <li><a href="university_level.aspx">University Level</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="register_complaint.aspx">Complaint</a></li>                                                                                           </li>
                                             <li><a href="track_complaint.aspx">Track Complaint</a></li>
                                             <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
