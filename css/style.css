@@ -2985,6 +2985,13 @@ h3 {
   background-position: bottom;
   background-repeat: no-repeat;
 }
+.bradcam_area1 {
+  background-size: cover;
+  background-position: center center;
+  padding: 110px 0;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
 
 @media (max-width: 767px) {
   /* line 10, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
