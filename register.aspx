@@ -24,99 +24,101 @@
                     <div class="single_service active">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="First name">
+                                    <asp:TextBox ID="First" class="form-control" placeholder="First name" runat="server"></asp:TextBox>
                                  </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Last name">
+                                    <asp:TextBox ID="Last" class="form-control" placeholder="Last name" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Contact Number ">
+                                    <asp:TextBox ID="Contact" class="form-control" placeholder="Contact Number " runat="server"></asp:TextBox>
                                  </div>                                                            
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Email Adrress">
+                                <div class="col">                
+                                    <asp:TextBox ID="Email" class="form-control" placeholder="Email Adrress" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Password">
+                                    <asp:TextBox ID="Password" class="form-control" placeholder="Password"  TextMode="password" runat="server"></asp:TextBox>
                                  </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Confirm Password">
+                                    <asp:TextBox ID="Confirm"  class="form-control" placeholder="Confirm Password" TextMode="password" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                              <div class="row mt-3 ">
                                 <div class="col">
-                                   <select id="Select1" class="form-control">
-                                        <option disabled selected>Department Name</option>
-                                        <option>Department1</option>
-                                        <option>Department2</option>
-                                        <option>Department3</option>
-                                        <option>Department4</option>
-                                  </select>
+                                  <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" >  
+                                    <asp:ListItem Value="" InitialValue="Unselectable Item">Department Name</asp:ListItem>  
+                                    <asp:ListItem>Department1</asp:ListItem>  
+                                    <asp:ListItem>Department2</asp:ListItem>  
+                                    <asp:ListItem>Department3</asp:ListItem>  
+                                    <asp:ListItem>Department4</asp:ListItem>  
+                                    <asp:ListItem>Department5</asp:ListItem>  
+                                </asp:DropDownList>  
                                 </div>
-                                <div class="col">
-                                   <select id="inputState" class="form-control">
-                                        <option disabled selected>Institute Name</option>
-                                        <option>Institute</option>
-                                        <option>Institute2</option>
-                                        <option>Institute3</option>
-                                        <option>Institute4</option>
-                                  </select>
+                                <div class="col">                                        
+                                  <asp:DropDownList ID="inputState" class="form-control" runat="server" >  
+                                    <asp:ListItem Value="" InitialValue="Unselectable Item">Institute Name</asp:ListItem>  
+                                    <asp:ListItem>Institute1</asp:ListItem>  
+                                    <asp:ListItem>Institute2</asp:ListItem>  
+                                    <asp:ListItem>Institute3</asp:ListItem>  
+                                    <asp:ListItem>Institute4</asp:ListItem>  
+                                    <asp:ListItem>Institute5</asp:ListItem>  
+                                </asp:DropDownList>  
                                 </div>
                                   <div class="col">
-                                   <select id="Select2" class="form-control">
-                                        <option disabled selected>University Name</option>
-                                        <option>University1</option>
-                                        <option>University2</option>
-                                        <option>University3</option>
-                                        <option>University4</option>
-                                  </select>
+                                      <asp:DropDownList ID="university" class="form-control" runat="server" >  
+                                        <asp:ListItem Value="" InitialValue="Unselectable Item">University Name</asp:ListItem>  
+                                        <asp:ListItem>University1</asp:ListItem>  
+                                        <asp:ListItem>University2</asp:ListItem>  
+                                        <asp:ListItem>University3</asp:ListItem>  
+                                        <asp:ListItem>University4</asp:ListItem>  
+                                        <asp:ListItem>University5</asp:ListItem>  
+                                    </asp:DropDownList> 
                                 </div>
                              </div>
                              <div class="row mt-3 ">
                                 <div class="col">
-                                   <select id="Select3" class="form-control">
-                                        <option disabled selected>Admission Year</option>
-                                        <option>2020</option>
-                                        <option>2019</option>
-                                        <option>2018</option>
-                                        <option>2017</option>
-                                        <option>2016</option>
-                                  </select>
+                                      <asp:DropDownList ID="year" class="form-control" runat="server" >  
+                                        <asp:ListItem Value="" InitialValue="Unselectable Item">Admission Year</asp:ListItem>  
+                                        <asp:ListItem>2020</asp:ListItem>  
+                                        <asp:ListItem>2019</asp:ListItem>  
+                                        <asp:ListItem>2018</asp:ListItem>  
+                                        <asp:ListItem>2017</asp:ListItem>  
+                                        <asp:ListItem>2016</asp:ListItem>  
+                                    </asp:DropDownList> 
                                 </div>
                                 <div class="col">
-                                   <select id="Select4" class="form-control">
-                                        <option disabled selected>Current Year</option>
-                                        <option>2020</option>
-                                        <option>2019</option>
-                                        <option>2018</option>
-                                        <option>2017</option>
-                                        <option>2016</option>
-                                  </select>
+                                      <asp:DropDownList ID="curryear" class="form-control" runat="server" >  
+                                        <asp:ListItem Value="" InitialValue="Unselectable Item">Current Year</asp:ListItem>  
+                                        <asp:ListItem>2020</asp:ListItem>  
+                                        <asp:ListItem>2019</asp:ListItem>  
+                                        <asp:ListItem>2018</asp:ListItem>  
+                                        <asp:ListItem>2017</asp:ListItem>  
+                                        <asp:ListItem>2016</asp:ListItem>  
+                                    </asp:DropDownList>
                                 </div>
                               </div>
                              <div class="row mt-3 ">
                                 <div class="col">
-                                   <select id="Select5" class="form-control">
-                                        <option disabled selected>Shift</option>
-                                        <option>First Shift</option>
-                                        <option>Second Shift</option>
-                                    </select>
+                                      <asp:DropDownList ID="shift" class="form-control" runat="server" >  
+                                        <asp:ListItem Value="" InitialValue="Unselectable Item">Shift</asp:ListItem>  
+                                        <asp:ListItem>First Shift</asp:ListItem>  
+                                        <asp:ListItem>Second Shift</asp:ListItem>  
+                                    </asp:DropDownList>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Roll Number ">
+                                    <asp:TextBox ID="Roll"  class="form-control" placeholder="Roll Number " runat="server"></asp:TextBox>
                                  </div>                                                            
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="PNR Number">
+                                    <asp:TextBox ID="PNR" class="form-control" placeholder="PNR Number" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                              <div class="row justify-content-center mt-3">
-                            <a href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;">Register</a>
-                           </div>
-
-                    </div>
+                                   <asp:LinkButton Text="Register" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
+                             </div>
+                      </div>
                 </div>
               
             </div>

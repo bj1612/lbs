@@ -35,26 +35,36 @@
                 </div>
                 <div class="col-lg-6 col-md-8">
                     <div class="single_service active">
-                         <div class="service_content text-center" id="tableDiv" >
-                         <label style="font-size:x-large;">Unsolved Complaint</label>
-                               <table class="table table-hover mt-0">
-                                      <thead style="background-color: #f88017; color: white;">
-                                        <tr>
-                                          <th scope="col">Complaint Id</th>
-                                          <th scope="col">Subject</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">1</th>
-                                          <td>Mark</td>
+                         <div class="service_content text-center" id="tableDiv" runat="server" >
+                            <div class="row justify-content-center mt-3" runat="server">
+                                <asp:Button ID="Button1" runat="server" Text="Login" onclick="Button1_Click" />
+                            </div>
+                            <!--<asp:Table ID="Table1" runat="server" Height="123px" Width="567px" class="table table-hover mt-0">
+                                <asp:TableRow ID="TableRow1" runat="server" style="background-color: #f88017; color: white;">
+                                    <asp:TableCell ID="TableCell1" runat="server">Complaint</asp:TableCell>
+                                    <asp:TableCell ID="TableCell2" runat="server">Subject</asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow ID="TableRow2" runat="server">
+                                    <asp:TableCell ID="TableCell4" runat="server">1</asp:TableCell>
+                                    <asp:TableCell ID="TableCell5" runat="server">Mark</asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>-->
+                            <!--<label style="font-size:x-large;">Unsolved Complaint</label>
+                            <table class="table table-hover mt-0">
+                                <thead style="background-color: #f88017; color: white;">
+                                <tr>
+                                    <th scope="col">Complaint Id</th>
+                                    <th scope="col">Subject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
 
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                 <div class="row justify-content-center mt-3">
-                                 <a href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;">Login</a>
-                               </div>
+                                </tr>
+                                </tbody>
+                            </table>-->
                          </div>
                     </div>
                 </div>

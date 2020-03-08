@@ -20,31 +20,25 @@
      <div class="service_area" style ="padding:0px ; margin:0px;">
         <div class="container">            
             <div class="row justify-content-center">
-                
                 <div class="col-lg-6 col-md-8  p-3 mb-5 " style="margin-top:0px;">
                     <div class="single_service active">
-                       
-                          
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Email">
+                                    <asp:TextBox class="form-control" placeholder="Email" ID="Email" runat="server"></asp:TextBox>
                                  </div>
                             </div>
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <input type="text" class="form-control" placeholder="Password">
+                                    <asp:TextBox ID="Password" class="form-control" placeholder="Password"  TextMode="password" runat="server"></asp:TextBox>
                                  </div>
                             </div>
                                 <div class="row justify-content-center mt-3">
-                                   <a href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;">Login</a>
+                                    <asp:LinkButton Text="Login" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
                                 </div>
                            </div>
                     </div>
                 </div>
-              
-            </div>
+             </div>
         </div>
-    </div>
-
 </asp:Content>
 
