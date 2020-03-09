@@ -2,9 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="bradcam_area1 breadcam_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcam_text text-center">
+                        <h3 style="color:White;font-size:xx-large;">Welcome to SGRS</h3>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
     <!-- slider_area_start -->
-    <div class="slider_area">
+    <div class="slider_area" style="display:none;">
         <div class="single_slider slider_bg_1 d-flex align-items-center">
             <div class="container">
                 <div class="row">
