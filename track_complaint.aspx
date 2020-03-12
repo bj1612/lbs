@@ -60,6 +60,38 @@
                                 <th scope="row">1</th>
                                 <td>Unable to fill KT form, since delay in revaluation results</td>
                             </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Printing mistake</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
