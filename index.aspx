@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White;font-size:xx-large;">Welcome to SGRS</h3>
+                        <h3 style="color:White;font-size:xx-large;">Welcome to Student Review System</h3>
                     </div>
                 </div>
             </div>
@@ -39,10 +39,10 @@
     <div class="service_area">
         <div class="container">
             <div class="row justify-content-center ">
-                <div class="col-lg-7 col-md-10">
+                <div class="col-lg-7 col-md-12">
                     <div class="section_title text-center mb-95">
-                        <h3>Want to complaint, yes you can</h3>
-                        <p>Student will able to complaint at department level, institute level and univesity level.</p>
+                        <h3>Want to share your review, yes you can</h3>
+                        <p>Student will able to share review at department level, institute level and univesity level.</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                          </div>
                          <div class="service_content text-center">
                             <h3>Department</h3>
-                            <p>Here studuent can able to complaint at department level as well as there sub categories.</p>
+                            <p>Here student can able to share review at department level as well as there sub categories.</p>
                          </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                          </div>
                          <div class="service_content text-center">
                             <h3>Institute Level</h3>
-                            <p>Here studuent can able to complaint at institute level as well as there sub categories.</p>
+                            <p>Here student can able to review at institute level as well as there sub categories.</p>
                          </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                          </div>
                          <div class="service_content text-center">
                             <h3>University Level</h3>
-                            <p>Here studuent can able to complaint at university level as well as there sub categories.</p>
+                            <p>Here student can able to share review at university level as well as there sub categories.</p>
                          </div>
                     </div>
                 </div>
@@ -99,9 +99,9 @@
                 <div class="col-lg-5">
                     <div class="adapt_help">
                         <div class="section_title">
-                            <h3><span>track complaint</span>
+                            <h3><span>Track complaint</span>
                                 status</h3>
-                            <p>This selection provide the checking the status of complaint which you regiser with us.</p>
+                            <p>This section provide the checking the status of complaint which you register with us.</p>
                             <a href="track_complaint.aspx" class="boxed-btn3">Track Complaint</a>
                         </div>
                     </div>

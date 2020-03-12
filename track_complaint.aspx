@@ -27,7 +27,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8">
                     <div class="single_service">
-                        <h5 class="text-center">Solved Complaint</h5>
+                        <h5 class="text-center">Pending Complaint</h5>
                         <table class="table table-hover" style="color:#FF5500">
                             <thead>
                             <tr>
@@ -38,7 +38,7 @@
                             <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Printing mistake</td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-6 col-md-8">
                     <div class="single_service">
-                    <h5 class="text-center">Unsolved Complaint</h5>
+                    <h5 class="text-center">Completed Complaint</h5>
                         <table class="table table-hover" style="color:#FF5500">
                             <thead>
                             <tr>
@@ -58,7 +58,7 @@
                             <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Printing mistake</td>
+                                <td>Unable to fill KT form, since delay in revaluation results</td>
                             </tr>
                             </tbody>
                         </table>
