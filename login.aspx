@@ -24,16 +24,18 @@
                     <div class="single_service active">
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <asp:TextBox class="form-control" placeholder="Email" ID="Email" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" placeholder="Email" ID="Email" runat="server" required="true"></asp:TextBox>
                                  </div>
                             </div>
                             <div class="row mt-3 ">
                                 <div class="col">
-                                    <asp:TextBox ID="Password" class="form-control" placeholder="Password"  TextMode="password" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="Password" class="form-control" placeholder="Password"  TextMode="password" runat="server" required="true"></asp:TextBox>
                                  </div>
                             </div>
                                 <div class="row justify-content-center mt-3">
-                                    <asp:LinkButton Text="Login" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
+                                    <asp:Button Text="Login" class="boxed-btn4" 
+                                        style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" 
+                                        runat="server" ID="Login" onclick="Login_Click"></asp:Button>
                                 </div>
                            </div>
                     </div>

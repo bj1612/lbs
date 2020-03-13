@@ -13,9 +13,9 @@ public partial class Register : System.Web.UI.Page
     string connStr;
     protected void Page_Load(object sender, EventArgs e)
     {
+        connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
         if (!IsPostBack)
         {
-            connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
             try
             {
                 SqlConnection connection = new SqlConnection(connStr);
@@ -26,24 +26,43 @@ public partial class Register : System.Web.UI.Page
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.HasRows)
+                    if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
                             string university_id = reader.GetInt32(0).ToString();
-                            string item = reader.GetString(1);
-                            if (!string.IsNullOrEmpty(item))
+                            string university_name = reader.GetString(1);
+                            if (!string.IsNullOrEmpty(university_name))
                             {
-                                university.Items.Add(new ListItem(item,university_id));
+                                university.Items.Add(new ListItem(university_name, university_id));
                             }
                         }
-                        reader.NextResult();
                     }
                 }
             }
             catch (Exception e1)
             {
-                Console.WriteLine(e1.Message);
+                Console.WriteLine("Error Message: "+e1.StackTrace);
+                System.Diagnostics.Debug.WriteLine("Error Message: "+e1.StackTrace);
+            }
+            int year=Convert.ToInt32(DateTime.Today.Year.ToString());
+            int month = Convert.ToInt32(DateTime.Now.ToString("MM"));
+            if(month<7)
+            {
+                year--;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                admission_year.Items.Add(new ListItem(year.ToString(),year.ToString()));
+                year--;
+            }
+        }
+        if (this.IsPostBack)
+        {
+            if (Password.Text.Equals(Confirm.Text))
+            {
+                Password.Attributes["value"] = Password.Text;
+                Confirm.Attributes["value"] = Confirm.Text;
             }
         }
     }
@@ -57,39 +76,40 @@ public partial class Register : System.Web.UI.Page
         string institute_selected = inputState.SelectedValue ;
         if (university_selected.Equals("University Name")==false)
         {
-            if (institute_selected.Equals("Institute Name")==false)
+            if (institute_selected.Equals("Institute Name") == false)
             {
                 try
                 {
                     SqlConnection connection = new SqlConnection(connStr);
                     using (connection)
                     {
-                        /*SqlParameter institute_id_param = new SqlParameter();
+                        SqlParameter institute_id_param = new SqlParameter();
                         institute_id_param.ParameterName = "@ins_id";
                         institute_id_param.SqlDbType = SqlDbType.Int;
                         institute_id_param.Direction = ParameterDirection.Input;
-                        institute_id_param.Value = Convert.ToInt32(institute_selected);*/
+                        institute_id_param.Value = Convert.ToInt32(institute_selected);
 
                         SqlCommand command = new SqlCommand("SELECT department_id,department_name FROM department where institute_id=@ins_id", connection);
-                        command.Parameters.Add("@ins_id", SqlDbType.Int).Value = Convert.ToInt32(institute_selected);
+                        //command.Parameters.Add("@ins_id", SqlDbType.Int).Value = Convert.ToInt32(institute_selected);
                         connection.Open();
 
-                        //command.Parameters.Add(institute_id_param);
+                        command.Parameters.Add(institute_id_param);
 
                         SqlDataReader reader = command.ExecuteReader();
 
-                        while (reader.HasRows)
+                        if (reader.HasRows)
                         {
+                            DropDownList1.Items.Clear();
+                            DropDownList1.Items.Add(new ListItem("Department Name", "Department Name"));
                             while (reader.Read())
                             {
                                 string department_id = reader.GetInt32(0).ToString();
                                 string item = reader.GetString(1);
                                 if (!string.IsNullOrEmpty(item))
                                 {
-                                    DropDownList1.Items.Add(new ListItem(item,department_id));
+                                    DropDownList1.Items.Add(new ListItem(item, department_id));
                                 }
                             }
-                            reader.NextResult();
                         }
                     }
                 }
@@ -98,9 +118,20 @@ public partial class Register : System.Web.UI.Page
                     Console.WriteLine(e1.Message);
                 }
             }
+            else
+            {
+                DropDownList1.Items.Clear();
+                DropDownList1.Items.Add(new ListItem("Department Name", "Department Name"));
+                inputState.Items.FindByValue("Institute Name").Selected = true;
+                DropDownList1.Items.FindByValue("Department Name").Selected = true;
+            }
         }
         else
         {
+            inputState.Items.Clear();
+            inputState.Items.Add(new ListItem("Institute Name", "Institute Name"));
+            DropDownList1.Items.Clear();
+            DropDownList1.Items.Add(new ListItem("Department Name", "Department Name"));
             university.Items.FindByValue("University Name").Selected = true;
             inputState.Items.FindByValue("Institute Name").Selected = true;
             DropDownList1.Items.FindByValue("Department Name").Selected = true;
@@ -109,7 +140,7 @@ public partial class Register : System.Web.UI.Page
     protected void university_SelectedIndexChanged(object sender, EventArgs e)
     {
         string university_selected = university.SelectedValue;
-        if (university_selected.Equals("")==false)
+        if (university_selected.Equals("University Name") == false)
         {
             try
             {
@@ -129,8 +160,10 @@ public partial class Register : System.Web.UI.Page
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.HasRows)
+                    if (reader.HasRows)
                     {
+                        inputState.Items.Clear();
+                        inputState.Items.Add(new ListItem("Institute Name", "Institute Name"));
                         while (reader.Read())
                         {
                             string institute_id = reader.GetInt32(0).ToString();
@@ -140,7 +173,6 @@ public partial class Register : System.Web.UI.Page
                                 inputState.Items.Add(new ListItem(item,institute_id));
                             }
                         }
-                        reader.NextResult();
                     }
                 }
             }
@@ -151,9 +183,285 @@ public partial class Register : System.Web.UI.Page
         }
         else
         {
+            inputState.Items.Clear();
+            inputState.Items.Add(new ListItem("Institute Name", "Institute Name"));
+            DropDownList1.Items.Clear();
+            DropDownList1.Items.Add(new ListItem("Department Name", "Department Name"));
             university.Items.FindByValue("University Name").Selected = true;
             inputState.Items.FindByValue("Institute Name").Selected = true;
             DropDownList1.Items.FindByValue("Department Name").Selected = true;
         }
     }
+    protected void RegisterButton_Click(object sender, EventArgs e)
+    {
+        bool checkdrop = true;
+        string alertclassname = "alert-danger";
+        string first = First.Text;
+        string last = Last.Text;
+        long contact = Convert.ToInt64(Contact.Text);
+        string emailid = Email.Text;
+        string password = Password.Text;
+        string confirmpassword = Confirm.Text;
+        int universityid=0;
+        if(university.SelectedValue!="University Name")
+        {
+            universityid = Convert.ToInt32(university.SelectedValue);
+            //Remove a Class
+            university.Attributes.Add("class", String.Join(" ", university
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            university.Attributes.Add("class", String.Join(" ", university
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        int instituteid=0;
+        if (inputState.SelectedValue != "Institute Name")
+        {
+            instituteid = Convert.ToInt32(inputState.SelectedValue);
+            //Remove a Class
+            inputState.Attributes.Add("class", String.Join(" ", inputState
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            inputState.Attributes.Add("class", String.Join(" ", inputState
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        int departmentid=0;
+        if(DropDownList1.SelectedValue!="Department Name")
+        {
+           departmentid = Convert.ToInt32(DropDownList1.SelectedValue);
+           //Remove a Class
+           DropDownList1.Attributes.Add("class", String.Join(" ", DropDownList1
+                     .Attributes["class"]
+                     .Split(' ')
+                     .Except(new string[] { "", alertclassname })
+                     .ToArray()
+             ));
+        }
+        else
+        {
+            DropDownList1.Attributes.Add("class", String.Join(" ", DropDownList1
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        int admissionyear=0;
+        if (admission_year.SelectedValue != "Admission Year")
+        {
+            admissionyear = Convert.ToInt32(admission_year.SelectedValue);
+            //Remove a Class
+            admission_year.Attributes.Add("class", String.Join(" ", admission_year
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            admission_year.Attributes.Add("class", String.Join(" ", admission_year
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        string currentyear="";
+        if (current_year.SelectedValue != "Current Year")
+        {
+            currentyear = current_year.SelectedValue;
+            //Remove a Class
+            current_year.Attributes.Add("class", String.Join(" ", current_year
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            current_year.Attributes.Add("class", String.Join(" ", current_year
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        string shift="";
+        if (Shift.SelectedValue != "Shift")
+        {
+            shift = Shift.SelectedValue;
+            //Remove a Class
+            Shift.Attributes.Add("class", String.Join(" ", Shift
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            Shift.Attributes.Add("class", String.Join(" ", Shift
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        int rollno = Convert.ToInt32(Roll.Text);
+        long pnr = Convert.ToInt64(PNR.Text);
+        if (password.Equals(confirmpassword))
+        {
+            //Remove a Class
+            Password.Attributes.Add("class", String.Join(" ", Password
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+            Confirm.Attributes.Add("class", String.Join(" ", Confirm
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        }
+        else
+        {
+            
+            // Add a class
+            Password.Attributes.Add("class", String.Join(" ", Password
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            Confirm.Attributes.Add("class", String.Join(" ", Confirm
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+            checkdrop = false;
+        }
+        if (checkdrop == true)
+        {
+            string insertquery = "insert into student values(@first,@last,@email,@pass,@contact,@ins_id,@dep_id,@uni_id,@adm,@cur,@roll,@pnr,@shift)";
+            try
+            {
+                SqlConnection connection = new SqlConnection(connStr);
+                using (connection)
+                {
+                    using (SqlCommand command = new SqlCommand(insertquery, connection))
+                    {
+                        connection.Open();
+
+                        command.Parameters.AddWithValue("@first", first);
+                        command.Parameters.AddWithValue("@last", last);
+                        command.Parameters.AddWithValue("@email", emailid);
+                        command.Parameters.AddWithValue("@pass", password);
+                        command.Parameters.AddWithValue("@contact", contact);
+                        command.Parameters.AddWithValue("@ins_id", instituteid);
+                        command.Parameters.AddWithValue("@dep_id", departmentid);
+                        command.Parameters.AddWithValue("@uni_id", universityid);
+                        command.Parameters.AddWithValue("@adm", admissionyear);
+                        command.Parameters.AddWithValue("@cur", currentyear);
+                        command.Parameters.AddWithValue("@roll", rollno);
+                        command.Parameters.AddWithValue("@pnr", pnr);
+                        command.Parameters.AddWithValue("@shift", shift);
+
+                        command.ExecuteNonQuery();
+                        Response.Redirect("login.aspx");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1.Message);
+            }
+
+        }
+    }
+    protected void admission_year_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (admission_year.SelectedValue.Equals("Admission Year"))
+        {
+            current_year.Items.Clear();
+            current_year.Items.Add(new ListItem("Current Year", "Current Year"));
+        }
+        else
+        {
+            int year = Convert.ToInt32(DateTime.Today.Year.ToString());
+            int month = Convert.ToInt32(DateTime.Now.ToString("MM"));
+            if (month < 7)
+            {
+                year--;
+            }
+            current_year.Items.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                int checkyear = Convert.ToInt32(admission_year.SelectedValue);
+                if ((checkyear == year) && (i == 0))
+                {
+                    current_year.Items.Add(new ListItem("Current Year", "Current Year"));
+                    current_year.Items.Add(new ListItem("First Year", "First Year"));
+                    break;
+                }
+                if ((checkyear == year) && (i == 1))
+                {
+                    current_year.Items.Add(new ListItem("Current Year", "Current Year"));
+                    current_year.Items.Add(new ListItem("Second Year", "Second Year"));
+                    break;
+                }
+                if ((checkyear == year) && (i == 2))
+                {
+                    current_year.Items.Add(new ListItem("Current Year", "Current Year"));
+                    current_year.Items.Add(new ListItem("Third Year", "Third Year"));
+                    break;
+                }
+                if ((checkyear == year) && (i == 3))
+                {
+                    current_year.Items.Add(new ListItem("Current Year", "Current Year"));
+                    current_year.Items.Add(new ListItem("Fourth Year", "Fourth Year"));
+                    break;
+                }
+                year--;
+            }
+        }
+    }
+        
 }
