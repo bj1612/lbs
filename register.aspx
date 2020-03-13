@@ -48,17 +48,20 @@
                             </div>
                              <div class="row mt-3 ">
                                 <div class="col">
-                                      <asp:DropDownList ID="university" class="form-control" runat="server" >  
+                                      <asp:DropDownList ID="university" class="form-control" runat="server" 
+                                          onselectedindexchanged="university_SelectedIndexChanged" AutoPostBack="True">  
                                         <asp:ListItem Value="" Text="University Name"></asp:ListItem>  
                                     </asp:DropDownList> 
                                 </div>
                                 <div class="col">                                        
-                                  <asp:DropDownList ID="inputState" class="form-control" runat="server" >  
+                                  <asp:DropDownList ID="inputState" class="form-control" runat="server" 
+                                        onselectedindexchanged="inputState_SelectedIndexChanged" AutoPostBack="True">  
                                     <asp:ListItem Value="" Text="Institute Name"></asp:ListItem>  
                                 </asp:DropDownList>  
                                 </div>
                                 <div class="col">
-                                  <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" >  
+                                  <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" 
+                                        onselectedindexchanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">  
                                     <asp:ListItem Value="" Text="Department Name"></asp:ListItem>  
                                 </asp:DropDownList>  
                                 </div>
