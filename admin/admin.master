@@ -53,15 +53,13 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a  href="index.aspx">home</a></li>
-                                            <li><a href="register_complaint.aspx">Complaint</a></li>                                                                                           </li>
-                                            <li><a href="track_complaint.aspx">Track Complaint</a></li>
-                                            <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
+                                            <li><a href="register_complaint.aspx">Register Sub-Admins</a></li>                                                                                           </li>
+                                            <li><a href="#">Welcome  Patil    <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="register.aspx">Register</a></li>
-                                                    <li><a href="login.aspx">Login</a></li>
+                                                    <li><a href="register.aspx">Logout</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="about.aspx">About</a></li>
+                                            <li><a href="#"> </a></li>
                                         </ul>
                                     </nav>
                                 </div>
