@@ -124,8 +124,8 @@ img{ max-width:100%;}
   font-size: 17px;
   height: 33px;
   position: absolute;
-  right: 0;
-  top: 30px;
+  right: -37px;
+  top: 25px;
   width: 33px;
 }
 .messaging { padding: 0 0 50px 0;}
