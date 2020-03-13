@@ -58,7 +58,7 @@
                                                     <li><a href="login.aspx">Login</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="about.aspx">About</a></li>
+                                            <!--<li><a href="about.aspx">About</a></li>-->
                                         </ul>
                                     </nav>
                                 </div>
@@ -101,7 +101,7 @@
                                 <li><a href="department_level.aspx">Department level </a></li>
                                 <li><a href="institute_level.aspx">Institute level </a></li>
                                 <li><a href="university_level.aspx">University level</a></li>
-                                <li><a href="track_complaint.aspx">track status</a></li>
+                                <li><a href="track_complaint.aspx">Track status</a></li>
                             </ul>
                         </div>
                     </div>

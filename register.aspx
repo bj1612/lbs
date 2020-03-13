@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White;font-size:xx-large;">Register</h3style></h3>
+                        <h3 style="color:White;font-size:xx-large;">Register</h3>
                     </div>
                 </div>
             </div>
@@ -48,55 +48,30 @@
                             </div>
                              <div class="row mt-3 ">
                                 <div class="col">
-                                  <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" >  
-                                    <asp:ListItem Value="" InitialValue="Unselectable Item">Department Name</asp:ListItem>  
-                                    <asp:ListItem>Department1</asp:ListItem>  
-                                    <asp:ListItem>Department2</asp:ListItem>  
-                                    <asp:ListItem>Department3</asp:ListItem>  
-                                    <asp:ListItem>Department4</asp:ListItem>  
-                                    <asp:ListItem>Department5</asp:ListItem>  
-                                </asp:DropDownList>  
+                                      <asp:DropDownList ID="university" class="form-control" runat="server" >  
+                                        <asp:ListItem Value="" Text="University Name"></asp:ListItem>  
+                                    </asp:DropDownList> 
                                 </div>
                                 <div class="col">                                        
                                   <asp:DropDownList ID="inputState" class="form-control" runat="server" >  
-                                    <asp:ListItem Value="" InitialValue="Unselectable Item">Institute Name</asp:ListItem>  
-                                    <asp:ListItem>Institute1</asp:ListItem>  
-                                    <asp:ListItem>Institute2</asp:ListItem>  
-                                    <asp:ListItem>Institute3</asp:ListItem>  
-                                    <asp:ListItem>Institute4</asp:ListItem>  
-                                    <asp:ListItem>Institute5</asp:ListItem>  
+                                    <asp:ListItem Value="" Text="Institute Name"></asp:ListItem>  
                                 </asp:DropDownList>  
                                 </div>
-                                  <div class="col">
-                                      <asp:DropDownList ID="university" class="form-control" runat="server" >  
-                                        <asp:ListItem Value="" InitialValue="Unselectable Item">University Name</asp:ListItem>  
-                                        <asp:ListItem>University1</asp:ListItem>  
-                                        <asp:ListItem>University2</asp:ListItem>  
-                                        <asp:ListItem>University3</asp:ListItem>  
-                                        <asp:ListItem>University4</asp:ListItem>  
-                                        <asp:ListItem>University5</asp:ListItem>  
-                                    </asp:DropDownList> 
+                                <div class="col">
+                                  <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" >  
+                                    <asp:ListItem Value="" Text="Department Name"></asp:ListItem>  
+                                </asp:DropDownList>  
                                 </div>
                              </div>
                              <div class="row mt-3 ">
                                 <div class="col">
                                       <asp:DropDownList ID="year" class="form-control" runat="server" >  
                                         <asp:ListItem Value="" InitialValue="Unselectable Item">Admission Year</asp:ListItem>  
-                                        <asp:ListItem>2020</asp:ListItem>  
-                                        <asp:ListItem>2019</asp:ListItem>  
-                                        <asp:ListItem>2018</asp:ListItem>  
-                                        <asp:ListItem>2017</asp:ListItem>  
-                                        <asp:ListItem>2016</asp:ListItem>  
                                     </asp:DropDownList> 
                                 </div>
                                 <div class="col">
                                       <asp:DropDownList ID="curryear" class="form-control" runat="server" >  
                                         <asp:ListItem Value="" InitialValue="Unselectable Item">Current Year</asp:ListItem>  
-                                        <asp:ListItem>2020</asp:ListItem>  
-                                        <asp:ListItem>2019</asp:ListItem>  
-                                        <asp:ListItem>2018</asp:ListItem>  
-                                        <asp:ListItem>2017</asp:ListItem>  
-                                        <asp:ListItem>2016</asp:ListItem>  
                                     </asp:DropDownList>
                                 </div>
                               </div>
@@ -104,8 +79,9 @@
                                 <div class="col">
                                       <asp:DropDownList ID="shift" class="form-control" runat="server" >  
                                         <asp:ListItem Value="" InitialValue="Unselectable Item">Shift</asp:ListItem>  
-                                        <asp:ListItem>First Shift</asp:ListItem>  
-                                        <asp:ListItem>Second Shift</asp:ListItem>  
+                                        <asp:ListItem Value="First Shift">First Shift</asp:ListItem>  
+                                        <asp:ListItem Value="Second Shift">Second Shift</asp:ListItem>
+                                        <asp:ListItem Value="None">None</asp:ListItem>   
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col">
@@ -116,7 +92,7 @@
                                 </div>
                             </div>
                              <div class="row justify-content-center mt-3">
-                                   <asp:LinkButton Text="Register" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
+                                   <asp:LinkButton Text="Register" href="contact.html" class="boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
                              </div>
                       </div>
                 </div>
