@@ -1,26 +1,47 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Detail_complaint.aspx.cs" Inherits="Detail_complaint" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="adminlogin.aspx.cs" Inherits="admin_adminlogin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <link href="css/chatbox.css" rel="stylesheet" type="text/css" />
+    <link href="../css/chatbox.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <!-- bradcam_area_start -->
-    <div class="bradcam_area1 breadcam_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bradcam_text text-center">
-                        <h3 style="color:White; font-size:xx-large;">Details Of Your Complaint!</h3>
-                    </div>
-                </div>
+        <div class = "row">
+            <div class ="col-2">
+                <ul class="list-group">
+                    <li class="list-group-item active">Sub Admin</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+            <div class ="col-2">
+                 <ul class="list-group">
+                    <li class="list-group-item active">Moderator</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+            <div class ="col-2">
+               <ul class="list-group">
+                    <li class="list-group-item active">Pending Complaint</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item active">Solved Complaint</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
             </div>
 
-        </div>
-    </div>
-    <!-- bradcam_area_end -->
-     <div class="service_area" style ="padding:0px ; margin:0px;">
-        <div class="container">            
+            <div class ="col-6">            
             <div class="row justify-content-center">
             <!--complaint id and description-->
             <div class="card" style="text-align:center; width:2000px;margin-top: 20px;" >
@@ -39,7 +60,7 @@
             <!--End complaint and des-->
 
                 <!--Chat Message-->
-                <div class="mesgs">
+                <div class="mesgs" style="width:2000px;">
                    <div class="msg_history">
                     <div class="incoming_msg">
                         <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -74,18 +95,10 @@
                         </div>
                     </div>
                     </div>
-                    <div class="type_msg">
-                    <div class="input_msg_write">
-                        <asp:TextBox id="tb4" rows="3" class="form-control" placeholder="Type a message" TextMode="multiline" runat="server" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                    </div>
-                   </div>
+
                  </div>
-              </div>      
-          </div>
-</div>
-                     
-                        <!--Orange Border code End-->
-    
+              </div>  
+                </div> 
+                  </div>     
 </asp:Content>
 
