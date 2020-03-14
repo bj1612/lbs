@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="adminlogin.aspx.cs" Inherits="admin_adminlogin" %>
+﻿<%@ Page Title="Register System Admin" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="~/systemAdmin/Register_systemAdmin.aspx.cs" Inherits="Register_systemAdmin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White;font-size:xx-large;">Registration Page For Moderator!</h3style></h3>
+                        <h3 style="color:White;font-size:xx-large;">Registration Page For System-Admin!</h3style></h3>
                     </div>
                 </div>
             </div>

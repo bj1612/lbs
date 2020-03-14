@@ -18,7 +18,7 @@ img{ max-width:100%;}
 .srch_bar {
   display: inline-block;
   text-align: right;
-  width: 60%; padding:
+  width: 60%; padding:0px;
 }
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
 
@@ -62,13 +62,14 @@ img{ max-width:100%;}
 
 .incoming_msg_img {
   display: inline-block;
-  width: 6%;
+  width: 4%;
+  margin-left:10px;
 }
 .received_msg {
   display: inline-block;
-  padding: 0 0 0 10px;
+  padding: 3px 0 0 10px;
   vertical-align: top;
-  width: 92%;
+  width: 100%;
  }
  .received_withd_msg p {
   background: #ebebeb none repeat scroll 0 0;
@@ -84,12 +85,13 @@ img{ max-width:100%;}
   display: block;
   font-size: 12px;
   margin: 8px 0 0;
+  margin-left:10px;
 }
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
   padding: 30px 15px 0 25px;
-  width: 60%;
+  width: 80%;
 }
 
  .sent_msg p {
@@ -132,4 +134,5 @@ img{ max-width:100%;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
+  overflow-x:hidden;
 }

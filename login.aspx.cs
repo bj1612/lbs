@@ -18,12 +18,15 @@ public partial class login : System.Web.UI.Page
         {
             if (Session["typeofuser"] != null)
             {
-                Response.Redirect("index.aspx");
+                Response.Redirect(@"../lbs/index.aspx");
             }
         }
     }
     protected void Login_Click(object sender, EventArgs e)
     {
+        //Remove Css Class
+        string alertclassname = "alert-danger";
+
         string email = Email.Text;
         string pass = Password.Text;
         string systemadminquery = "select * from system_admin where system_admin_email=@email and password=@pass";
@@ -46,6 +49,19 @@ public partial class login : System.Web.UI.Page
 
         string studentquery = "select * from student where student_email=@email and password=@pass";
         bool student = false;
+
+        Email.Attributes.Add("class", String.Join(" ", Email
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
+        Password.Attributes.Add("class", String.Join(" ", Password
+                      .Attributes["class"]
+                      .Split(' ')
+                      .Except(new string[] { "", alertclassname })
+                      .ToArray()
+              ));
 
         try
         {
@@ -247,52 +263,89 @@ public partial class login : System.Web.UI.Page
             if ((systemadmin == false) && (uniadmin == false) && (insadmin == false) && (depadmin == false) && (unisub == false) && (inssub == false) && (depsub == false) && (unimode == false) && (insmode == false) && (depmode == false) && (student == false))
             {
                 //Login Unsuccessful
+                Email.Text = "";
+                Password.Text = "";
+                //Add Css Class
+                Email.Attributes.Add("class", String.Join(" ", Email
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
+                Password.Attributes.Add("class", String.Join(" ", Password
+                       .Attributes["class"]
+                       .Split(' ')
+                       .Except(new string[] { "", alertclassname })
+                       .Concat(new string[] { alertclassname })
+                       .ToArray()
+               ));
             }
             if (systemadmin == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "system_admin";
+                Response.Redirect(@"/lbs/systemAdmin/Register_admin.aspx");
             }
             if (uniadmin == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "university_admin";
+                Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (insadmin == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "institute_admin";
+                Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (depadmin == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "department_admin";
+                Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (unisub == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "university_sub_admin";
+                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             } 
             if (inssub == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "institute_sub_admin";
+                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             }
             if (depsub == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "department_sub_admin";
+                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             }
             if (unimode == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "university_mode";
+                Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (insmode == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "institute_mode";
+                Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (depmode == true)
             {
-
+                Session["email"] = email;
+                Session["typeofuser"] = "department_mode";
+                Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (student == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "student";
-                Response.Redirect("index.aspx");
+                Response.Redirect(@"/lbs/index.aspx");
             }
         }
         catch (Exception e1)

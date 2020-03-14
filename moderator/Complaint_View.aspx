@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="adminlogin.aspx.cs" Inherits="admin_adminlogin" %>
+﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/moderator/moderator.master" AutoEventWireup="true" CodeFile="~/moderator/Complaint_View.aspx.cs" Inherits="Complaint_View" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
  <link href="../css/chatbox.css" rel="stylesheet" type="text/css" />
@@ -23,7 +23,7 @@
             <div class="row justify-content-center">
                 <!--Chat Message-->
 
-                <div class="mesgs p-5" style="border-style: groove;border-width: 20px;">
+                <div class="mesgs p-5" style="">
                    <div class="msg_history">
                     <div class="incoming_msg">
                         <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>

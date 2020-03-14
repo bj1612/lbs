@@ -16,6 +16,13 @@ public partial class Register : System.Web.UI.Page
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
         if (!IsPostBack)
         {
+            if (Session["email"] != null)
+            {
+                if (Session["typeofuser"] != null)
+                {
+                    Response.Redirect(@"../lbs/index.aspx");
+                }
+            }
             try
             {
                 SqlConnection connection = new SqlConnection(connStr);

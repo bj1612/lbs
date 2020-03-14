@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="index" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/index.aspx.cs" Inherits="index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="dog_thumb d-none d-lg-block">
-                <img src="img/banner/complaint.png" alt="">
+                <img src="/lbs/img/banner/complaint.png" alt="" />
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                     <div class="single_service">
                          <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
                              <div class="service_icon">
-                                 <img src="img/service/department.png" alt="">
+                                 <img src="/lbs/img/service/department.png" alt="" />
                              </div>
                          </div>
                          <div class="service_content text-center">
@@ -64,7 +64,7 @@
                     <div class="single_service active">
                          <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
                              <div class="service_icon">
-                                 <img src="img/service/institute.png" alt=""/>
+                                 <img src="/lbs/img/service/institute.png" alt="" />
                              </div>
                          </div>
                          <div class="service_content text-center">
@@ -77,7 +77,7 @@
                     <div class="single_service">
                          <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
                              <div class="service_icon">
-                                 <img src="img/service/university.png" alt="">
+                                 <img src="/lbs/img/service/university.png" alt="" />
                              </div>
                          </div>
                          <div class="service_content text-center">
@@ -102,7 +102,7 @@
                             <h3><span>Track complaint</span>
                                 status</h3>
                             <p>This section provide the checking the status of complaint which you register with us.</p>
-                            <a href="track_complaint.aspx" class="boxed-btn3">Track Complaint</a>
+                            <a href="/lbs/student/track_complaint.aspx" class="boxed-btn3">Track Complaint</a>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-6">
                                 <div class="single_adapt text-center">
-                                    <img src="img/adapt_icon/department1.png" alt="">
+                                    <img src="/lbs/img/adapt_icon/department1.png" alt="" />
                                     <div class="adapt_content">
                                         <h3 class="counter">452</h3>
                                         <p>Department Complaint</p>
@@ -120,14 +120,14 @@
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="single_adapt text-center">
-                                    <img src="img/adapt_icon/institute1.png" alt="">
+                                    <img src="/lbs/img/adapt_icon/institute1.png" alt="" />
                                     <div class="adapt_content">
                                         <h3><span class="counter">52</span>+</h3>
                                         <p>Institute Complaint</p>
                                     </div>
                                 </div>
                                 <div class="single_adapt text-center">
-                                    <img src="img/adapt_icon/university1.png" alt="">
+                                    <img src="/lbs/img/adapt_icon/university1.png" alt="" />
                                     <div class="adapt_content">
                                         <h3><span class="counter">52</span>+</h3>
                                         <p>University Complaint</p>

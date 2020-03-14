@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="moderator.master.cs" Inherits="admin_admin" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,18 +15,21 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/themify-icons.css">
+    <link rel="stylesheet" href="../css/nice-select.css">
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/gijgo.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/slicknav.css">
+    <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="../css/responsive.css"> -->
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -40,41 +43,24 @@
                         <div class="row align-items-center">
                             <div class="col-xl-3 col-lg-3">
                                 <div class="logo">
-                                    <a href="index.aspx">
-                                        <img src="/lbs/img/Edited logo1.png" alt="" />
+                                    <a href="track_complaint.aspx">
+                                        <img src="../img/Edited logo1.png" alt=""/>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9">
                                 <div class="main-menu  d-none d-lg-block">
-                                    <div id="menudiv" runat="server">
-                                        <nav>
-                                            <ul id="navigation">
-                                                <li><a  href="/lbs/index.aspx">Home</a></li>
-                                                <li><a href="/lbs/student/register_complaint.aspx">Register Complaint</a></li>                                                                                           </li>
-                                                <li><a href="/lbs/student/track_complaint.aspx">Track Complaint</a></li>
-                                                <li><a href="#">Welcome Nabil Kazi <i class="ti-angle-down"></i></a>
-                                                    <ul class="submenu">
-                                                        <li><a href="/lbs/logout.aspx">Logout</a></li>
-                                                    </ul>
-                                                </li>
-                                           </ul>
-                                        </nav>
-                                        <nav>
-                                            <ul>
-                                                <li><a href="/lbs/index.aspx">Home</a></li>
-                                                <li><a href="/lbs/about.aspx">About Us</a></li>
-                                                <li><a href="/lbs/about.aspx">GuideLines</a></li>
-                                                <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
-                                                    <ul class="submenu">
-                                                        <li><a href="/lbs/register.aspx">Register</a></li>
-                                                        <li><a href="/lbs/login.aspx">Login</a></li>
-                                                    </ul>
-                                                </li>
-                                                <!--<li><a href="about.aspx">About</a></li>-->
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a  href="track_complaint.aspx">Home</a></li>                                                                                          </li>
+                                            <li><a href="#">Welcome  Patil    <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="../register.aspx">Logout</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#"> </a></li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -109,13 +95,10 @@
                     <div class="col-xl-3  col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                status & complaint 
+                                Status & Complaint 
                             </h3>
                             <ul class="links">
-                                <li><a href="department_level.aspx">Department level </a></li>
-                                <li><a href="institute_level.aspx">Institute level </a></li>
-                                <li><a href="university_level.aspx">University level</a></li>
-                                <li><a href="track_complaint.aspx">Track status</a></li>
+                                <li><a href="track_complaint.aspx">Track Complaint</a></li>
                             </ul>
                         </div>
                     </div>
@@ -125,7 +108,7 @@
                                 Quick Link
                             </h3>
                             <ul class="links">
-                                <li><a href="about.aspx">About Us</a></li>
+                                <li><a href="../about.aspx">About Us</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Terms of Service</a></li>
                             </ul>
@@ -135,7 +118,7 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="/lbs/img/Edited logo1.png" alt="" />
+                                    <img src="img/Edited logo1.png" alt="">
                                 </a>
                             </div>
                             <p class="address_text">Collector colony, chembur, 400086</p>
@@ -183,34 +166,7 @@
     <!-- footer_end  -->
 
 
-    <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
 
-    <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-
-    <script src="js/main.js"></script>
     <!--<script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
