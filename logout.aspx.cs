@@ -11,7 +11,7 @@ public partial class logout : System.Web.UI.Page
     {
         Session.RemoveAll();
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-2));
+        Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
         Response.Cache.SetNoStore();
         Response.Redirect(@"/lbs/login.aspx");
     }
