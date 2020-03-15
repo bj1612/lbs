@@ -29,6 +29,8 @@ public partial class login : System.Web.UI.Page
 
         string email = Email.Text;
         string pass = Password.Text;
+        string first = "";
+        string last = "";
         string systemadminquery = "select * from system_admin where system_admin_email=@email and password=@pass";
         bool systemadmin = false;
 
@@ -77,7 +79,12 @@ public partial class login : System.Web.UI.Page
 
                 if (reader.HasRows)
                 {
-                    systemadmin = true;
+                    while (reader.Read())
+                    {
+                        first = reader.GetString(0);
+                        last = reader.GetString(1);
+                        systemadmin = true;
+                    }
                 }
             }
             if (systemadmin == false)
@@ -94,7 +101,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        uniadmin = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            uniadmin = true;
+                        }
                     }
                 }
             }
@@ -112,7 +124,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        insadmin = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            insadmin = true;
+                        }
                     }
                 }
             }
@@ -130,7 +147,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        depadmin = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            depadmin = true;
+                        }
                     }
                 }
             }
@@ -148,7 +170,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        unisub = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            unisub = true;
+                        }
                     }
                 }
             }
@@ -166,7 +193,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        inssub = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            inssub = true;
+                        }
                     }
                 }
             }
@@ -184,7 +216,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        depsub = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            depsub = true;
+                        }
                     }
                 }
             }
@@ -202,7 +239,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        unimode = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            unimode = true;
+                        }
                     }
                 }
             }
@@ -220,7 +262,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        insmode = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            insmode = true;
+                        }
                     }
                 }
             }
@@ -238,7 +285,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        depmode = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            depmode = true;
+                        }
                     }
                 }
             }
@@ -256,7 +308,12 @@ public partial class login : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
-                        student = true;
+                        while (reader.Read())
+                        {
+                            first = reader.GetString(0);
+                            last = reader.GetString(1);
+                            student = true;
+                        }
                     }
                 }
             }
@@ -285,66 +342,110 @@ public partial class login : System.Web.UI.Page
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "system_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first+" "+last;
+                }
                 Response.Redirect(@"/lbs/systemAdmin/Register_admin.aspx");
             }
             if (uniadmin == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "university_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (insadmin == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "institute_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (depadmin == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "department_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
             if (unisub == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "university_sub_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             } 
             if (inssub == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "institute_sub_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             }
             if (depsub == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "department_sub_admin";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
             }
             if (unimode == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "university_mode";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (insmode == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "institute_mode";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (depmode == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "department_mode";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
             }
             if (student == true)
             {
                 Session["email"] = email;
                 Session["typeofuser"] = "student";
+                if ((first.Equals("") == false) && (last.Equals("") == false))
+                {
+                    Session["username"] = first + " " + last;
+                }
                 Response.Redirect(@"/lbs/index.aspx");
             }
         }

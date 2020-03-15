@@ -15,17 +15,17 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/lbs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lbs/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/lbs/css/magnific-popup.css">
+    <link rel="stylesheet" href="/lbs/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lbs/css/themify-icons.css">
+    <link rel="stylesheet" href="/lbs/css/nice-select.css">
+    <link rel="stylesheet" href="/lbs/css/flaticon.css">
+    <link rel="stylesheet" href="/lbs/css/gijgo.css">
+    <link rel="stylesheet" href="/lbs/css/animate.css">
+    <link rel="stylesheet" href="/lbs/css/slicknav.css">
+    <link rel="stylesheet" href="/lbs/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -48,7 +48,7 @@
                             <div class="col-xl-9 col-lg-9">
                                 <div class="main-menu  d-none d-lg-block">
                                     <div id="menudiv" runat="server">
-                                        <nav>
+                                        <!--<nav>
                                             <ul id="navigation">
                                                 <li><a  href="/lbs/index.aspx">Home</a></li>
                                                 <li><a href="/lbs/student/register_complaint.aspx">Register Complaint</a></li>                                                                                           </li>
@@ -59,21 +59,20 @@
                                                     </ul>
                                                 </li>
                                            </ul>
-                                        </nav>
-                                        <nav>
+                                        </nav>-->
+                                        <!--<nav>
                                             <ul>
                                                 <li><a href="/lbs/index.aspx">Home</a></li>
                                                 <li><a href="/lbs/about.aspx">About Us</a></li>
                                                 <li><a href="/lbs/about.aspx">GuideLines</a></li>
-                                                <li><a href="#">Register | Login <i class="ti-angle-down"></i></a>
+                                                <li>Register | Login <i class="ti-angle-down"></i>
                                                     <ul class="submenu">
                                                         <li><a href="/lbs/register.aspx">Register</a></li>
                                                         <li><a href="/lbs/login.aspx">Login</a></li>
                                                     </ul>
                                                 </li>
-                                                <!--<li><a href="about.aspx">About</a></li>-->
                                             </ul>
-                                        </nav>
+                                        </nav>-->
                                     </div>
                                 </div>
                             </div>
@@ -184,33 +183,33 @@
 
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
+    <script src="/lbs/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/lbs/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/lbs/js/popper.min.js"></script>
+    <script src="/lbs/js/bootstrap.min.js"></script>
+    <script src="/lbs/js/owl.carousel.min.js"></script>
+    <script src="/lbs/js/isotope.pkgd.min.js"></script>
+    <script src="/lbs/js/ajax-form.js"></script>
+    <script src="/lbs/js/waypoints.min.js"></script>
+    <script src="/lbs/js/jquery.counterup.min.js"></script>
+    <script src="/lbs/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/lbs/js/scrollIt.js"></script>
+    <script src="/lbs/js/jquery.scrollUp.min.js"></script>
+    <script src="/lbs/js/wow.min.js"></script>
+    <script src="/lbs/js/nice-select.min.js"></script>
+    <script src="/lbs/js/jquery.slicknav.min.js"></script>
+    <script src="/lbs/js/jquery.magnific-popup.min.js"></script>
+    <script src="/lbs/js/plugins.js"></script>
+    <script src="/lbs/js/gijgo.min.js"></script>
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src="/lbs/js/contact.js"></script>
+    <script src="/lbs/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/lbs/js/jquery.form.js"></script>
+    <script src="/lbs/js/jquery.validate.min.js"></script>
+    <script src="/lbs/js/mail-script.js"></script>
 
-    <script src="js/main.js"></script>
+    <script src="/lbs/js/main.js"></script>
     <!--<script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
