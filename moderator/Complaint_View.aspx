@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/moderator/moderator.master" AutoEventWireup="true" CodeFile="~/moderator/Complaint_View.aspx.cs" Inherits="Complaint_View" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
- <link href="../css/chatbox.css" rel="stylesheet" type="text/css" />
+ <link href="/lbs/css/chatbox.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -75,7 +75,7 @@
 <div class="row p-lg-3" style="margin-left:550px;"> 
 <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Reassign</button>
 <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#example" data-whatever="@fat">Report</button>
-</button>
+
  </div>  
 <!-- Modal -->
 <script>

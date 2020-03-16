@@ -40,27 +40,27 @@ public partial class track_complaint : System.Web.UI.Page
                         if (reader.HasRows)
                         {
                             pendingdiv.InnerHtml = @"<table class='table table-responsive table-hover' style='color:#FF5500'>";
-                            pendingdiv.InnerHtml += "<thead>";
-                            pendingdiv.InnerHtml += "<tr>";
+                            pendingdiv.InnerHtml += @"<thead>";
+                            pendingdiv.InnerHtml += @"<tr>";
                             pendingdiv.InnerHtml += @"<th scope='col'>Complaint No.</th>";
                             pendingdiv.InnerHtml += @"<th scope='col'>Type</th>";
                             pendingdiv.InnerHtml += @"<th scope='col'>Subject</th>";
-                            pendingdiv.InnerHtml += "</tr>";
-                            pendingdiv.InnerHtml += "</thead>";
-                            pendingdiv.InnerHtml += "<tbody>";
+                            pendingdiv.InnerHtml += @"</tr>";
+                            pendingdiv.InnerHtml += @"</thead>";
+                            pendingdiv.InnerHtml += @"<tbody>";
                             while (reader.Read())
                             {
                                 int complaint_id = reader.GetInt32(0);
                                 string complaint_level = reader.GetString(1);
                                 string complaint_title = reader.GetString(4);
-                                pendingdiv.InnerHtml += "<tr>";
+                                pendingdiv.InnerHtml += @"<tr>";
                                 pendingdiv.InnerHtml += @"<th scope='row'><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_id + "</a></th>";
-                                pendingdiv.InnerHtml += "<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_level + "</a></td>";
-                                pendingdiv.InnerHtml += "<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
-                                pendingdiv.InnerHtml += "</tr>";
+                                pendingdiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(complaint_level) + "</a></td>";
+                                pendingdiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
+                                pendingdiv.InnerHtml += @"</tr>";
                             }
-                            pendingdiv.InnerHtml += "</tbody>";
-                            pendingdiv.InnerHtml += "</table>";
+                            pendingdiv.InnerHtml += @"</tbody>";
+                            pendingdiv.InnerHtml += @"</table>";
                         }
                         else
                         {
@@ -81,25 +81,27 @@ public partial class track_complaint : System.Web.UI.Page
                         if (reader.HasRows)
                         {
                             completeddiv.InnerHtml = @"<table class='table table-responsive table-hover' style='color:#FF5500'>";
-                            completeddiv.InnerHtml += "<thead>";
-                            completeddiv.InnerHtml += "<tr>";
+                            completeddiv.InnerHtml += @"<thead>";
+                            completeddiv.InnerHtml += @"<tr>";
                             completeddiv.InnerHtml += @"<th scope='col'>Complaint No.</th>";
+                            completeddiv.InnerHtml += @"<th scope='col'>Type</th>";
                             completeddiv.InnerHtml += @"<th scope='col'>Subject</th>";
-                            completeddiv.InnerHtml += "</tr>";
-                            completeddiv.InnerHtml += "</thead>";
-                            completeddiv.InnerHtml += "<tbody>";
+                            completeddiv.InnerHtml += @"</tr>";
+                            completeddiv.InnerHtml += @"</thead>";
+                            completeddiv.InnerHtml += @"<tbody>";
                             while (reader.Read())
                             {
                                 int complaint_id = reader.GetInt32(0);
                                 string complaint_level = reader.GetString(1);
                                 string complaint_title = reader.GetString(4);
-                                completeddiv.InnerHtml += "<tr>";
+                                completeddiv.InnerHtml += @"<tr>";
                                 completeddiv.InnerHtml += @"<th scope='row'><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_id + "</a></th>";
-                                completeddiv.InnerHtml += "<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
-                                completeddiv.InnerHtml += "</tr>";
+                                completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(complaint_level) + "</a></td>";
+                                completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
+                                completeddiv.InnerHtml += @"</tr>";
                             }
-                            completeddiv.InnerHtml += "</tbody>";
-                            completeddiv.InnerHtml += "</table>";
+                            completeddiv.InnerHtml += @"</tbody>";
+                            completeddiv.InnerHtml += @"</table>";
                         }
                         else
                         {

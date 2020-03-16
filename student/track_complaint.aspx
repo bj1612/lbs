@@ -52,7 +52,22 @@
                     <div class="single_service">
                         <h5 class="text-center">Completed Complaint</h5>
                         <div id="completeddiv" runat="server" class="text-center" style="padding-top:10px;">
-                            
+                            <!--<table class="table table-responsive table-hover" style="color:#FF5500">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Complaint No.</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Subject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>university</td>
+                                    <td>Less Hygenic Wash Rooms</td>
+                                </tr>
+                                </tbody>
+                            </table>-->
                         </div>                        
                     </div>
                 </div>

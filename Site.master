@@ -31,7 +31,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" method="post">
     <div>
     <header>
             <div class="header-area ">
@@ -60,8 +60,8 @@
                                                 </li>
                                            </ul>
                                         </nav>-->
-                                        <!--<nav>
-                                            <ul>
+                                        <nav>
+                                            <ul id="navigation">
                                                 <li><a href="/lbs/index.aspx">Home</a></li>
                                                 <li><a href="/lbs/about.aspx">About Us</a></li>
                                                 <li><a href="/lbs/about.aspx">GuideLines</a></li>
@@ -72,7 +72,7 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                        </nav>-->
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
@@ -183,33 +183,33 @@
 
 
     <!-- JS here -->
-    <script src="/lbs/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/lbs/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/lbs/js/popper.min.js"></script>
-    <script src="/lbs/js/bootstrap.min.js"></script>
-    <script src="/lbs/js/owl.carousel.min.js"></script>
-    <script src="/lbs/js/isotope.pkgd.min.js"></script>
-    <script src="/lbs/js/ajax-form.js"></script>
-    <script src="/lbs/js/waypoints.min.js"></script>
-    <script src="/lbs/js/jquery.counterup.min.js"></script>
-    <script src="/lbs/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/lbs/js/scrollIt.js"></script>
-    <script src="/lbs/js/jquery.scrollUp.min.js"></script>
-    <script src="/lbs/js/wow.min.js"></script>
-    <script src="/lbs/js/nice-select.min.js"></script>
-    <script src="/lbs/js/jquery.slicknav.min.js"></script>
-    <script src="/lbs/js/jquery.magnific-popup.min.js"></script>
-    <script src="/lbs/js/plugins.js"></script>
-    <script src="/lbs/js/gijgo.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/vendor/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/popper.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/ajax-form.js"></script>
+    <script type="text/javascript" src="/lbs/js/waypoints.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/scrollIt.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.scrollUp.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/wow.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/nice-select.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.slicknav.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/plugins.js"></script>
+    <script type="text/javascript" src="/lbs/js/gijgo.min.js"></script>
 
     <!--contact js-->
-    <script src="/lbs/js/contact.js"></script>
-    <script src="/lbs/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/lbs/js/jquery.form.js"></script>
-    <script src="/lbs/js/jquery.validate.min.js"></script>
-    <script src="/lbs/js/mail-script.js"></script>
+    <script type="text/javascript" src="/lbs/js/contact.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.ajaxchimp.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/lbs/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/lbs/js/mail-script.js"></script>
 
-    <script src="/lbs/js/main.js"></script>
+    <script type="text/javascript" src="/lbs/js/main.js"></script>
     <!--<script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',

@@ -411,7 +411,7 @@ public partial class login : System.Web.UI.Page
             if (unimode == true)
             {
                 Session["email"] = email;
-                Session["typeofuser"] = "university_mode";
+                Session["typeofuser"] = "university_moderator";
                 if ((first.Equals("") == false) && (last.Equals("") == false))
                 {
                     Session["username"] = first + " " + last;
@@ -421,7 +421,7 @@ public partial class login : System.Web.UI.Page
             if (insmode == true)
             {
                 Session["email"] = email;
-                Session["typeofuser"] = "institute_mode";
+                Session["typeofuser"] = "institute_moderator";
                 if ((first.Equals("") == false) && (last.Equals("") == false))
                 {
                     Session["username"] = first + " " + last;
@@ -431,7 +431,7 @@ public partial class login : System.Web.UI.Page
             if (depmode == true)
             {
                 Session["email"] = email;
-                Session["typeofuser"] = "department_mode";
+                Session["typeofuser"] = "department_moderator";
                 if ((first.Equals("") == false) && (last.Equals("") == false))
                 {
                     Session["username"] = first + " " + last;
