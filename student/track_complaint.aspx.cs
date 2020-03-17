@@ -11,12 +11,11 @@ using System.Data.SqlClient;
 public partial class track_complaint : System.Web.UI.Page
 {
     string connStr;
+    string current_user = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-        Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-        Response.Cache.SetNoStore();
+        
         string student_email = "";
         if (Session["email"] == null)
         {
@@ -26,11 +25,19 @@ public partial class track_complaint : System.Web.UI.Page
         {
             student_email = Session["email"].ToString();
         }
+        if (Session["typeofuser"] != null)
+        {
+            current_user = Session["typeofuser"].ToString();
+            if (current_user.Equals("student") == false)
+            {
+                Response.Redirect("/lbs/logout.aspx");
+            }
+        }
         try
         {
             using (SqlConnection connection = new SqlConnection(connStr))
             {
-                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where student_email=@student_email and complaint_progress='Pending' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where student_email=@student_email and complaint_progress='Pending' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where student_email=@student_email and complaint_progress='Pending' ORDER BY complaint_date,complaint_time desc", connection))
+                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where student_email=@student_email and complaint_progress='Pending' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where student_email=@student_email and complaint_progress='Pending' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where student_email=@student_email and complaint_progress='Pending' ORDER BY complaint_date desc", connection))
                 {
                     connection.Open();
                     command.Parameters.AddWithValue("@student_email", student_email);
@@ -71,7 +78,7 @@ public partial class track_complaint : System.Web.UI.Page
             }
             using (SqlConnection connection = new SqlConnection(connStr))
             {
-                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where student_email=@student_email and complaint_progress='Completed' ORDER BY complaint_date,complaint_time desc", connection))
+                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where student_email=@student_email and complaint_progress='Completed' ORDER BY complaint_date desc", connection))
                 {
                     connection.Open();
                     command.Parameters.AddWithValue("@student_email", student_email);

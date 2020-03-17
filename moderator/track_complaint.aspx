@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/moderator/moderator.master" AutoEventWireup="true" CodeFile="~/moderator/track_complaint.aspx.cs" Inherits="track_complaint" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/moderator/track_complaint.aspx.cs" Inherits="track_complaint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server"> 
@@ -19,81 +19,56 @@
     <div class="service_area"  style ="padding:0px ; margin:0px;">
         <div class="container">
             <div class="row justify-content-center ">
-                <div class="col-lg-7 col-md-10">
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-md-10">
                     <div class="section_title text-center mb-95">
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
                     <div class="single_service">
                         <h5 class="text-center">Pending Complaint</h5>
-                        <table class="table table-hover" style="color:#FF5500">
-                            <thead>
-                            <tr>
-                                <th scope="col">Complaint No.</th>
-                                <th scope="col">Subject</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div id="pendingdiv" runat="server" class="text-center" style="padding-top:10px;">
+                            <!--<table class="table table-responsive table-hover" style="color:#FF5500">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Complaint No.</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Subject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>university</td>
+                                    <td>Less Hygenic Wash Rooms</td>
+                                </tr>
+                                </tbody>
+                            </table>-->
+                        </div>
                     </div>
-                   
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
                     <div class="single_service">
-                    <h5 class="text-center">Completed Complaint</h5>
-                        <table class="table table-hover" style="color:#FF5500">
-                            <thead>
-                            <tr>
-                                <th scope="col">Complaint No.</th>
-                                <th scope="col">Subject</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Unable to fill KT form, since delay in revaluation results</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Printing mistake</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <h5 class="text-center">Completed Complaint</h5>
+                        <div id="completeddiv" runat="server" class="text-center" style="padding-top:10px;">
+                            <!--<table class="table table-responsive table-hover" style="color:#FF5500">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Complaint No.</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Subject</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>university</td>
+                                    <td>Less Hygenic Wash Rooms</td>
+                                </tr>
+                                </tbody>
+                            </table>-->
+                        </div>                        
                     </div>
                 </div>
 

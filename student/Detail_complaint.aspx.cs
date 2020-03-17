@@ -13,6 +13,7 @@ public partial class Detail_complaint : System.Web.UI.Page
     string connStr,current_user="",user_name="";
     string student_email = "", complaint_level = "";
     int complaint_id = 0;
+    int category_id = 0;
     protected void Comment_Load() 
     {
         string connStr1 = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
@@ -225,10 +226,6 @@ public partial class Detail_complaint : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-        Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-        Response.Cache.SetNoStore();
-
         
         if (Session["email"] == null)
         {
@@ -241,6 +238,10 @@ public partial class Detail_complaint : System.Web.UI.Page
         if (Session["typeofuser"] != null)
         {
             current_user = Session["typeofuser"].ToString();
+            if (current_user.Equals("student")==false)
+            {
+                Response.Redirect("/lbs/logout.aspx");
+            }
         }
         if (Session["username"] != null)
         {
@@ -295,6 +296,15 @@ public partial class Detail_complaint : System.Web.UI.Page
                             if (reader.HasRows)
                             {
                                 commenttextboxdiv.Style["display"] = "none";
+                                while (reader.Read())
+                                {
+                                    category_id = reader.GetInt32(3);
+                                    string complaint_status = reader.GetString(8);
+                                    if (complaint_status.Equals("Reappeal") == false)
+                                    {
+                                        reappealdiv.Style["display"] = "block";
+                                    }
+                                }
                             }
                         }
                     }
@@ -343,6 +353,35 @@ public partial class Detail_complaint : System.Web.UI.Page
             }
             if (complaint_level.Equals("institute"))
             {
+                string checkisclosed = "SELECT * FROM institute_complaint where student_email=@student_email and institute_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
+                using (SqlConnection connection = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(checkisclosed, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@student_email", student_email);
+                        command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                        command.Parameters.AddWithValue("@complaint_level", complaint_level);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                commenttextboxdiv.Style["display"] = "none";
+                                while (reader.Read())
+                                {
+                                    category_id = reader.GetInt32(3);
+                                    string complaint_status = reader.GetString(8);
+                                    if (complaint_status.Equals("Reappeal") == false)
+                                    {
+                                        reappealdiv.Style["display"] = "block";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand("SELECT * FROM institute_complaint where student_email=@student_email and institute_complaint_id=@complaint_id and complaint_level=@complaint_level", connection))
@@ -386,6 +425,35 @@ public partial class Detail_complaint : System.Web.UI.Page
             }
             if (complaint_level.Equals("department"))
             {
+                string checkisclosed = "SELECT * FROM department_complaint where student_email=@student_email and department_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
+                using (SqlConnection connection = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(checkisclosed, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@student_email", student_email);
+                        command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                        command.Parameters.AddWithValue("@complaint_level", complaint_level);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                commenttextboxdiv.Style["display"] = "none";
+                                while (reader.Read())
+                                {
+                                    category_id = reader.GetInt32(3);
+                                    string complaint_status = reader.GetString(8);
+                                    if (complaint_status.Equals("Reappeal") == false)
+                                    {
+                                        reappealdiv.Style["display"] = "block";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand("SELECT * FROM department_complaint where student_email=@student_email and department_complaint_id=@complaint_id and complaint_level=@complaint_level", connection))
@@ -598,6 +666,118 @@ public partial class Detail_complaint : System.Web.UI.Page
     }
     protected void Reappeal_Click(object sender, EventArgs e)
     {
-        descriptiondiv.InnerHtml += " Success";
+        string reassign_description = reappeal_text.Value;
+        if (reassign_description.Equals("") == false)
+        {
+            try
+            {
+                if (complaint_level.Equals("university"))
+                {
+                    string updatemodeassign = "update university_mode_assign set assign_status='Reappeal',university_category_id=@category_id,reassign_description=@reassign_description,reassign_request_user=@type_of_user where university_complaint_id=@complaint_id";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatemodeassign, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@reassign_description", reassign_description);
+                            command.Parameters.AddWithValue("@type_of_user", current_user);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    string updatecomplaint = "update university_complaint set complaint_status='Reappeal' where university_category_id=@category_id and student_email=@student_email and university_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatecomplaint, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@student_email", student_email);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                            command.Parameters.AddWithValue("@complaint_level", complaint_level);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    reappeal_text.Value = "";
+                    reappealdiv.Style["display"] = "none";
+                    Response.Redirect("/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level);
+                }
+                if (complaint_level.Equals("institute"))
+                {
+                    string updatemodeassign = "update institute_mode_assign set assign_status='Reappeal',institute_category_id=@category_id,reassign_description=@reassign_description,reassign_request_user=@type_of_user where institute_complaint_id=@complaint_id";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatemodeassign, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@reassign_description", reassign_description);
+                            command.Parameters.AddWithValue("@type_of_user", current_user);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    string updatecomplaint = "update institute_complaint set complaint_status='Reappeal' where institute_category_id=@category_id and student_email=@student_email and institute_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatecomplaint, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@student_email", student_email);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                            command.Parameters.AddWithValue("@complaint_level", complaint_level);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    reappeal_text.Value = "";
+                    reappealdiv.Style["display"] = "none";
+                    Response.Redirect("/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level);
+                }
+                if (complaint_level.Equals("department"))
+                {
+                    string updatemodeassign = "update department_mode_assign set assign_status='Reappeal',department_category_id=@category_id,reassign_description=@reassign_description,reassign_request_user=@type_of_user where department_complaint_id=@complaint_id";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatemodeassign, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@reassign_description", reassign_description);
+                            command.Parameters.AddWithValue("@type_of_user", current_user);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    string updatecomplaint = "update department_complaint set complaint_status='Reappeal' where department_category_id=@category_id and student_email=@student_email and department_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(updatecomplaint, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+                            command.Parameters.AddWithValue("@student_email", student_email);
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                            command.Parameters.AddWithValue("@complaint_level", complaint_level);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    reappeal_text.Value = "";
+                    reappealdiv.Style["display"] = "none";
+                    Response.Redirect("/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level);
+                }
+            }
+            catch (Exception e1)
+            {
+                System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
+            }
+        }
     }
 }

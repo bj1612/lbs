@@ -13,15 +13,21 @@ public partial class register_complaint : System.Web.UI.Page
     string type_of_complaint="",category_of_complaint="";
     string connStr;
     string alertclassname = "alert-danger";
+    string current_user;
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-        Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-        Response.Cache.SetNoStore();
         if (Session["email"] == null)
         {
             Response.Redirect(@"/lbs/index.aspx");
+        }
+        if (Session["typeofuser"] != null)
+        {
+            current_user = Session["typeofuser"].ToString();
+            if (current_user.Equals("student") == false)
+            {
+                Response.Redirect("/lbs/logout.aspx");
+            }
         }
     }
     protected void ComplaintType_SelectedIndexChanged(object sender, EventArgs e)

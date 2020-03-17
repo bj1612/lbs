@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="/lbs/css/animate.css">
     <link rel="stylesheet" href="/lbs/css/slicknav.css">
     <link rel="stylesheet" href="/lbs/css/style.css">
+
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -46,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9">
-                                <div class="main-menu  d-none d-lg-block">
+                                <div class="main-menu d-none d-lg-block">
                                     <div id="menudiv" runat="server">
                                         <!--<nav>
                                             <ul id="navigation">
@@ -62,13 +66,13 @@
                                         </nav>-->
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="/lbs/index.aspx">Home</a></li>
-                                                <li><a href="/lbs/about.aspx">About Us</a></li>
-                                                <li><a href="/lbs/about.aspx">GuideLines</a></li>
-                                                <li>Register | Login <i class="ti-angle-down"></i>
+                                                <li><a href="/lbs/index.aspx" style="text-decoration:none;">Home</a></li>
+                                                <li><a href="/lbs/about.aspx" style="text-decoration:none;">About Us</a></li>
+                                                <li><a href="/lbs/about.aspx" style="text-decoration:none;">GuideLines</a></li>
+                                                <li><a href="#" style="text-decoration:none;">Register | Login <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
-                                                        <li><a href="/lbs/register.aspx">Register</a></li>
-                                                        <li><a href="/lbs/login.aspx">Login</a></li>
+                                                        <li><a href="/lbs/register.aspx" style="text-decoration:none;">Register</a></li>
+                                                        <li><a href="/lbs/login.aspx" style="text-decoration:none;">Login</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
