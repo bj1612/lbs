@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/moderator/Complaint_View.aspx.cs" Inherits="Complaint_View" %>
+﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/moderator/Complaint_View.aspx.cs" Inherits="Complaint_View" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="/lbs/css/chatbox.css" rel="stylesheet" type="text/css" />
@@ -7,13 +7,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
-
+    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="100000">
+     </asp:Timer>
     <div class="bradcam_area1 breadcam_bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White; font-size:xx-large;">Details Of Your Complaint!</h3>
+                        <h3 style="color:White; font-size:xx-large;">Details Of Student Complaint!</h3>
                     </div>
                 </div>
             </div>
@@ -21,7 +22,7 @@
         </div>
     </div>
     <!-- bradcam_area_end -->
-    <asp:UpdatePanel ID="CompaintUpdatePanel1" runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="ComplaintUpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="service_area" style ="padding:0px ; margin:0px;">
                 <div class="container">            
@@ -71,7 +72,7 @@
                         <div class="mesgs">
                             <div class="msg_history">
                                 <div class="row" runat="server" id="messageboxdiv">
-                                    <div class="incoming_msg col-sm-11 col-md-10 col-lg-10">
+                                    <!--<div class="incoming_msg col-sm-11 col-md-10 col-lg-10">
                                         <div class="incoming_msg_img"> 
                                             <div style="width:300px;">
                                                 <img src="../img/user-profile.png" alt="user-image" style="float:left;width:33px;margin-right:10px;"/>
@@ -103,7 +104,7 @@
                                                 solutions</p>
                                             <span class="time_date"> 11:01 AM    |    June 9</span>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="type_msg">
@@ -120,9 +121,10 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="Comment" EventName="ServerClick" />
+            <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
         </Triggers>
     </asp:UpdatePanel>  
-    <div class="row" style="margin-top:20px;"> 
+            <div class="row" style="margin-top:20px;"> 
             </div>
             <!-- Button trigger modal -->
             <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;">
@@ -167,16 +169,21 @@
                         </div>
                         <div class="modal-body">
                             <h4>Please provide us detail why you want to reassign</h4>
-                            <form>
+                            <!--<form>-->
                                 <!-- Example single danger button -->
                                 <h6>(Note:If you want the category to be same select the current category)</h6>
                                 <div class="form-group">
                                     <label for="category" class="col-form-label">Category:</label>
                                     <!--<select></select>-->
+                                    <asp:DropDownList class="form-control" ID="ReassignCategory" runat="server" style="height:40px;">
+                                        <asp:ListItem Value="0" Text="Category"></asp:ListItem> 
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group">
                                     <label for="reassign_text" class="col-form-label">Description:</label>
                                     <textarea class="form-control" rows="4" id="reassign_text" runat="server"></textarea>
                                 </div>
-                            </form>
+                            <!--</form>-->
                         </div>
                         <div class="modal-footer">
                             <button id="Button1" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Reassign_Click">Reappeal</button>
@@ -215,15 +222,21 @@
                         </div>
                         <div class="modal-body">
                             <h4>Please provide us detail why you want to report</h4>
-                            <form>
+                            <!--<form>-->
                                 <!-- Example single danger button -->
                                 <div class="form-group">
-                                    <label class="col-form-label">Type:</label>
+                                    <label for="ReportType" class="col-form-label">Type:</label>
                                     <!--<select></select>-->
-                                    <label for="rep_desc" class="col-form-label">Description:</label>
-                                    <textarea class="form-control" rows="4" id="rep_desc" runat="server" value=""></textarea>
+                                    <asp:DropDownList class="form-control" ID="ReportType" runat="server" style="height:40px;">
+                                        <asp:ListItem Value="Type" Text="Type"></asp:ListItem>
+                                        <asp:ListItem Value="Abusive and Offensive" Text="Abusive and Offensive"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
-                            </form>
+                                <div class="form-group">
+                                    <label for="rep_desc" class="col-form-label">Description:</label>
+                                    <textarea class="form-control" rows="4" id="rep_desc" runat="server"></textarea>
+                                </div>
+                            <!--</form>-->
                         </div>
                         <div class="modal-footer">
                             <button id="Button2" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Report_Click">Report</button>

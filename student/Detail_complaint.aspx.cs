@@ -16,7 +16,6 @@ public partial class Detail_complaint : System.Web.UI.Page
     int category_id = 0;
     protected void Comment_Load() 
     {
-        string connStr1 = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
         try
         {
             if (complaint_level.Equals("university"))
@@ -779,5 +778,9 @@ public partial class Detail_complaint : System.Web.UI.Page
                 System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
             }
         }
+    }
+    protected void Timer1_Tick(object sender, EventArgs e)
+    {
+        CommentUpdatePanel1.Update();
     }
 }

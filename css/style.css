@@ -38,6 +38,8 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-style: normal;
+  padding-right:0px !important;
+  margin-right:0px !important;
 }
 
 /* line 11, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_reset.scss */

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Detail_complaint.aspx.cs" Inherits="Detail_complaint" %>
+﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Detail_complaint.aspx.cs" Inherits="Detail_complaint" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="/lbs/css/chatbox.css" rel="stylesheet" type="text/css" />
@@ -7,6 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
+    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="100000">
+     </asp:Timer>
     <!-- bradcam_area_start -->
     <div class="bradcam_area1 breadcam_bg">
         <div class="container">
@@ -118,13 +120,20 @@
                 </div>    
             </div>
         </div>
-        <div class="row" style="margin-top:20px;"> 
+        
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="Comment" EventName="ServerClick" />
+            <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+        </Triggers>
+    </asp:UpdatePanel>
+    <div class="row" style="margin-top:20px;"> 
         </div>
-        <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;display:none;" id="reappealdiv" runat="server"> 
+        <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;display:none;overflow:hidden" id="reappealdiv" runat="server"> 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Reappeal</button>
         </div>               
         <!-- Reappeal Modal-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -143,7 +152,7 @@
             </div>
           </div>
         </div>
-        <div class="modal fade" id="getModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal fade" id="getModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" style="overflow:hidden">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -154,13 +163,11 @@
               </div>
               <div class="modal-body">
                 <h4>Please provide us detail why you want to reappeal</h4>
-                <form>
                     <!-- Example single danger button -->
                       <div class="form-group">
                         <label for="reappeal_text" class="col-form-label">Description:</label>
                         <textarea class="form-control" rows="4" id="reappeal_text" runat="server"></textarea>
                       </div>
-                    </form>
               </div>
               <div class="modal-footer">
                 <button id="Button1" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Reappeal_Click">Reappeal</button>
@@ -168,11 +175,6 @@
             </div>
           </div>
         </div>
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="Comment" EventName="ServerClick" />
-        </Triggers>
-    </asp:UpdatePanel>
     <!--<script>
         /*$('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal

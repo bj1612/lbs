@@ -40,19 +40,19 @@ public partial class track_complaint : System.Web.UI.Page
             string searchpendingquery = "", searchcompletedquery = "";
             if (current_user.Equals("university_moderator"))
             {
-                searchpendingquery = "SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where university_complaint_id=(select university_complaint_id from university_mode_assign where university_mode_email=@mode_email) and complaint_progress='Pending' ORDER BY complaint_date desc";
-                searchcompletedquery = "SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where university_complaint_id=(select university_complaint_id from university_mode_assign where university_mode_email=@mode_email) and complaint_progress='Completed' ORDER BY complaint_date desc";
+                searchpendingquery = "SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where university_complaint_id=(select university_complaint_id from university_mode_assign where university_mode_email=@mode_email and assign_status='Assign') and complaint_progress='Pending' ORDER BY complaint_date desc";
+                searchcompletedquery = "SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where university_complaint_id=(select university_complaint_id from university_mode_assign where university_mode_email=@mode_email and assign_status='Completed') and complaint_progress='Completed' ORDER BY complaint_date desc";
             }
 
             if (current_user.Equals("institute_moderator"))
             {
-                searchpendingquery = "SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where institute_complaint_id=(select institute_complaint_id from institute_mode_assign where institute_mode_email=@mode_email) and complaint_progress='Pending' ORDER BY complaint_date desc";
-                searchcompletedquery = "SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where institute_complaint_id=(select institute_complaint_id from institute_mode_assign where institute_mode_email=@mode_email) and complaint_progress='Completed' ORDER BY complaint_date desc";
+                searchpendingquery = "SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where institute_complaint_id=(select institute_complaint_id from institute_mode_assign where institute_mode_email=@mode_email and assign_status='Assign') and complaint_progress='Pending' ORDER BY complaint_date desc";
+                searchcompletedquery = "SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where institute_complaint_id=(select institute_complaint_id from institute_mode_assign where institute_mode_email=@mode_email and assign_status='Completed') and complaint_progress='Completed' ORDER BY complaint_date desc";
             }
             if (current_user.Equals("department_moderator"))
             {
-                searchpendingquery = "SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where department_complaint_id=(select department_complaint_id from department_mode_assign where department_mode_email=@mode_email) and complaint_progress='Pending' ORDER BY complaint_date desc";
-                searchcompletedquery = "SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where department_complaint_id=(select department_complaint_id from department_mode_assign where department_mode_email=@mode_email) and complaint_progress='Completed' ORDER BY complaint_date desc";
+                searchpendingquery = "SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where department_complaint_id=(select department_complaint_id from department_mode_assign where department_mode_email=@mode_email and assign_status='Assign') and complaint_progress='Pending' ORDER BY complaint_date desc";
+                searchcompletedquery = "SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where department_complaint_id=(select department_complaint_id from department_mode_assign where department_mode_email=@mode_email and assign_status='Completed') and complaint_progress='Completed' ORDER BY complaint_date desc";
             }
             using (SqlConnection connection = new SqlConnection(connStr))
             {
