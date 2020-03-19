@@ -386,7 +386,7 @@ public partial class login : System.Web.UI.Page
                 {
                     Session["username"] = first + " " + last;
                 }
-                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
+                Response.Redirect(@"/lbs/subAdmin/SubAdmin_View.aspx");
             } 
             if (inssub == true)
             {
@@ -396,7 +396,7 @@ public partial class login : System.Web.UI.Page
                 {
                     Session["username"] = first + " " + last;
                 }
-                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
+                Response.Redirect(@"/lbs/subAdmin/SubAdmin_View.aspx");
             }
             if (depsub == true)
             {
@@ -406,7 +406,7 @@ public partial class login : System.Web.UI.Page
                 {
                     Session["username"] = first + " " + last;
                 }
-                Response.Redirect(@"/lbs/subAdmin/Sub_Admin_View.aspx");
+                Response.Redirect(@"/lbs/subAdmin/SubAdmin_View.aspx");
             }
             if (unimode == true)
             {

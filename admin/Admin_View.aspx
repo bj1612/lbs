@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="~/admin/Admin_View.aspx.cs" Inherits="Admin_View" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/admin/Admin_View.aspx.cs" Inherits="Admin_View" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="../css/chatbox.css" rel="stylesheet" type="text/css" />
@@ -7,99 +7,54 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container-fluid">
         <div class = "row">
-            <div class ="col-sm-12 col-md-3 col-lg-3">
-                <ul class="list-group">
-                    <li class="list-group-item active">Sub Admin</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-            <div class ="col-sm-12 col-md-3 col-lg-3">
-                 <ul class="list-group">
-                    <li class="list-group-item active">Moderator</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-            <div class ="col-sm-12 col-md-6 col-lg-3">
-                <div class="row">
-                    <ul class="list-group col-sm-12 col-md-6 col-lg-12">
-                        <li class="list-group-item active">Pending Complaint</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <ul class="list-group col-sm-12 col-md-6 col-lg-12">
-                        <li class="list-group-item active">Solved Complaint</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
+            <div class ="col-sm-12 col-md-3 col-lg-2">
+                <div class="list-group" id="subadminlist" role="tablist">
+                  <a class="list-group-item list-group-item-action" disabled style=" background-color: #000066;color: white;">Sub Admin</a>
+                  <a class="list-group-item list-group-item-action active" id="subadmin1" data-toggle="list" href="#subadmin1-tab" role="tab" aria-controls="subadmin1-tab">Sub Admin1</a>
+                  <a class="list-group-item list-group-item-action" id="subadmin2" data-toggle="list" href="#subadmin2-tab" role="tab" aria-controls="subadmin2-tab">Sub Admin2</a>
                 </div>
             </div>
-
-            <div class ="col-sm-12 col-md-12 col-lg-3">            
-                <div class="row justify-content-center">
-                    <!--complaint id and description-->
-                    <div class="card" style="text-align:center; width:2000px;margin-top: 20px;" >
-                        <div class="card-header" style="background-color:orange;color:White; font-size:x-large;">Complaint ID<space>                         </space><date>20-05-2018</date><time>10:05 Am</time></div>
-                    </div>
-                   
-                    <div class="card" style="text-align:center; width:2000px;margin-top: 20px;" >
-                        <div class="card-header" style="background-color:orange;color:White; font-size:x-large;">Title Of Your Complaint</div>
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p>Description about complaint </p>
-                            </blockquote>
+            <div class ="col-sm-12 col-md-3 col-lg-2">
+                <div class="tab-content" id="moderatortabContent">
+                  <div class="tab-pane fade show active" id="subadmin1-tab" role="tabpanel" aria-labelledby="subadmin1">
+                        <div class="list-group" id="subadmin1-moderator-list" role="tablist">
+                            <a class="list-group-item list-group-item-action" disabled style=" background-color: #000066;color: white;">Moderator</a>
+                            <a class="list-group-item list-group-item-action active" id="moderator1" data-toggle="list" href="#moderator1-tab" role="tab" aria-controls="moderator1-tab">Moderator1</a>
+                            <a class="list-group-item list-group-item-action" id="moderator2" data-toggle="list" href="#moderator2-tab" role="tab" aria-controls="moderator2-tab">Moderator2</a>
                         </div>
+                  </div>
+                  <div class="tab-pane fade" id="subadmin2-tab" role="tabpanel" aria-labelledby="subadmin2">list of Moderator for subadmin 2</div>
+                </div>
+            </div>
+            <div class ="col-sm-12 col-md-6 col-lg-2">
+                <div class="tab-content" id="complainttabContent">
+                    <div class="tab-pane fade show active" id="moderator1-tab" role="tabpanel" aria-labelledby="moderator1">
+                        List of first moderator complaint list
                     </div>
-
-                    <!--End complaint and des-->
-
-                    <!--Chat Message-->
-                    <div class="mesgs" style="width:2000px;">
-                        <div class="msg_history">
-                            <div class="incoming_msg">
-                                <div class="incoming_msg_img"> <img src="../img/user-profile.png" alt="user-image"/> </div>
-                                <div class="received_msg">
-                                    <div class="received_withd_msg">
-                                        <p>Test which is a new approach to have all
-                                        solutions</p>
-                                        <span class="time_date"> 11:01 AM    |    June 9</span>
-                                    </div>
+                    <div class="tab-pane fade" id="moderator2-tab" role="tabpanel" aria-labelledby="moderator2">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-12">
+                                <div class="list-group" id="moderator2-pending-list" role="tablist">
+                                    <a class="list-group-item list-group-item-action" disabled style=" background-color: #000066;color: white;">Pending Complaints</a>
+                                    <a class="list-group-item list-group-item-action active" id="moderator2-complaint1" data-toggle="list" href="#complaint1-tab" role="tab" aria-controls="complaint1-tab">Pending Complaints 1</a>
+                                    <a class="list-group-item list-group-item-action" id="moderator2-complaint2" data-toggle="list" href="#complaint2-tab" role="tab" aria-controls="complaint2-tab">Pending Complaints 2</a>
                                 </div>
                             </div>
-                            <div class="outgoing_msg">
-                                <div class="sent_msg">
-                                    <p>Test which is a new approach to have all
-                                        solutions</p>
-                                    <span class="time_date"> 11:01 AM    |    June 9</span>
-                                </div>
-                            </div>
-                            <div class="incoming_msg">
-                                <div class="incoming_msg_img"> <img src="../img/user-profile.png" alt="user-image"/> </div>
-                                <div class="received_msg">
-                                    <div class="received_withd_msg">
-                                        <p>Test, which is a new approach to have</p>
-                                        <span class="time_date"> 11:01 AM    |    Yesterday</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="outgoing_msg">
-                                <div class="sent_msg">
-                                    <p>Apollo University, Delhi, India Test</p>
-                                    <span class="time_date"> 11:01 AM    |    Today</span> 
+                            <div class="col-sm-12 col-md-6 col-lg-12">
+                                <div class="list-group" id="moderator2-complete-list" role="tablist">
+                                    <a class="list-group-item list-group-item-action" disabled style=" background-color: #000066;color: white;">Solved Complaints</a>
+                                    <a class="list-group-item list-group-item-action active" id="moderator2-complaint3" data-toggle="list" href="#complaint3-tab" role="tab" aria-controls="complaint3-tab">Solved Complaints 1</a>
+                                    <a class="list-group-item list-group-item-action" id="moderator2-complaint4" data-toggle="list" href="#complaint4-tab" role="tab" aria-controls="complaint4-tab">Solved Complaints 2</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
+            </div>
+            <div class ="col-sm-12 col-md-12 col-lg-6">
+                <div class="tab-content" id="complaintviewtab" runat="server">
+                          
+                </div>
             </div> 
         </div>
     </div>     

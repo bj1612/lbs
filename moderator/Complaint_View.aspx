@@ -113,7 +113,8 @@
                                     <button class="msg_send_btn" type="button" runat="server" ID="Comment" onserverclick="Comment_Click"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                 </div>
                            </div>             
-                        </div>                       
+                        </div>  
+                        <!-- end of chat-->                     
                     </div>
                 </div>
             </div>
