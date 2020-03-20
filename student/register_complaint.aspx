@@ -4,12 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ComplaintScriptManager1" runat="server"/>
-    <div class="bradcam_area1 breadcam_bg">
+    <div class="background_check">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White; height:10px;">Register Your Complaint!</h3>
+                        <h3 style="color:White;font-size:xx-large;">Register Your Complaint!</h3>
                     </div>
                 </div>
             </div>

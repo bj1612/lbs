@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server"> 
     <!-- bradcam_area_start -->
-    <div class="bradcam_area1 breadcam_bg">
+    <div class="background_check">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -16,14 +16,14 @@
         </div>
     </div>
     <!-- bradcam_area_end -->
-    <div class="service_area"  style ="padding:0px ; margin:0px;">
+    <div class="service_area">
         <div class="container">
-            <div class="row justify-content-center ">
+            <!--<div class="row justify-content-center ">
                 <div class="col-xs-12 col-sm-12 col-lg-6 col-md-10">
                     <div class="section_title text-center mb-95">
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row justify-content-center">
                 <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
                     <div class="single_service">

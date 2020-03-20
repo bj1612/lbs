@@ -2,19 +2,18 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="/lbs/css/chatbox.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
     <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="100000">
      </asp:Timer>
-    <div class="bradcam_area1 breadcam_bg">
+    <div class="background_check" style="padding-top:0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White; font-size:xx-large;">Details Of Student Complaint!</h3>
+                        <h3 style="color:White; font-size:xx-large;font-family: 'Poppins', sans-serif;">Details Of Student Complaint!</h3>
                     </div>
                 </div>
             </div>

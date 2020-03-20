@@ -80,6 +80,10 @@ public partial class SubAdmin_View : System.Web.UI.Page
                 bool checkmodefirstcomplaint = true;
                 bool checkfirstmode = true;
                 bool checkpendingfirst = true;
+                moderatorlist.InnerHtml = "";
+                complainttabContent.InnerHtml = "";
+                complaintviewtab.InnerHtml = "";
+                moderatorlist.InnerHtml += @"<a class='list-group-item list-group-item-action' disabled style='background-color: #000066;color: white;'>Moderator</a>";
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(loadmoderatorquery, connection))
@@ -103,16 +107,16 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                            ).ToArray());
                                     if (checkfirstmode == true)
                                     {
-                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action active' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action active' id='" + modeemail + "' onclick='childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                         checkfirstmode = false;
                                     }
                                     else
                                     {
-                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action' id='" + modeemail + "' onclick='childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                     }
                                     if (checkmodefirstcomplaint == true)
                                     {
-                                        complainttabContent.InnerHtml += @"<div class='tab-pane fade show active' id='tab-moderator-" + modeemail + "' role='tabpanel' aria-labelledby='" + modeemail + "'>";
+                                        complainttabContent.InnerHtml += @"<div class='tab-pane show active fade' id='tab-moderator-" + modeemail + "' role='tabpanel' aria-labelledby='" + modeemail + "'>";
                                         checkmodefirstcomplaint = false;
                                     }
                                     else
@@ -140,20 +144,20 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                                                         complaint_id = reader1.GetInt32(0);
                                                                         if (checkpendingfirst == true)
                                                                         {
-                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check active' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
+                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active moderator-change' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
                                                                             LoadComplaint(complaint_id, modeemail);
                                                                             checkpendingfirst = false;
                                                                         }
                                                                         else
                                                                         {
-                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
+                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active moderator-change' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
                                                                             LoadComplaint(complaint_id, modeemail);
                                                                         }
                                                                     }
                                                                 }
                                                                 else
                                                                 {
-                                                                    complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check' disabled>No Pending Complaints</a>";
+                                                                    complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active' disabled>No Pending Complaints</a>";
                                                                 }
                                                             }
                                                         }
@@ -180,20 +184,20 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                                                         complaint_id = reader1.GetInt32(0);
                                                                         if (checkpendingfirst == true)
                                                                         {
-                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check active' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
+                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active moderator-change' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
                                                                             LoadComplaint(complaint_id, modeemail);
                                                                             checkpendingfirst = false;
                                                                         }
                                                                         else
                                                                         {
-                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
+                                                                            complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active moderator-change' id='" + modeemail + "-" + complaint_id + "' onClick='removeActive(this.id);' data-toggle='list' href='#tab-complaint-" + complaint_id + "' role='tab' aria-controls='tab-complaint-" + complaint_id + "'>" + complaint_id + "</a>";
                                                                             LoadComplaint(complaint_id, modeemail);
                                                                         }
                                                                     }
                                                                 }
                                                                 else
                                                                 {
-                                                                    complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action custom-list-check' disabled>No Completed Complaints</a>";
+                                                                    complainttabContent.InnerHtml += @"<a class='list-group-item list-group-item-action remove-complaint-active' disabled>No Completed Complaints</a>";
                                                                 }
                                                             }
                                                         }
@@ -210,7 +214,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect(@"/lbs/subAdmin/subadmin_index.aspx");
+                moderatorlist.InnerHtml += @"<a class='list-group-item list-group-item-action' disabled style=' background-color: #000066;color: white;'>No Moderator Assigned</a>";
             }
 
         }
@@ -246,15 +250,15 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                 string complaint_progress = reader.GetString(9);
                                 if (checkfirstcomplaint == true)
                                 {
-                                    complaintviewtab.InnerHtml += @"<div class='tab-pane fade show active' id='tab-complaint-" + complaint_idd + "' role='tabpanel' aria-labelledby='" + mode_emaill + "-" + complaint_idd + "'>";
+                                    complaintviewtab.InnerHtml += @"<div class='tab-pane fade remove-complaint-list' id='tab-complaint-" + complaint_idd + "' role='tabpanel' aria-labelledby='" + mode_emaill + "-" + complaint_idd + "'>";
                                     checkfirstcomplaint = false;
                                 }
                                 else
                                 {
-                                    complaintviewtab.InnerHtml += @"<div class='tab-pane fade' id='tab-complaint-" + complaint_idd + "' role='tabpanel' aria-labelledby='" + mode_emaill + "-" + complaint_idd + "'>";
+                                    complaintviewtab.InnerHtml += @"<div class='tab-pane fade remove-complaint-list' id='tab-complaint-" + complaint_idd + "' role='tabpanel' aria-labelledby='" + mode_emaill + "-" + complaint_idd + "'>";
                                 }
                                 complaintviewtab.InnerHtml += @"<div class='row justify-content-center'>";
-                                complaintviewtab.InnerHtml += @"<div class='card' style='text-align:center; width:2000px;margin-top: 20px;' >";
+                                complaintviewtab.InnerHtml += @"<div class='card' style='text-align:center; width:2000px;' >";
                                 complaintviewtab.InnerHtml += @"<div class='card-header' style='background-color:orange;color:White; font-size:larger;'>";
                                 complaintviewtab.InnerHtml += @"<div class='row'>";
                                 complaintviewtab.InnerHtml += @"<div class='col'>";
@@ -369,5 +373,9 @@ public partial class SubAdmin_View : System.Web.UI.Page
         {
             System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
         }
+    }
+    protected void Timer1_Tick(object sender, EventArgs e)
+    {
+        SubAdminViewUpdatePanel1.Update();
     }
 }

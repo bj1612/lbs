@@ -1874,14 +1874,14 @@ h3 {
 
 /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
 .service_area {
-  padding-top: 241px;
+  padding-top: 50px;
   padding-bottom: 106px;
 }
 
 @media (max-width: 767px) {
   /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
   .service_area {
-    padding-top: 60px;
+    padding-top: 30px;
     padding-bottom: 60px;
   }
 }
@@ -1889,7 +1889,7 @@ h3 {
 @media (min-width: 768px) and (max-width: 991px) {
   /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
   .service_area {
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 40px;
   }
 }
@@ -2980,6 +2980,18 @@ h3 {
 .breadcam_bg_2 {
   background-image: url(../img/banner/bradcam3.png);
 }
+.background_check
+{
+    padding-top:10px;
+    margin-bottom:10px;
+    min-height:63px;
+    max-width:100%;
+    overflow:hidden;
+    background-image: url(/lbs/img/banner/bradcam.png);
+    background-position:center top;
+	background-repeat:no-repeat;
+	background-size:cover;
+}
 
 /* line 10, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
 .bradcam_area {
@@ -2988,6 +3000,7 @@ h3 {
   padding: 160px 0;
   background-position: bottom;
   background-repeat: no-repeat;
+  
 }
 .bradcam_area1 {
   background-size: cover;

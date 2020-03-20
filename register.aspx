@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
     <!-- bradcam_area_start -->
-    <div class="bradcam_area1 breadcam_bg">
+    <div class="background_check">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
