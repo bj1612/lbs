@@ -68,7 +68,7 @@
                                             <ul id="navigation">
                                                 <li><a href="/lbs/index.aspx" style="text-decoration:none;">Home</a></li>
                                                 <li><a href="/lbs/about.aspx" style="text-decoration:none;">About Us</a></li>
-                                                <li><a href="guidlinesaspx.aspx" style="text-decoration:none;">Guidelines</a></li>
+                                                <li><a href="/lbs/about.aspx" style="text-decoration:none;">GuideLines</a></li>
                                                 <li><a href="#" style="text-decoration:none;">Register | Login <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a href="/lbs/register.aspx" style="text-decoration:none;">Register</a></li>
