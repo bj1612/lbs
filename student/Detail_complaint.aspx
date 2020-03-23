@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    <div style="overflow:hidden;">
     <asp:UpdatePanel ID="CommentUpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate> 
         <!-- bradcam_area_end -->
@@ -51,6 +52,10 @@
                             <div class="col">
                                 <div class="col">Status:</div>
                                 <div class="col" style="margin-right:20px;padding-left:5px;color:Black;" runat="server" id="statusdiv">Pending</div>
+                            </div>
+                            <div class="col">
+                                <div class="col">Category:</div>
+                                <div class="col" style="margin-right:20px;padding-left:5px;color:Black;" runat="server" id="catdiv">Grade</div>
                             </div>
                         </div>
                         </div>
@@ -173,6 +178,7 @@
             </div>
           </div>
         </div>
+  </div>
     <!--<script>
         /*$('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal

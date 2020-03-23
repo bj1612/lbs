@@ -14,12 +14,18 @@ public partial class register_complaint : System.Web.UI.Page
     string connStr;
     string alertclassname = "alert-danger";
     string current_user;
+    int university_id = 0, institute_id = 0, department_id = 0;
+    string student_email = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
         if (Session["email"] == null)
         {
             Response.Redirect(@"/lbs/index.aspx");
+        }
+        if (Session["email"] != null)
+        {
+            student_email = Session["email"].ToString();
         }
         if (Session["typeofuser"] != null)
         {
@@ -29,115 +35,97 @@ public partial class register_complaint : System.Web.UI.Page
                 Response.Redirect("/lbs/logout.aspx");
             }
         }
+        string fetchstudentinfoquery = "select university_id,institute_id,department_id from student where student_email=@student_email";
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connStr))
+            {
+                using (SqlCommand command = new SqlCommand(fetchstudentinfoquery, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@student_email", student_email);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                university_id = reader.GetInt32(0);
+                                institute_id = reader.GetInt32(1);
+                                department_id = reader.GetInt32(2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e1)
+        {
+            System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
+        }
     }
     protected void ComplaintType_SelectedIndexChanged(object sender, EventArgs e)
     {
         type_of_complaint = ComplaintType.SelectedValue;
         if (type_of_complaint.Equals("Complaint Type") == false)
         {
-            if (type_of_complaint.Equals("university") == true)
+            string fetchcategory = "";
+            try
             {
-                try
+                if (type_of_complaint.Equals("university") == true)
                 {
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    fetchcategory = "select * from university_category where university_id=@id and university_category_id in (select distinct university_category_id from university_subadmin where university_subadmin_email in (select university_subadmin_email from university_mode))";
+                }
+                if (type_of_complaint.Equals("institute") == true)
+                {
+                    fetchcategory = "select * from institute_category where institute_id=@id and institute_category_id in (select distinct institute_category_id from institute_subadmin where institute_subadmin_email in (select institute_subadmin_email from institute_mode))";
+                }
+                if (type_of_complaint.Equals("department") == true)
+                {
+                    fetchcategory = "select * from department_category where department_id=@id and department_category_id in (select distinct department_category_id from department_subadmin where department_subadmin_email in (select department_subadmin_email from department_mode))";
+                }
+                using (SqlConnection connection = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(fetchcategory, connection))
                     {
-                        using (SqlCommand command = new SqlCommand("SELECT * FROM university_category", connection))
+                        connection.Open();
+                        if (type_of_complaint.Equals("university"))
                         {
-                            connection.Open();
-                            using (SqlDataReader reader = command.ExecuteReader())
+                            command.Parameters.AddWithValue("@id", university_id);
+                        }
+                        if (type_of_complaint.Equals("institute"))
+                        {
+                            command.Parameters.AddWithValue("@id", institute_id);
+                        }
+                        if (type_of_complaint.Equals("department"))
+                        {
+                            command.Parameters.AddWithValue("@id", department_id);
+                        }
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
                             {
-                                if (reader.HasRows)
+                                ComplaintCategory.Items.Clear();
+                                ComplaintCategory.Items.Add(new ListItem("Category", "Complaint Category"));
+                                while (reader.Read())
                                 {
-                                    ComplaintCategory.Items.Clear();
-                                    ComplaintCategory.Items.Add(new ListItem("Category", "Complaint Category"));
-                                    while (reader.Read())
+                                    string category_id = reader.GetInt32(0).ToString();
+                                    string category_name = reader.GetString(1);
+                                    if (!string.IsNullOrEmpty(category_name))
                                     {
-                                        string university_category_id = reader.GetInt32(0).ToString();
-                                        string university_category_name = reader.GetString(1);
-                                        if (!string.IsNullOrEmpty(university_category_name))
-                                        {
-                                            ComplaintCategory.Items.Add(new ListItem(university_category_name, university_category_id));
-                                        }
+                                        ComplaintCategory.Items.Add(new ListItem(category_name, category_id));
                                     }
                                 }
                             }
                         }
                     }
-                }
-                catch (Exception e1)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
                 }
             }
-            if (type_of_complaint.Equals("institute") == true)
+            catch (Exception e1)
             {
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connStr))
-                    {
-                        using (SqlCommand command = new SqlCommand("SELECT * FROM institute_category", connection))
-                        {
-                            connection.Open();
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                if (reader.HasRows)
-                                {
-                                    ComplaintCategory.Items.Clear();
-                                    ComplaintCategory.Items.Add(new ListItem("Category", "Complaint Category"));
-                                    while (reader.Read())
-                                    {
-                                        string institute_category_id = reader.GetInt32(0).ToString();
-                                        string institute_category_name = reader.GetString(1);
-                                        if (!string.IsNullOrEmpty(institute_category_name))
-                                        {
-                                            ComplaintCategory.Items.Add(new ListItem(institute_category_name, institute_category_id));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e1)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
-                }
+                System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
             }
-            if (type_of_complaint.Equals("department") == true)
-            {
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connStr))
-                    {
-                        using (SqlCommand command = new SqlCommand("SELECT * FROM department_category", connection))
-                        {
-                            connection.Open();
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                if (reader.HasRows)
-                                {
-                                    ComplaintCategory.Items.Clear();
-                                    ComplaintCategory.Items.Add(new ListItem("Category", "Complaint Category"));
-                                    while (reader.Read())
-                                    {
-                                        string department_category_id = reader.GetInt32(0).ToString();
-                                        string department_category_name = reader.GetString(1);
-                                        if (!string.IsNullOrEmpty(department_category_name))
-                                        {
-                                            ComplaintCategory.Items.Add(new ListItem(department_category_name, department_category_id));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e1)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
-                }
-            }   
-
         }
         else
         {
@@ -150,7 +138,7 @@ public partial class register_complaint : System.Web.UI.Page
     }
     protected void RegisterComplaint_Click(object sender, EventArgs e)
     {
-        string student_email="",complaint_date="",complaint_time="",complaint_title="",complaint_description="",complaint_status="",complaint_progress="";
+        string complaint_date="",complaint_time="",complaint_title="",complaint_description="",complaint_status="",complaint_progress="";
         int category_id=0;
         string insertquery="";
         type_of_complaint = ComplaintType.SelectedValue;
@@ -178,10 +166,7 @@ public partial class register_complaint : System.Web.UI.Page
                 complaint_description = Description.Text;
                 complaint_status = "Open";
                 complaint_progress = "Pending";
-                if (Session["email"] != null)
-                {
-                    student_email = Session["email"].ToString();
-                }
+                
                 complaint_date = DateTime.Now.Year+"-"+DateTime.Now.Month+"-"+DateTime.Now.Day;
                 complaint_time = DateTime.Now.ToShortTimeString();
                 
@@ -309,7 +294,10 @@ public partial class register_complaint : System.Web.UI.Page
                                             }
                                             if (update_moderator_email.Equals("") == true)
                                             {
-                                                update_moderator_email = first_moderator;
+                                                if (first_moderator.Equals(assign_moderator_email) == false)
+                                                {
+                                                    update_moderator_email = first_moderator;
+                                                }
                                                 break;
                                             }
                                             
@@ -334,34 +322,52 @@ public partial class register_complaint : System.Web.UI.Page
                             command.ExecuteNonQuery();
                         }
                     }
-
-                    string moderatorupdateassignquery = "update university_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    if (update_moderator_email.Equals("") == false)
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                        string moderatorupdateassignquery = "update university_mode set status='No',total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            total_no_of_complaint++;
-                            command.Parameters.AddWithValue("@no", "No");
-                            command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
-                            command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        string moderatorupdatenextquery = "update university_mode set status=@yes where university_mode_email=@update_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
+                        {
+                            using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                            {
+                                connection.Open();
+
+                                command.Parameters.AddWithValue("@yes", "Yes");
+                                command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
-
-                    string moderatorupdatenextquery = "update university_mode set status=@yes where university_mode_email=@update_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    else
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                        string moderatorupdateassignquery = "update university_mode set total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            command.Parameters.AddWithValue("@yes", "Yes");
-                            command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
                     /*System.Diagnostics.Debug.WriteLine("Student Email : " + student_email);
@@ -506,7 +512,10 @@ public partial class register_complaint : System.Web.UI.Page
                                             }
                                             if (update_moderator_email.Equals("") == true)
                                             {
-                                                update_moderator_email = first_moderator;
+                                                if (first_moderator.Equals(assign_moderator_email) == false)
+                                                {
+                                                    update_moderator_email = first_moderator;
+                                                }
                                                 break;
                                             }
 
@@ -532,33 +541,53 @@ public partial class register_complaint : System.Web.UI.Page
                         }
                     }
 
-                    string moderatorupdateassignquery = "update institute_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    if (update_moderator_email.Equals("") == false)
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                        string moderatorupdateassignquery = "update institute_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            total_no_of_complaint++;
-                            command.Parameters.AddWithValue("@no", "No");
-                            command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
-                            command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@no", "No");
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        string moderatorupdatenextquery = "update institute_mode set status=@yes where institute_mode_email=@update_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
+                        {
+                            using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                            {
+                                connection.Open();
+
+                                command.Parameters.AddWithValue("@yes", "Yes");
+                                command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
-
-                    string moderatorupdatenextquery = "update institute_mode set status=@yes where institute_mode_email=@update_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    else
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                        string moderatorupdateassignquery = "update institute_mode set total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            command.Parameters.AddWithValue("@yes", "Yes");
-                            command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
                     /*System.Diagnostics.Debug.WriteLine("Student Email : " + student_email);
@@ -703,7 +732,10 @@ public partial class register_complaint : System.Web.UI.Page
                                             }
                                             if (update_moderator_email.Equals("") == true)
                                             {
-                                                update_moderator_email = first_moderator;
+                                                if (first_moderator.Equals(assign_moderator_email) == false)
+                                                {
+                                                    update_moderator_email = first_moderator;
+                                                }
                                                 break;
                                             }
 
@@ -729,33 +761,53 @@ public partial class register_complaint : System.Web.UI.Page
                         }
                     }
 
-                    string moderatorupdateassignquery = "update department_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    if (update_moderator_email.Equals("") == false)
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                        string moderatorupdateassignquery = "update department_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            total_no_of_complaint++;
-                            command.Parameters.AddWithValue("@no", "No");
-                            command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
-                            command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@no", "No");
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        string moderatorupdatenextquery = "update department_mode set status=@yes where department_mode_email=@update_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
+                        {
+                            using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                            {
+                                connection.Open();
+
+                                command.Parameters.AddWithValue("@yes", "Yes");
+                                command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
-
-                    string moderatorupdatenextquery = "update department_mode set status=@yes where department_mode_email=@update_moderator_email";
-                    using (SqlConnection connection = new SqlConnection(connStr))
+                    else
                     {
-                        using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                        string moderatorupdateassignquery = "update department_mode set total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
+                        using (SqlConnection connection = new SqlConnection(connStr))
                         {
-                            connection.Open();
+                            using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
+                            {
+                                connection.Open();
 
-                            command.Parameters.AddWithValue("@yes", "Yes");
-                            command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+                                total_no_of_complaint++;
+                                command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                                command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
 
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                            }
                         }
                     }
                     /*System.Diagnostics.Debug.WriteLine("Student Email : " + student_email);

@@ -390,8 +390,7 @@ public partial class Register : System.Web.UI.Page
             string insertquery = "insert into student values(@first,@last,@email,@pass,@contact,@ins_id,@dep_id,@uni_id,@adm,@cur,@roll,@pnr,@shift)";
             try
             {
-                SqlConnection connection = new SqlConnection(connStr);
-                using (connection)
+                using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(insertquery, connection))
                     {

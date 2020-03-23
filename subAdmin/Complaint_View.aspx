@@ -1,12 +1,10 @@
-﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/moderator/Complaint_View.aspx.cs" Inherits="Complaint_View" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="Detailed View Of Complaint" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="~/subAdmin/Complaint_View.aspx.cs" Inherits="Complaint_View" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="/lbs/css/chatbox.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"/>
-    <asp:Timer ID="Timer1" runat="server" ontick="Timer1_Tick" Interval="100000">
      </asp:Timer>
     <div class="background_check" style="padding-top:0px;">
         <div class="container">
@@ -22,13 +20,11 @@
     </div>
     <!-- bradcam_area_end -->
     <div style="overflow:hidden;">
-    <asp:UpdatePanel ID="ComplaintUpdatePanel1" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
             <div class="service_area" style ="padding:0px ; margin:0px;">
                 <div class="container">            
                     <div class="row justify-content-center">
                         <!--complaint id and description-->
-                        <div class="card" style="text-align:center; width:2000px;margin-top: 20px;" >
+                        <div class="card" style="text-align:center; width:95%;margin-top: 20px;" >
                             <div class="card-header" style="background-color:orange;color:White; font-size:larger;">
                                 <div class="row">
                                     <div class="col">
@@ -61,7 +57,7 @@
                             </div>
                         </div>
                    
-                        <div class="card" style="text-align:center; width:2000px;margin-top: 20px;" >
+                        <div class="card" style="text-align:center; width:95%;margin-top: 20px;" >
                             <div class="card-header" style="background-color:orange;color:White; font-size:x-large;"><span runat="server" id="titlediv">Title of Complaint</span></div>
                             <div class="card-body">
                             <blockquote class="blockquote mb-0">
@@ -75,7 +71,7 @@
 
                         <div class="mesgs">
                             <div class="msg_history">
-                                <div class="row" runat="server" id="messageboxdiv">
+                                <div class="row" id="messageboxdiv" runat="server">
                                     <!--<div class="incoming_msg col-sm-11 col-md-10 col-lg-10">
                                         <div class="incoming_msg_img"> 
                                             <div style="width:300px;">
@@ -110,147 +106,110 @@
                                         </div>
                                     </div>-->
                                 </div>
-                            </div>
-                            <div class="type_msg">
-                                <div class="input_msg_write" runat="server" id="commenttextboxdiv" style="display:block;">
-                                    <asp:TextBox id="CommentBox" rows="3" class="form-control" placeholder="Type a message" TextMode="multiline" runat="server" Text=""/>
-                                    <button class="msg_send_btn" type="button" runat="server" ID="Comment" onserverclick="Comment_Click"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                            </div>             
+                        </div>
+                        <div id="reassigndiv" class="check-reassign-report" runat="server" style="display:none;">
+                            <div class="card" style="text-align:center; width:100%;margin-top: 20px;" >
+                                <div class="card-header" style="background-color:orange;color:White; font-size:larger;padding-bottom:0px;">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">New Category:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reassigncatname" style="color:Black;">Category Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Name:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reassignmodenamediv" style="color:Black;">Moderator Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Email:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reassignmodeemaildiv" style="color:Black;">Moderator Email</div>
+                                    </div>
+                                    <div class="row justify-content-center" style="text-align:center; background-color:	#FF4500;margin-top:10px;padding-top:5px;padding-bottom:5px;" >
+                                        Description
+                                    </div>
                                 </div>
-                           </div>             
-                        </div>  
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <!--<p>Description about complaint </p>-->
+                                        <p runat="server" id="reassigndesc" class="text-info">Description about complaint</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reappealdiv" class="check-reassign-report" runat="server" style="display:none;">
+                            <div class="card" style="text-align:center; width:100%;margin-top: 20px;" >
+                                <div class="card-header" style="background-color:orange;color:White; font-size:larger;padding-bottom:0px;">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Applied Category:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reappealcatdiv" style="color:Black;">Category Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Name:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reappealmodenamediv" style="color:Black;">Moderator Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Email:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reappealmodeemaildiv" style="color:Black;">Moderator Email</div>
+                                    </div>
+                                    <div class="row justify-content-center" style="text-align:center; background-color:	#FF4500;margin-top:10px;padding-top:5px;padding-bottom:5px;" >
+                                        Description
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <!--<p>Description about complaint </p>-->
+                                        <p runat="server" id="reappealdesc" class="text-info">Description about complaint</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reportdiv" class="check-reassign-report" runat="server" style="display:none;">
+                            <div class="card" style="text-align:center; width:100%;margin-top: 20px;" >
+                                <div class="card-header" style="background-color:orange;color:White; font-size:larger;padding-bottom:0px;">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Applied Category:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reportcatdiv" style="color:Black;">Category Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Type:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reporttypediv" style="color:Black;">Type Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Name:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reportmodenamediv" style="color:Black;">Moderator Name</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Moderator Email:</div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" id="reportmodeemaildiv" style="color:Black;">Moderator Email</div>
+                                    </div>
+                                    <div class="row justify-content-center" style="text-align:center; background-color:	#FF4500;margin-top:10px;padding-top:5px;padding-bottom:5px;" >
+                                        Description
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <!--<p>Description about complaint </p>-->
+                                        <p runat="server" id="reportdesc" class="text-info">Description about complaint</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div> 
                         <!-- end of chat-->                     
                     </div>
                 </div>
-            </div>
-            
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="Comment" EventName="ServerClick" />
-            <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
-        </Triggers>
-    </asp:UpdatePanel>  
+            </div> 
             <div class="row" style="margin-top:20px;"> 
             </div>
             <!-- Button trigger modal -->
             <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;">
-                <div id="reassigndiv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Ressign</button>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" style="display:block;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Approve</button>
                 </div>
-                <div id="reportdiv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Report</button>
-                </div>
-                <div id="closediv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Close</button>
-                </div>
-            </div>
-            <!-- Reassign Modal-->
-            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Confirm your action </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h3>Are you sure you want to reassign your task?</h3>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#getModal1">Yes</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="getModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel1">Reassign Details </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h4>Please provide us detail why you want to reassign</h4>
-                            <!--<form>-->
-                                <!-- Example single danger button -->
-                                <h6>(Note:If you want the category to be same select the current category)</h6>
-                                <div class="form-group">
-                                    <label for="category" class="col-form-label">Category:</label>
-                                    <!--<select></select>-->
-                                    <asp:DropDownList class="form-control" ID="ReassignCategory" runat="server" style="height:40px;">
-                                        <asp:ListItem Value="0" Text="Category"></asp:ListItem> 
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reassign_text" class="col-form-label">Description:</label>
-                                    <textarea class="form-control" rows="4" id="reassign_text" runat="server"></textarea>
-                                </div>
-                            <!--</form>-->
-                        </div>
-                        <div class="modal-footer">
-                            <button id="Button1" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Reassign_Click">Reappeal</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Report Modal-->
-            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel2">Confirm your action </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h3>Are you sure you want to report your task?</h3>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#getModal2">Yes</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="getModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel3">Report Details </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h4>Please provide us detail why you want to report</h4>
-                            <!--<form>-->
-                                <!-- Example single danger button -->
-                                <div class="form-group">
-                                    <label for="ReportType" class="col-form-label">Type:</label>
-                                    <!--<select></select>-->
-                                    <asp:DropDownList class="form-control" ID="ReportType" runat="server" style="height:40px;">
-                                        <asp:ListItem Value="Type" Text="Type"></asp:ListItem>
-                                        <asp:ListItem Value="Abusive and Offensive" Text="Abusive and Offensive"></asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="form-group">
-                                    <label for="rep_desc" class="col-form-label">Description:</label>
-                                    <textarea class="form-control" rows="4" id="rep_desc" runat="server"></textarea>
-                                </div>
-                            <!--</form>-->
-                        </div>
-                        <div class="modal-footer">
-                            <button id="Button2" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Report_Click">Report</button>
-                        </div>
-                    </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" style="display:block;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Reject</button>
                 </div>
             </div>
             <!-- Close Modal-->
-            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -260,16 +219,35 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h3>Are you sure you want to close your task?</h3>
+                            <h3>Are you sure you want to approve the request?</h3>
                         </div>
                         <div class="modal-footer">
-                            <button id="CloseButton" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Close_Click">Yes</button>
+                            <button id="YesButton" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Yes_Click">Yes</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel5">Confirm your action </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Are you sure you want to approve the request?</h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="No_Button" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="No_Click">Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- Modal 
     <script>
         $('#exampleModal').on('show.bs.modal', function (event) {
