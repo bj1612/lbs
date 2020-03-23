@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White;font-size:xx-large;">Registration Page For Sub-Admin's!</h3style></h3>
+                        <h3 style="color:White;font-size:xx-large;">Registration Page For Sub-Admin's!</h3>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,9 @@
                                 </div>
                             </div>                        
                              <div class="row justify-content-center mt-3">
-                                   <asp:LinkButton Text="Register" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
+                                    <asp:LinkButton Text="Register" class="boxed-btn4" 
+                                    style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" 
+                                    runat="server" ID="RegisterButton" onclick="RegisterButtonsubadmin_Click"></asp:LinkButton>
                              </div>
                       </div>
                 </div>
@@ -55,5 +57,6 @@
             </div>
         </div>
     </div>
+    <asp:Label ID="message" runat="server"></asp:Label>
 </asp:Content>
 
