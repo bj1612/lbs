@@ -26,6 +26,50 @@
   background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
   background-image: -ms-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
 }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) 
+{
+    .check-reassign-report
+    {
+        width:95%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px)
+{
+    .check-reassign-report
+    {
+        width:80%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px)
+{
+    .check-reassign-report
+    {
+        width:80%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px)
+{
+    .check-reassign-report
+    {
+        width:80%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px)
+{
+    .check-reassign-report
+    {
+        width:80%;
+    }
+}
 
 /* Normal desktop :1200px. */
 /* Normal desktop :992px. */

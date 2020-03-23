@@ -11,8 +11,9 @@ using System.Data.SqlClient;
 public partial class Complaint_View : System.Web.UI.Page
 {
     string connStr, current_user = "", user_name = "";
-    string mode_email = "", student_email = "", complaint_level = "";
+    string mode_email = "", student_email = "", complaint_level = "", category_name = "";
     int complaint_id = 0;
+    int category_id = 0;
     protected void Comment_Load()
     {
         string commentquery = "";
@@ -178,27 +179,30 @@ public partial class Complaint_View : System.Web.UI.Page
         System.Diagnostics.Debug.WriteLine("Complaint_level: " + complaint_level);*/
         try
         {
-            string checkmode = "", checkisclosed = "", fetchcomplaintquery = "", loadcategoryquery="";
+            string checkmode = "", checkisclosed = "", fetchcomplaintquery = "", loadcategoryquery="",fetchcategoryquery = "";
             bool checkmodebool = false;
             if (complaint_level.Equals("") == false)
             {
                 if (complaint_level.Equals("university"))
                 {
-                    loadcategoryquery = "SELECT * FROM university_category";
+                    fetchcategoryquery = "SELECT * from university_category where university_category_id=@category_id";
+                    loadcategoryquery = "SELECT * FROM university_category where university_id=(select university_id from university_admin where university_admin_email=(select university_admin_email from university_subadmin where university_subadmin_email=(select university_subadmin_email from university_mode where university_mode_email=@mode_email)))";
                     checkmode = "SELECT * FROM university_mode_assign where university_mode_email=@mode_email and university_complaint_id=@complaint_id and (assign_status='Assign' or assign_status='Completed')";
                     checkisclosed = "SELECT * FROM university_complaint where university_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
                     fetchcomplaintquery = "SELECT * FROM university_complaint where university_complaint_id=@complaint_id and complaint_level=@complaint_level";
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    loadcategoryquery = "SELECT * FROM institute_category";
+                    fetchcategoryquery = "SELECT * from institute_category where institute_category_id=@category_id";
+                    loadcategoryquery = "SELECT * FROM institute_category where institute_id=(select institute_id from institute_admin where institute_admin_email=(select institute_admin_email from institute_subadmin where institute_subadmin_email=(select institute_subadmin_email from institute_mode where institute_mode_email=@mode_email)))";
                     checkmode = "SELECT * FROM institute_mode_assign where institute_mode_email=@mode_email and institute_complaint_id=@complaint_id and (assign_status='Assign' or assign_status='Completed')";
                     checkisclosed = "SELECT * FROM institute_complaint where institute_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
                     fetchcomplaintquery = "SELECT * FROM institute_complaint where institute_complaint_id=@complaint_id and complaint_level=@complaint_level";
                 }
                 if (complaint_level.Equals("department"))
                 {
-                    loadcategoryquery = "SELECT * FROM department_category";
+                    fetchcategoryquery = "SELECT * from department_category where department_category_id=@category_id";
+                    loadcategoryquery = "SELECT * FROM department_category where department_id=(select department_id from department_admin where department_admin_email=(select department_admin_email from department_subadmin where department_subadmin_email=(select department_subadmin_email from department_mode where department_mode_email=@mode_email)))";
                     checkmode = "SELECT * FROM department_mode_assign where department_mode_email=@mode_email and department_complaint_id=@complaint_id and (assign_status='Assign' or assign_status='Completed')";
                     checkisclosed = "SELECT * FROM department_complaint where department_complaint_id=@complaint_id and complaint_progress='Completed' and complaint_level=@complaint_level";
                     fetchcomplaintquery = "SELECT * FROM department_complaint where department_complaint_id=@complaint_id and complaint_level=@complaint_level";
@@ -208,6 +212,7 @@ public partial class Complaint_View : System.Web.UI.Page
                     using (SqlCommand command = new SqlCommand(loadcategoryquery, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@mode_email",mode_email);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -281,6 +286,7 @@ public partial class Complaint_View : System.Web.UI.Page
                                 {
                                     while (reader.Read())
                                     {
+                                        category_id = reader.GetInt32(3);
                                         student_email = reader.GetString(1);
                                         string complaint_date = reader.GetDateTime(4).ToShortDateString();
                                         string complaint_time = reader.GetString(5);
@@ -307,6 +313,30 @@ public partial class Complaint_View : System.Web.UI.Page
                     }
                     //Comment_Load
                     Comment_Load();
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(fetchcategoryquery, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@category_id", category_id);
+
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                if (reader.HasRows)
+                                {
+                                    while (reader.Read())
+                                    {
+                                        category_name = reader.GetString(1);
+                                        catdiv.InnerHtml = category_name;
+                                    }
+                                }
+                                else
+                                {
+                                    Response.Redirect(@"/lbs/moderator/track_complaint.aspx");
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {

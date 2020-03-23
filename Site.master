@@ -68,7 +68,7 @@
                                             <ul id="navigation">
                                                 <li><a href="/lbs/index.aspx" style="text-decoration:none;">Home</a></li>
                                                 <li><a href="/lbs/about.aspx" style="text-decoration:none;">About Us</a></li>
-                                                <li><a href="/lbs/about.aspx" style="text-decoration:none;">GuideLines</a></li>
+                                                <li><a href="guidlinesaspx.aspx" style="text-decoration:none;">Guidelines</a></li>
                                                 <li><a href="#" style="text-decoration:none;">Register | Login <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a href="/lbs/register.aspx" style="text-decoration:none;">Register</a></li>
@@ -97,10 +97,10 @@
         <div class="footer_top">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 col-lg-3">
+                    <div class="col-xl-6 col-md-6 col-lg-6">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                Contact Us
+                                Student Grievance Review System
                             </h3>
                             <ul class="address_line">
                                 <li>8652832005</li>
@@ -109,7 +109,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-3  col-md-6 col-lg-3">
+                    <!--<div class="col-xl-3  col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
                                 status & complaint 
@@ -121,7 +121,7 @@
                                 <li><a href="track_complaint.aspx">Track status</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-xl-3  col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
@@ -129,6 +129,7 @@
                             </h3>
                             <ul class="links">
                                 <li><a href="about.aspx">About Us</a></li>
+                                <li><a href="about.aspx">Guidelines</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Terms of Service</a></li>
                             </ul>
@@ -141,7 +142,6 @@
                                     <img src="/lbs/img/Edited logo1.png" alt="" />
                                 </a>
                             </div>
-                            <p class="address_text">Collector colony, chembur, 400086</p>
                             <div class="socail_links">
                                 <ul>
                                     <li>
@@ -177,7 +177,7 @@
                 <div class="bordered_1px"></div>
                 <div class="row">
                     <div class="col-xl-12 ">
-                         <center><p>All rights reserved @ Student Grieavence System </p></center>
+                         <center><p>All rights reserved @ Student Grievance Review System </p></center>
                     </div>
                 </div>
             </div>
