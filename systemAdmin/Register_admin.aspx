@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3 style="color:White;font-size:xx-large;">Registration Page For Admin!</h3style></h3>
+                        <h3 style="color:White;font-size:xx-large;">Registration Page For Admin!</h3>
                     </div>
                 </div>
             </div>
