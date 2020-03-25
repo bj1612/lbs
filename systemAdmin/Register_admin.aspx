@@ -88,7 +88,7 @@
                                                runat="server" ID="Register">
                                         </asp:Button>
                                     </div>
-                            </ContentTemplate>
+                                </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="choose_level" EventName="SelectedIndexChanged" />
                                     <asp:AsyncPostBackTrigger ControlID="university_choose" EventName="SelectedIndexChanged" />
@@ -97,9 +97,9 @@
                                     <asp:AsyncPostBackTrigger ControlID="department_choose" EventName="SelectedIndexChanged" />
                                     <asp:AsyncPostBackTrigger ControlID="Register" EventName="Click" />
                                 </Triggers>
-                           </asp:UpdatePanel>
+                            </asp:UpdatePanel>
                             <asp:Label ID="show" runat="server"></asp:Label>
-                      </div>
+                        </div>
                    </div>
                </div>
            </div>
