@@ -134,13 +134,13 @@
             <!-- Button trigger modal -->
             <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;">
                 <div id="reassigndiv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Ressign</button>
+                    <button type="button" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" data-toggle="modal" data-target="#myModal1">Ressign</button>
                 </div>
                 <div id="reportdiv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Report</button>
+                    <button type="button" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" data-toggle="modal" data-target="#myModal2">Report</button>
                 </div>
                 <div id="closediv" class="col-lg-4 col-md-4 col-xs-4" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">Close</button>
+                    <button type="button" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" data-toggle="modal" data-target="#myModal3">Close</button>
                 </div>
             </div>
             <!-- Reassign Modal-->

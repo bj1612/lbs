@@ -202,10 +202,10 @@
             <!-- Button trigger modal -->
             <div class="row" style="margin-top:20px;margin-bottom:20px;text-align:center;">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Approve</button>
+                    <button type="button" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" data-toggle="modal" data-target="#myModal1">Approve</button>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" style="display:block;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Reject</button>
+                    <button type="button" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" data-toggle="modal" data-target="#myModal2">Reject</button>
                 </div>
             </div>
             <!-- Close Modal-->

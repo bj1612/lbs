@@ -47,7 +47,7 @@
                                 </div>
                             </div>                       
                              <div class="row justify-content-center mt-3">
-                                   <asp:LinkButton Text="Register" href="contact.html" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
+                                   <asp:LinkButton Text="Register" href="contact.html" class="btn boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="Login"></asp:LinkButton>
                              </div>
                       </div>
                 </div>

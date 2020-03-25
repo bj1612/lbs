@@ -16,7 +16,7 @@ public partial class Admin_View : System.Web.UI.Page
     bool checkfirstcomplaint = true;
     string loadcomplaintquery = "", commentquery = "", fetchcategoryquery = "";
     string first_name = "", last_name = "";
-    int category_id = 0;
+    int category_id = 0, academic_id=0;
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
@@ -180,12 +180,12 @@ public partial class Admin_View : System.Web.UI.Page
                                                                            ).ToArray());
                                                                     if (checkfirstmode == true)
                                                                     {
-                                                                        moderatortabContent.InnerHtml += "<a class='list-group-item list-group-item-action custom-moderator-list-check remove-active-moderator' onClick='removeActiveModerator(this.id);' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                                                        moderatortabContent.InnerHtml += "<a class='list-group-item list-group-item-action custom-moderator-list-check remove-active-moderator' onClick='modeclick(\"" + mode_email + "\");removeActiveModerator(this.id);' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                                                         checkfirstmode = false;
                                                                     }
                                                                     else
                                                                     {
-                                                                        moderatortabContent.InnerHtml += "<a class='list-group-item list-group-item-action custom-moderator-list-check remove-active-moderator' onClick='removeActiveModerator(this.id);' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                                                        moderatortabContent.InnerHtml += "<a class='list-group-item list-group-item-action custom-moderator-list-check remove-active-moderator' onClick='modeclick(\"" + mode_email + "\");removeActiveModerator(this.id);' id='" + modeemail + "' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                                                     }
                                                                     if (checkmodefirstcomplaint == true)
                                                                     {
@@ -380,8 +380,9 @@ public partial class Admin_View : System.Web.UI.Page
                                 complaintviewtab.InnerHtml += @"</div>";
                                 complaintviewtab.InnerHtml += @"</div>";
                                 complaintviewtab.InnerHtml += @"</div>";
+                                LoadAcademic();
                                 complaintviewtab.InnerHtml += @"<div class='card' style='text-align:center; width:2000px;margin-top: 20px;' >";
-                                complaintviewtab.InnerHtml += @"<div class='card-header' style='background-color:orange;color:White; font-size:x-large;'><span>" + complaint_title + "</span></div>";
+                                complaintviewtab.InnerHtml += @"<div class='card-header' style='background-color:orange;color:White; font-size:x-large;'><span><a href='/lbs/viewProfile.aspx?ID=" + student_email + "&Data=" + academic_id + "' style='text-decoration:none;color:white;' target='blank' title='View Student Profile'>" + complaint_title + "</a></span></div>";
                                 complaintviewtab.InnerHtml += @"<div class='card-body'>";
                                 complaintviewtab.InnerHtml += @"<blockquote class='blockquote mb-0'>";
                                 complaintviewtab.InnerHtml += @"<p class='text-info'>" + complaint_description + "</p>";
@@ -418,7 +419,7 @@ public partial class Admin_View : System.Web.UI.Page
                                                         complaintviewtab.InnerHtml += @"<div class='sent_msg'>";
                                                         complaintviewtab.InnerHtml += @"<div>";
                                                         complaintviewtab.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                                        complaintviewtab.InnerHtml += comment_username;//Moderator Name
+                                                        complaintviewtab.InnerHtml += @"<a href='/lbs/moderator/viewModeratorProfile.aspx?ID=" + mode_email + "' style='font-weight: bold;text-decoration:none;color:black;' target='blank'>" + comment_username + "</a>";//Moderator Name
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"<p>" + comment_description + "</p>";
@@ -433,7 +434,7 @@ public partial class Admin_View : System.Web.UI.Page
                                                         complaintviewtab.InnerHtml += @"<div style='width:300px;'>";
                                                         complaintviewtab.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
                                                         complaintviewtab.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
-                                                        complaintviewtab.InnerHtml += comment_username;// Student Name
+                                                        complaintviewtab.InnerHtml += @"<a href='/lbs/viewProfile.aspx?ID=" + student_email + "&Data=" + academic_id + "' style='font-weight: bold;text-decoration:none;color:black;' target='blank'>" + comment_username + "</a>";// Student Name
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
@@ -495,6 +496,29 @@ public partial class Admin_View : System.Web.UI.Page
         catch (Exception e1)
         {
             System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
+        }
+    }
+    protected void LoadAcademic()
+    {
+        string fetchstudentinfoquery1 = "select student_academic_detail_id from student_academic_detail where status='Active' and student_email=@student_email";
+        using (SqlConnection connection = new SqlConnection(connStr))
+        {
+            using (SqlCommand command = new SqlCommand(fetchstudentinfoquery1, connection))
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@student_email", student_email);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            academic_id = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
         }
     }
     protected void Timer1_Tick(object sender, EventArgs e)

@@ -169,6 +169,8 @@ public partial class Register : System.Web.UI.Page
 
                     if (reader.HasRows)
                     {
+                        DropDownList1.Items.Clear();
+                        DropDownList1.Items.Add(new ListItem("Department Name", "Department Name"));
                         inputState.Items.Clear();
                         inputState.Items.Add(new ListItem("Institute Name", "Institute Name"));
                         while (reader.Read())
@@ -210,6 +212,7 @@ public partial class Register : System.Web.UI.Page
         string password = Password.Text;
         string confirmpassword = Confirm.Text;
         int universityid=0;
+        bool student_exist = false;
         if(university.SelectedValue!="University Name")
         {
             universityid = Convert.ToInt32(university.SelectedValue);
@@ -387,32 +390,78 @@ public partial class Register : System.Web.UI.Page
         }
         if (checkdrop == true)
         {
-            string insertquery = "insert into student values(@first,@last,@email,@pass,@contact,@ins_id,@dep_id,@uni_id,@adm,@cur,@roll,@pnr,@shift)";
+            string insertquery = "insert into student values(@first,@last,@email,@pass,@contact,@ins_id,@dep_id,@uni_id)";
+            string insertquery1 = "insert into student_academic_detail (student_email,department_id,admission_year,current_year,roll_no,prn_no,shift,status) values(@email,@dep_id,@adm,@cur,@roll,@pnr,@shift,'Active')";
+            string selectquery = "select * from student where student_email=@student_email";
             try
             {
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
-                    using (SqlCommand command = new SqlCommand(insertquery, connection))
+                    using (SqlCommand command = new SqlCommand(selectquery, connection))
                     {
                         connection.Open();
 
-                        command.Parameters.AddWithValue("@first", first);
-                        command.Parameters.AddWithValue("@last", last);
-                        command.Parameters.AddWithValue("@email", emailid);
-                        command.Parameters.AddWithValue("@pass", password);
-                        command.Parameters.AddWithValue("@contact", contact);
-                        command.Parameters.AddWithValue("@ins_id", instituteid);
-                        command.Parameters.AddWithValue("@dep_id", departmentid);
-                        command.Parameters.AddWithValue("@uni_id", universityid);
-                        command.Parameters.AddWithValue("@adm", admissionyear);
-                        command.Parameters.AddWithValue("@cur", currentyear);
-                        command.Parameters.AddWithValue("@roll", rollno);
-                        command.Parameters.AddWithValue("@pnr", pnr);
-                        command.Parameters.AddWithValue("@shift", shift);
+                        command.Parameters.AddWithValue("@student_email", emailid);
 
-                        command.ExecuteNonQuery();
-                        Response.Redirect("login.aspx");
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                student_exist = true;
+                            }
+                        }
                     }
+                }
+
+                if (student_exist == false)
+                {
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(insertquery, connection))
+                        {
+                            connection.Open();
+
+                            command.Parameters.AddWithValue("@first", first);
+                            command.Parameters.AddWithValue("@last", last);
+                            command.Parameters.AddWithValue("@email", emailid);
+                            command.Parameters.AddWithValue("@pass", password);
+                            command.Parameters.AddWithValue("@contact", contact);
+                            command.Parameters.AddWithValue("@ins_id", instituteid);
+                            command.Parameters.AddWithValue("@dep_id", departmentid);
+                            command.Parameters.AddWithValue("@uni_id", universityid);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(insertquery1, connection))
+                        {
+                            connection.Open();
+
+                            command.Parameters.AddWithValue("@email", emailid);
+                            command.Parameters.AddWithValue("@dep_id", departmentid);
+                            command.Parameters.AddWithValue("@adm", admissionyear);
+                            command.Parameters.AddWithValue("@cur", currentyear);
+                            command.Parameters.AddWithValue("@roll", rollno);
+                            command.Parameters.AddWithValue("@pnr", pnr);
+                            command.Parameters.AddWithValue("@shift", shift);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    Response.Redirect("/lbs/login.aspx");
+                }
+                else
+                {
+                    string message = "You are already registered";
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append("alert('");
+                    sb.Append(message);
+                    sb.Append("');");
+                    sb.Append("window.location ='../lbs/login.aspx';");
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
                 }
             }
             catch (Exception e1)
@@ -445,24 +494,31 @@ public partial class Register : System.Web.UI.Page
                 {
                     current_year.Items.Add(new ListItem("Current Year", "Current Year"));
                     current_year.Items.Add(new ListItem("First Year", "First Year"));
+                    current_year.Items.Add(new ListItem("Second Year", "Second Year"));
+                    current_year.Items.FindByValue("First Year").Selected = true;
                     break;
                 }
                 if ((checkyear == year) && (i == 1))
                 {
                     current_year.Items.Add(new ListItem("Current Year", "Current Year"));
                     current_year.Items.Add(new ListItem("Second Year", "Second Year"));
+                    current_year.Items.Add(new ListItem("Third Year", "Third Year"));
+                    current_year.Items.FindByValue("Second Year").Selected = true;
                     break;
                 }
                 if ((checkyear == year) && (i == 2))
                 {
                     current_year.Items.Add(new ListItem("Current Year", "Current Year"));
                     current_year.Items.Add(new ListItem("Third Year", "Third Year"));
+                    current_year.Items.Add(new ListItem("Fourth Year", "Fourth Year"));
+                    current_year.Items.FindByValue("Third Year").Selected = true;
                     break;
                 }
                 if ((checkyear == year) && (i == 3))
                 {
                     current_year.Items.Add(new ListItem("Current Year", "Current Year"));
                     current_year.Items.Add(new ListItem("Fourth Year", "Fourth Year"));
+                    current_year.Items.FindByValue("Fourth Year").Selected = true;
                     break;
                 }
                 year--;

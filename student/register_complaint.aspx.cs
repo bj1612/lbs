@@ -14,7 +14,7 @@ public partial class register_complaint : System.Web.UI.Page
     string connStr;
     string alertclassname = "alert-danger";
     string current_user;
-    int university_id = 0, institute_id = 0, department_id = 0;
+    int university_id = 0, institute_id = 0, department_id = 0, student_academic_detail_id=0;
     string student_email = "";
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -36,6 +36,7 @@ public partial class register_complaint : System.Web.UI.Page
             }
         }
         string fetchstudentinfoquery = "select university_id,institute_id,department_id from student where student_email=@student_email";
+        string fetchstudentinfoquery1 = "select student_academic_detail_id from student_academic_detail where status='Active' and student_email=@student_email";
         try
         {
             using (SqlConnection connection = new SqlConnection(connStr))
@@ -59,6 +60,27 @@ public partial class register_complaint : System.Web.UI.Page
                     }
                 }
             }
+
+            using (SqlConnection connection = new SqlConnection(connStr))
+            {
+                using (SqlCommand command = new SqlCommand(fetchstudentinfoquery1, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@student_email", student_email);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                student_academic_detail_id = reader.GetInt32(0);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         catch (Exception e1)
         {
@@ -75,15 +97,15 @@ public partial class register_complaint : System.Web.UI.Page
             {
                 if (type_of_complaint.Equals("university") == true)
                 {
-                    fetchcategory = "select * from university_category where university_id=@id and university_category_id in (select distinct university_category_id from university_subadmin where university_subadmin_email in (select university_subadmin_email from university_mode))";
+                    fetchcategory = "select * from university_category where university_id=@id and university_category_id in (select distinct university_category_id from university_subadmin where university_subadmin_email in (select university_subadmin_email from university_mode where status<>'Off Duty'))";
                 }
                 if (type_of_complaint.Equals("institute") == true)
                 {
-                    fetchcategory = "select * from institute_category where institute_id=@id and institute_category_id in (select distinct institute_category_id from institute_subadmin where institute_subadmin_email in (select institute_subadmin_email from institute_mode))";
+                    fetchcategory = "select * from institute_category where institute_id=@id and institute_category_id in (select distinct institute_category_id from institute_subadmin where institute_subadmin_email in (select institute_subadmin_email from institute_mode where status<>'Off Duty'))";
                 }
                 if (type_of_complaint.Equals("department") == true)
                 {
-                    fetchcategory = "select * from department_category where department_id=@id and department_category_id in (select distinct department_category_id from department_subadmin where department_subadmin_email in (select department_subadmin_email from department_mode))";
+                    fetchcategory = "select * from department_category where department_id=@id and department_category_id in (select distinct department_category_id from department_subadmin where department_subadmin_email in (select department_subadmin_email from department_mode where status<>'Off Duty'))";
                 }
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
@@ -173,7 +195,7 @@ public partial class register_complaint : System.Web.UI.Page
 
                 if (type_of_complaint.Equals("university") == true)
                 {
-                    insertquery = "insert into university_complaint(student_email,complaint_level,university_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress) values (@student_email,@complaint_level,@university_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress)";
+                    insertquery = "insert into university_complaint(student_email,complaint_level,university_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress,student_academic_detail_id) values (@student_email,@complaint_level,@university_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress,@student_academic_detail_id)";
                     
                     using (SqlConnection connection = new SqlConnection(connStr))
                     {
@@ -190,6 +212,7 @@ public partial class register_complaint : System.Web.UI.Page
                             command.Parameters.AddWithValue("@complaint_description", complaint_description);
                             command.Parameters.AddWithValue("@complaint_status", complaint_status);
                             command.Parameters.AddWithValue("@complaint_progress", complaint_progress);
+                            command.Parameters.AddWithValue("@student_academic_detail_id", student_academic_detail_id);
 
                             command.ExecuteNonQuery();
                         }
@@ -251,7 +274,7 @@ public partial class register_complaint : System.Web.UI.Page
                         }
                     }
 
-                    string moderatorfetchquery = "select university_mode_email,status,total_no_of_complaint from university_mode where university_subadmin_email = (select university_subadmin_email from university_subadmin where university_category_id=@category_id and university_admin_email=(select university_admin_email from university_admin where university_id=@university_id))";
+                    string moderatorfetchquery = "select university_mode_email,status,total_no_of_complaint from university_mode where status<>'Off Duty' and university_subadmin_email = (select university_subadmin_email from university_subadmin where university_category_id=@category_id and university_admin_email=(select university_admin_email from university_admin where university_id=@university_id))";
                     string update_moderator_email = "";
                     string assign_moderator_email = "";
                     string first_moderator = "";
@@ -391,7 +414,7 @@ public partial class register_complaint : System.Web.UI.Page
                 }
                 if (type_of_complaint.Equals("institute") == true)
                 {
-                    insertquery = "insert into institute_complaint(student_email,complaint_level,institute_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress) values (@student_email,@complaint_level,@institute_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress)";
+                    insertquery = "insert into institute_complaint(student_email,complaint_level,institute_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress,student_academic_detail_id) values (@student_email,@complaint_level,@institute_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress,@student_academic_detail_id)";
 
                     using (SqlConnection connection = new SqlConnection(connStr))
                     {
@@ -408,6 +431,7 @@ public partial class register_complaint : System.Web.UI.Page
                             command.Parameters.AddWithValue("@complaint_description", complaint_description);
                             command.Parameters.AddWithValue("@complaint_status", complaint_status);
                             command.Parameters.AddWithValue("@complaint_progress", complaint_progress);
+                            command.Parameters.AddWithValue("@student_academic_detail_id", student_academic_detail_id);
 
                             command.ExecuteNonQuery();
                         }
@@ -469,7 +493,7 @@ public partial class register_complaint : System.Web.UI.Page
                         }
                     }
 
-                    string moderatorfetchquery = "select institute_mode_email,status,total_no_of_complaint from institute_mode where institute_subadmin_email = (select institute_subadmin_email from institute_subadmin where institute_category_id=@category_id and institute_admin_email=(select institute_admin_email from institute_admin where institute_id=@institute_id))";
+                    string moderatorfetchquery = "select institute_mode_email,status,total_no_of_complaint from institute_mode where status<>'Off Duty' and institute_subadmin_email = (select institute_subadmin_email from institute_subadmin where institute_category_id=@category_id and institute_admin_email=(select institute_admin_email from institute_admin where institute_id=@institute_id))";
                     string update_moderator_email = "";
                     string assign_moderator_email = "";
                     string first_moderator = "";
@@ -611,7 +635,7 @@ public partial class register_complaint : System.Web.UI.Page
                 }
                 if (type_of_complaint.Equals("department") == true)
                 {
-                    insertquery = "insert into department_complaint(student_email,complaint_level,department_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress) values (@student_email,@complaint_level,@department_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress)";
+                    insertquery = "insert into department_complaint(student_email,complaint_level,department_category_id,complaint_date,complaint_time,complaint_title,complaint_description,complaint_status,complaint_progress,student_academic_detail_id) values (@student_email,@complaint_level,@department_category_id,@complaint_date,@complaint_time,@complaint_title,@complaint_description,@complaint_status,@complaint_progress,@student_academic_detail_id)";
 
                     using (SqlConnection connection = new SqlConnection(connStr))
                     {
@@ -628,6 +652,7 @@ public partial class register_complaint : System.Web.UI.Page
                             command.Parameters.AddWithValue("@complaint_description", complaint_description);
                             command.Parameters.AddWithValue("@complaint_status", complaint_status);
                             command.Parameters.AddWithValue("@complaint_progress", complaint_progress);
+                            command.Parameters.AddWithValue("@student_academic_detail_id", student_academic_detail_id);
 
                             command.ExecuteNonQuery();
                         }
@@ -689,7 +714,7 @@ public partial class register_complaint : System.Web.UI.Page
                         }
                     }
 
-                    string moderatorfetchquery = "select department_mode_email,status,total_no_of_complaint from department_mode where department_subadmin_email = (select department_subadmin_email from department_subadmin where department_category_id=@category_id and department_admin_email=(select department_admin_email from department_admin where department_id=@department_id))";
+                    string moderatorfetchquery = "select department_mode_email,status,total_no_of_complaint from department_mode where status<>'Off Duty' and department_subadmin_email = (select department_subadmin_email from department_subadmin where department_category_id=@category_id and department_admin_email=(select department_admin_email from department_admin where department_id=@department_id))";
                     string update_moderator_email = "";
                     string assign_moderator_email = "";
                     string first_moderator = "";

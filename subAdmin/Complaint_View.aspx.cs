@@ -723,21 +723,21 @@ public partial class Complaint_View : System.Web.UI.Page
         string moderatorfetchquery = "", moderatorinsertquery = "", moderatorupdateassignquery="",moderatorupdatenextquery = "";
         if (complaint_level.Equals("university"))
         {
-            moderatorfetchquery = "select university_mode_email,status,total_no_of_complaint from university_mode where university_subadmin_email = (select university_subadmin_email from university_subadmin where university_category_id=@category_id and university_admin_email=(select university_admin_email from university_admin where university_id=@id))";
+            moderatorfetchquery = "select university_mode_email,status,total_no_of_complaint from university_mode where status<>'Off Duty' and university_subadmin_email = (select university_subadmin_email from university_subadmin where university_category_id=@category_id and university_admin_email=(select university_admin_email from university_admin where university_id=@id))";
             moderatorinsertquery = "insert into university_mode_assign(university_complaint_id,university_mode_email) values (@complaint_id,@mode_email)";
             moderatorupdateassignquery = "update university_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
             moderatorupdatenextquery = "update university_mode set status=@yes where university_mode_email=@update_moderator_email";
         }
         if (complaint_level.Equals("institute"))
         {
-            moderatorfetchquery = "select institute_mode_email,status,total_no_of_complaint from institute_mode where institute_subadmin_email = (select institute_subadmin_email from institute_subadmin where institute_category_id=@category_id and institute_admin_email=(select institute_admin_email from institute_admin where institute_id=@id))";
+            moderatorfetchquery = "select institute_mode_email,status,total_no_of_complaint from institute_mode where status<>'Off Duty' and institute_subadmin_email = (select institute_subadmin_email from institute_subadmin where institute_category_id=@category_id and institute_admin_email=(select institute_admin_email from institute_admin where institute_id=@id))";
             moderatorinsertquery = "insert into institute_mode_assign(institute_complaint_id,institute_mode_email) values (@complaint_id,@mode_email)";
             moderatorupdateassignquery = "update institute_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
             moderatorupdatenextquery = "update institute_mode set status=@yes where institute_mode_email=@update_moderator_email";
         }
         if (complaint_level.Equals("department"))
         {
-            moderatorfetchquery = "select department_mode_email,status,total_no_of_complaint from department_mode where department_subadmin_email = (select department_subadmin_email from department_subadmin where department_category_id=@category_id and department_admin_email=(select department_admin_email from department_admin where department_id=@id))";
+            moderatorfetchquery = "select department_mode_email,status,total_no_of_complaint from department_mode where status<>'Off Duty' and department_subadmin_email = (select department_subadmin_email from department_subadmin where department_category_id=@category_id and department_admin_email=(select department_admin_email from department_admin where department_id=@id))";
             moderatorinsertquery = "insert into department_mode_assign(department_complaint_id,department_mode_email) values (@complaint_id,@mode_email)";
             moderatorupdateassignquery = "update department_mode set status=@no,total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
             moderatorupdatenextquery = "update department_mode set status=@yes where department_mode_email=@update_moderator_email";

@@ -43,7 +43,7 @@
                                 </div>
                             </div>                       
                              <div class="row justify-content-center mt-3">
-                                   <asp:Button Text="Register" class="boxed-btn4" style="  background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="RegisterModerator" onclick="RegisterModerator_Click"></asp:Button>
+                                   <asp:Button Text="Register" class="btn boxed-btn4" style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" runat="server" ID="RegisterModerator" onclick="RegisterModerator_Click"></asp:Button>
                              </div>
                       </div>
                 </div>

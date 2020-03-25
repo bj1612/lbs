@@ -13,9 +13,9 @@ public partial class SubAdmin_View : System.Web.UI.Page
     string connStr, current_user = "", user_name = "";
     string sub_email = "", mode_email = "", student_email = "", complaint_level = "", category_name = "";
     int complaint_id = 0;
-    string loadcomplaintquery = "", commentquery = "", fetchcategoryquery="";
+    string loadcomplaintquery = "", commentquery = "", fetchcategoryquery="",fetchstudentinfoquery1="";
     bool checkfirstcomplaint = true;
-    int category_id = 0;
+    int category_id = 0, academic_id=0;
     protected void Page_Load(object sender, EventArgs e)
     {
         connStr = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
@@ -60,6 +60,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                     loadmoderatorcompletecomplaintquery = "Select * from university_complaint where complaint_progress='Completed' and university_complaint_id in (select university_complaint_id from university_mode_assign where university_mode_email=@mode_email and (assign_status='Assign' or assign_status='Completed'))";
                     loadcomplaintquery = "select * from university_complaint where university_complaint_id=@complaint_id";
                     commentquery = "SELECT * FROM university_student_comment where university_complaint_id=@complaint_id";
+                    fetchstudentinfoquery1 = "select student_academic_detail_id from student_academic_detail where student_email=@student_email and student_academic_detail_id=(select student_academic_detail_id from university_complaint where university_complaint_id=@complaint_id)";
                 }
                 if (complaint_level.Equals("institute"))
                 {
@@ -69,6 +70,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                     loadmoderatorcompletecomplaintquery = "Select * from institute_complaint where complaint_progress='Completed' and institute_complaint_id in (select institute_complaint_id from institute_mode_assign where institute_mode_email=@mode_email and (assign_status='Assign' or assign_status='Completed'))";
                     loadcomplaintquery = "select * from institute_complaint where institute_complaint_id=@complaint_id";
                     commentquery = "SELECT * FROM institute_student_comment where institute_complaint_id=@complaint_id";
+                    fetchstudentinfoquery1 = "select student_academic_detail_id from student_academic_detail where student_email=@student_email and student_academic_detail_id=(select student_academic_detail_id from institute_complaint where institute_complaint_id=@complaint_id)";
                 }
                 if (complaint_level.Equals("department"))
                 {
@@ -78,6 +80,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                     loadmoderatorcompletecomplaintquery = "Select * from department_complaint where complaint_progress='Completed' and department_complaint_id in (select department_complaint_id from department_mode_assign where department_mode_email=@mode_email and (assign_status='Assign' or assign_status='Completed'))";
                     loadcomplaintquery = "select * from department_complaint where department_complaint_id=@complaint_id";
                     commentquery = "SELECT * FROM department_student_comment where department_complaint_id=@complaint_id";
+                    fetchstudentinfoquery1 = "select student_academic_detail_id from student_academic_detail where student_email=@student_email and student_academic_detail_id=(select student_academic_detail_id from department_complaint where department_complaint_id=@complaint_id)";
                 }
                 
                 //Loading Moderators
@@ -109,14 +112,16 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                                             where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
                                                             select c
                                            ).ToArray());
+                                    //string modeviewurl = @"'/lbs/moderator/viewModeratorProfile.aspx?ID?" + mode_email + "'";
+                                    //string modeviewtype = @"'_blank'";
                                     if (checkfirstmode == true)
                                     {
-                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action active' id='" + modeemail + "' onclick='childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action active' id='" + modeemail + "' onclick='modeclick(\""+mode_email+"\");childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                         checkfirstmode = false;
                                     }
                                     else
                                     {
-                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action' id='" + modeemail + "' onclick='childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
+                                        moderatorlist.InnerHtml += "<a class='list-group-item list-group-item-action' id='" + modeemail + "' onclick='modeclick(\"" + mode_email + "\");childActive();' data-toggle='list' href='#tab-moderator-" + modeemail + "' role='tab' aria-controls='tab-moderator-" + modeemail + "'>" + first_name + " " + last_name + "</a>";
                                     }
                                     if (checkmodefirstcomplaint == true)
                                     {
@@ -300,8 +305,9 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                 complaintviewtab.InnerHtml += @"</div>";
                                 complaintviewtab.InnerHtml += @"</div>";
                                 complaintviewtab.InnerHtml += @"</div>";
+                                LoadAcademic();
                                 complaintviewtab.InnerHtml += @"<div class='card' style='text-align:center; width:2000px;margin-top: 20px;' >";
-                                complaintviewtab.InnerHtml += @"<div class='card-header' style='background-color:orange;color:White; font-size:x-large;'><span>" + complaint_title + "</span></div>";
+                                complaintviewtab.InnerHtml += @"<div class='card-header' style='background-color:orange;color:White; font-size:x-large;'><span><a href='/lbs/viewProfile.aspx?ID=" + student_email + "&Data=" + academic_id + "' style='text-decoration:none;color:white;' target='blank' title='View Profile'>" + complaint_title + "</a></span></div>";
                                 complaintviewtab.InnerHtml += @"<div class='card-body'>";
                                 complaintviewtab.InnerHtml += @"<blockquote class='blockquote mb-0'>";
                                 complaintviewtab.InnerHtml += @"<p class='text-info'>" + complaint_description + "</p>";
@@ -311,6 +317,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                 complaintviewtab.InnerHtml += @"<div class='mesgs'>";
                                 complaintviewtab.InnerHtml += @"<div class='msg_history'>";
                                 complaintviewtab.InnerHtml += @"<div class='row'>";
+                                
                                 using (SqlConnection connection1 = new SqlConnection(connStr))
                                 {
                                     using (SqlCommand command1 = new SqlCommand(commentquery, connection1))
@@ -338,7 +345,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                                         complaintviewtab.InnerHtml += @"<div class='sent_msg'>";
                                                         complaintviewtab.InnerHtml += @"<div>";
                                                         complaintviewtab.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                                        complaintviewtab.InnerHtml += comment_username;//Moderator Name
+                                                        complaintviewtab.InnerHtml += @"<a href='/lbs/moderator/viewModeratorProfile.aspx?ID=" + mode_email + "' style='font-weight: bold;text-decoration:none;color:black;' target='blank'>" + comment_username + "</a>";//Moderator Name
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"<p>" + comment_description + "</p>";
@@ -353,7 +360,7 @@ public partial class SubAdmin_View : System.Web.UI.Page
                                                         complaintviewtab.InnerHtml += @"<div style='width:300px;'>";
                                                         complaintviewtab.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
                                                         complaintviewtab.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
-                                                        complaintviewtab.InnerHtml += comment_username;// Student Name
+                                                        complaintviewtab.InnerHtml += @"<a href='/lbs/viewProfile.aspx?ID=" + student_email + "&Data=" + academic_id + "' style='font-weight: bold;text-decoration:none;color:black;' target='blank'>" + comment_username+"</a>";// Student Name
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
                                                         complaintviewtab.InnerHtml += @"</div>";
@@ -415,6 +422,29 @@ public partial class SubAdmin_View : System.Web.UI.Page
         catch (Exception e1)
         {
             System.Diagnostics.Debug.WriteLine("Error Message: " + e1.StackTrace);
+        }
+    }
+    protected void LoadAcademic()
+    {
+        using (SqlConnection connection = new SqlConnection(connStr))
+        {
+            using (SqlCommand command = new SqlCommand(fetchstudentinfoquery1, connection))
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@student_email", student_email);
+                command.Parameters.AddWithValue("@complaint_id", complaint_id);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            academic_id = reader.GetInt32(0);
+                        }
+                    }
+                }
+            }
         }
     }
     protected void Timer1_Tick(object sender, EventArgs e)

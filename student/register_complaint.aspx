@@ -63,7 +63,7 @@
 
                             <div class="row justify-content-center mt-3">
                                 <asp:Button ID="RegisterComplaint" runat="server" Text="Share" 
-                                    class="boxed-btn4" 
+                                    class="btn boxed-btn4" 
                                     style="background: #ff3500;color: #fff;border: 1px solid #ff3500;" 
                                     onclick="RegisterComplaint_Click"/>
                             </div>

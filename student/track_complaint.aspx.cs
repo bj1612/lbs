@@ -19,7 +19,7 @@ public partial class track_complaint : System.Web.UI.Page
         string student_email = "";
         if (Session["email"] == null)
         {
-            Response.Redirect(@"/lbs/index.aspx");
+            Response.Redirect(@"/lbs/login.aspx");
         }
         if (Session["email"] != null)
         {
@@ -78,7 +78,7 @@ public partial class track_complaint : System.Web.UI.Page
             }
             using (SqlConnection connection = new SqlConnection(connStr))
             {
-                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM university_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM institute_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title FROM department_complaint where student_email=@student_email and complaint_progress='Completed' ORDER BY complaint_date desc", connection))
+                using (SqlCommand command = new SqlCommand("SELECT university_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title,complaint_status FROM university_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT institute_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title,complaint_status FROM institute_complaint where student_email=@student_email and complaint_progress='Completed' UNION SELECT department_complaint_id,complaint_level,complaint_date,complaint_time,complaint_title,complaint_status FROM department_complaint where student_email=@student_email and complaint_progress='Completed' ORDER BY complaint_date desc", connection))
                 {
                     connection.Open();
                     command.Parameters.AddWithValue("@student_email", student_email);
@@ -101,11 +101,23 @@ public partial class track_complaint : System.Web.UI.Page
                                 int complaint_id = reader.GetInt32(0);
                                 string complaint_level = reader.GetString(1);
                                 string complaint_title = reader.GetString(4);
-                                completeddiv.InnerHtml += @"<tr>";
-                                completeddiv.InnerHtml += @"<th scope='row'><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_id + "</a></th>";
-                                completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(complaint_level) + "</a></td>";
-                                completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
-                                completeddiv.InnerHtml += @"</tr>";
+                                string complaint_status = reader.GetString(5);
+                                if (complaint_status.Equals("Reported"))
+                                {
+                                    completeddiv.InnerHtml += @"<tr class='alert-danger'>";
+                                    completeddiv.InnerHtml += @"<th scope='row'><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;color:red;'>" + complaint_id + "</a></th>";
+                                    completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;color:red;'>" + System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(complaint_level) + "</a></td>";
+                                    completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;color:red;'>" + complaint_title + "</a></td>";
+                                    completeddiv.InnerHtml += @"</tr>";
+                                }
+                                else
+                                {
+                                    completeddiv.InnerHtml += @"<tr>";
+                                    completeddiv.InnerHtml += @"<th scope='row'><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_id + "</a></th>";
+                                    completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(complaint_level) + "</a></td>";
+                                    completeddiv.InnerHtml += @"<td><a href='/lbs/student/Detail_complaint.aspx?ID=" + complaint_id + "&Type=" + complaint_level + "' style='text-decoration:none;'>" + complaint_title + "</a></td>";
+                                    completeddiv.InnerHtml += @"</tr>";
+                                }
                             }
                             completeddiv.InnerHtml += @"</tbody>";
                             completeddiv.InnerHtml += @"</table>";

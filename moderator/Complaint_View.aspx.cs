@@ -52,6 +52,7 @@ public partial class Complaint_View : System.Web.UI.Page
                                 messageboxdiv.InnerHtml = "";
                                 while (reader.Read())
                                 {
+                                    string sender_email_check = reader.GetString(2);
                                     string comment_date = reader.GetDateTime(4).ToString("dd MMMM yyyy");
                                     string comment_time = reader.GetString(5);
                                     comment_time = DateTime.Parse(comment_time, System.Globalization.CultureInfo.InvariantCulture).ToString("hh:mm tt");
@@ -66,8 +67,15 @@ public partial class Complaint_View : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='outgoing_msg col-sm-11 col-md-10 col-lg-10'>";
                                         messageboxdiv.InnerHtml += @"<div class='sent_msg'>";
                                         messageboxdiv.InnerHtml += @"<div>";
-                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                        messageboxdiv.InnerHtml += comment_username;//Moderator Name
+                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;font-weight: bold;text-decoration:none;color:black;'>";
+                                        if (sender_email_check.Equals(mode_email))
+                                        {
+                                            messageboxdiv.InnerHtml += @"<a href='/lbs/moderator/viewModeratorProfile.aspx?ID=" + mode_email + "' style='font-weight: bold;text-decoration:none;color:black;'>" + comment_username + "</a>";//Moderator Name
+                                        }
+                                        else
+                                        {
+                                            messageboxdiv.InnerHtml += @"Moderator";//Moderator Name
+                                        }
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"<p>" + comment_description + "</p>";
@@ -81,7 +89,7 @@ public partial class Complaint_View : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='incoming_msg_img'>";
                                         messageboxdiv.InnerHtml += @"<div style='width:300px;'>";
                                         messageboxdiv.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
-                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
+                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;font-weight: bold;text-decoration:none;color:black;'>";
                                         messageboxdiv.InnerHtml += "Student";// Student Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";

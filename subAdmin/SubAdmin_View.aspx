@@ -17,6 +17,16 @@
     <script type="text/javascript">
         var idd;
         //var modeid;
+        var em=[];
+        function modeclick(emaill) {
+            if (em.includes(emaill)==false) {
+                var a = document.createElement('a');
+                a.target = "_blank";
+                a.href = "/lbs/moderator/viewModeratorProfile.aspx?ID=" + emaill;
+                a.click();
+                em.push(emaill);
+            }
+        }
         function removeActive(id) {
             idd = id;
             $.myjQuery();

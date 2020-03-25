@@ -14,6 +14,7 @@ public partial class Detail_complaint : System.Web.UI.Page
     string student_email = "", complaint_level = "", category_name="";
     int complaint_id = 0;
     int category_id = 0;
+    int academic_id = 0;
     protected void Comment_Load() 
     {
         try
@@ -46,7 +47,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='incoming_msg_img'>";
                                         messageboxdiv.InnerHtml += @"<div style='width:300px;'>";
                                         messageboxdiv.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
-                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
+                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;font-weight: bold;text-decoration:none;color:black;'>";
                                         messageboxdiv.InnerHtml += "Support Team";// Moderator Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
@@ -70,7 +71,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='sent_msg'>";
                                         messageboxdiv.InnerHtml += @"<div>";
                                         messageboxdiv.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                        messageboxdiv.InnerHtml += comment_username;//Student Name
+                                        messageboxdiv.InnerHtml += @"<a href='/lbs/viewProfile.aspx?ID=" + student_email + "' style='font-weight: bold;text-decoration:none;color:black;'>" + comment_username + "</a>";//Student Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"<p>" + comment_description + "</p>";
@@ -112,7 +113,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='incoming_msg_img'>";
                                         messageboxdiv.InnerHtml += @"<div style='width:300px;'>";
                                         messageboxdiv.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
-                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
+                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;font-weight: bold;text-decoration:none;color:black;'>";
                                         messageboxdiv.InnerHtml += "Support Team";// Moderator Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
@@ -136,7 +137,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='sent_msg'>";
                                         messageboxdiv.InnerHtml += @"<div>";
                                         messageboxdiv.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                        messageboxdiv.InnerHtml += comment_username;//Student Name
+                                        messageboxdiv.InnerHtml += @"<a href='/lbs/viewProfile.aspx?ID=" + student_email + "' style='font-weight: bold;text-decoration:none;color:black;'>" + comment_username + "</a>";//Student Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"<p>" + comment_description + "</p>";
@@ -178,7 +179,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='incoming_msg_img'>";
                                         messageboxdiv.InnerHtml += @"<div style='width:300px;'>";
                                         messageboxdiv.InnerHtml += @"<img src='/lbs/img/user-profile.png' alt='user-image' style='float:left;width:33px;margin-right:10px;'/>";
-                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;'>";
+                                        messageboxdiv.InnerHtml += @"<div style='padding-left:10px;padding-top:5px;font-weight: bold;text-decoration:none;color:black;'>";
                                         messageboxdiv.InnerHtml += "Support Team";// Moderator Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
@@ -202,7 +203,7 @@ public partial class Detail_complaint : System.Web.UI.Page
                                         messageboxdiv.InnerHtml += @"<div class='sent_msg'>";
                                         messageboxdiv.InnerHtml += @"<div>";
                                         messageboxdiv.InnerHtml += @"<div style='padding-left:10px;margin-bottom:5px;'>";
-                                        messageboxdiv.InnerHtml += comment_username;//Student Name
+                                        messageboxdiv.InnerHtml += @"<a href='/lbs/viewProfile.aspx?ID=" + student_email + "' style='font-weight: bold;text-decoration:none;color:black;'>" + comment_username + "</a>";//Student Name
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"</div>";
                                         messageboxdiv.InnerHtml += @"<p>" + comment_description + "</p>";

@@ -22,6 +22,7 @@ public partial class Site : System.Web.UI.MasterPage
                     string current_user = Session["typeofuser"].ToString();
                     if (current_user.Equals("student"))
                     {
+                        string stud_email = Session["email"].ToString();
                         username = Session["username"].ToString();
                         menudiv.InnerHtml = "";
                         menudiv.InnerHtml = @"<nav>";
@@ -31,6 +32,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<li><a href='/lbs/student/track_complaint.aspx' style='text-decoration:none;'>Track Complaint</a></li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/viewProfile.aspx?ID="+stud_email+"' style='text-decoration:none;'>Profile</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
@@ -39,6 +41,7 @@ public partial class Site : System.Web.UI.MasterPage
                     }
                     if (current_user.Equals("university_moderator") || current_user.Equals("institute_moderator") || current_user.Equals("department_moderator"))
                     {
+                        string mode_email = Session["email"].ToString();
                         username = Session["username"].ToString();
                         menudiv.InnerHtml = "";
                         menudiv.InnerHtml = @"<nav>";
@@ -46,6 +49,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<li><a href='/lbs/moderator/track_complaint.aspx' style='text-decoration:none;'>Home</a></li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/moderator/viewModeratorProfile.aspx?ID=" + mode_email + "' style='text-decoration:none;'>Profile</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
