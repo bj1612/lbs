@@ -89,6 +89,22 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</nav>";
                     }
+                    if (current_user.Equals("system_admin"))
+                    {
+                        username = Session["username"].ToString();
+                        menudiv.InnerHtml = "";
+                        menudiv.InnerHtml = @"<nav>";
+                        menudiv.InnerHtml += @"<ul id='navigation'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Register_admin.aspx' style='text-decoration:none;'>Home</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Register_systemAdmin.aspx' style='text-decoration:none;'>Register System Admin</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
+                        menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
+                        menudiv.InnerHtml += @"</ul>";
+                        menudiv.InnerHtml += @"</li>";
+                        menudiv.InnerHtml += @"</ul>";
+                        menudiv.InnerHtml += @"</nav>";
+                    }
                 }
             }
         }

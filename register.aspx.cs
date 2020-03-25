@@ -460,7 +460,7 @@ public partial class Register : System.Web.UI.Page
                     sb.Append("alert('");
                     sb.Append(message);
                     sb.Append("');");
-                    sb.Append("window.location ='../lbs/login.aspx';");
+                    sb.Append("window.location ='/lbs/login.aspx';");
                     ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
                 }
             }
