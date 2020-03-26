@@ -97,6 +97,13 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<ul id='navigation'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Register_admin.aspx' style='text-decoration:none;'>Home</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Register_systemAdmin.aspx' style='text-decoration:none;'>Register System Admin</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Add Details<i class='ti-angle-down'></i></a>";
+                        menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Add_university.aspx' style='text-decoration:none;'>Add University</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Add_institute.aspx' style='text-decoration:none;'>Add Institute</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/systemAdmin/Add_department.aspx' style='text-decoration:none;'>Add Department</a></li>";
+                        menudiv.InnerHtml += @"</ul>";
+                        menudiv.InnerHtml += @"</li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
