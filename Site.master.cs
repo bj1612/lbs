@@ -64,7 +64,12 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<ul id='navigation'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/subAdmin/subadmin_index.aspx' style='text-decoration:none;'>Home</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/subAdmin/SubAdmin_View.aspx' style='text-decoration:none;'>Quick View</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Moderator<i class='ti-angle-down'></i></a>";
+                        menudiv.InnerHtml += @"<ul class='submenu'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/subAdmin/Register_moderator.aspx' style='text-decoration:none;'>Register Moderator</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/subAdmin/UpdateModerator.aspx' style='text-decoration:none;'>Update Moderator</a></li>";
+                        menudiv.InnerHtml += @"</ul>";
+                        menudiv.InnerHtml += @"</li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
