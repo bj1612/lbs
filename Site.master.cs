@@ -33,6 +33,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/viewProfile.aspx?ID="+stud_email+"' style='text-decoration:none;'>Profile</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/ChangePassword.aspx' style='text-decoration:none;'>Change Password</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
@@ -50,6 +51,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/moderator/viewModeratorProfile.aspx?ID=" + mode_email + "' style='text-decoration:none;'>Profile</a></li>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/ChangePassword.aspx' style='text-decoration:none;'>Change Password</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
@@ -72,6 +74,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"</li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/ChangePassword.aspx' style='text-decoration:none;'>Change Password</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
@@ -93,6 +96,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"</li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/ChangePassword.aspx' style='text-decoration:none;'>Change Password</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
@@ -121,6 +125,7 @@ public partial class Site : System.Web.UI.MasterPage
                         menudiv.InnerHtml += @"</li>";
                         menudiv.InnerHtml += @"<li><a href='#' style='text-decoration:none;'>Welcome " + username + " <i class='ti-angle-down'></i></a>";
                         menudiv.InnerHtml += @"<ul class='submenu'>";
+                        menudiv.InnerHtml += @"<li><a href='/lbs/ChangePassword.aspx' style='text-decoration:none;'>Change Password</a></li>";
                         menudiv.InnerHtml += @"<li><a href='/lbs/logout.aspx' style='text-decoration:none;'>Logout</a></li>";
                         menudiv.InnerHtml += @"</ul>";
                         menudiv.InnerHtml += @"</li>";
