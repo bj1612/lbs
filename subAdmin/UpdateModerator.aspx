@@ -48,7 +48,7 @@
                                         <div class="col-lg-12 col-md-12 col-xs-12 mt-3">
                                             <div class="row">
                                                 <div class="col mt-3">
-                                                    <label for="AvailableModerator">Available Moderators</label>
+                                                    <label for="AvailableModerator" style="font-weight:bold;padding-left:10px;">Available Moderators</label>
                                                     <asp:DropDownList ID="AvailableModerator" class="form-control" runat="server" style="height:48px;font-size:18px;border:1px solid #e5e6e9;">
                                                         <asp:ListItem Value="Select Moderator" Text="Select Moderator"></asp:ListItem>
                                                     </asp:DropDownList>  
@@ -67,7 +67,7 @@
                                         <div class="col-lg-12 col-md-12 col-xs-12 mt-3">
                                             <div class="row">
                                                 <div class="col mt-3">
-                                                    <label for="OffDutyModerator">Off Duty Moderators</label>
+                                                    <label for="OffDutyModerator" style="font-weight:bold;padding-left:10px;">Off Duty Moderators</label>
                                                     <asp:DropDownList ID="OffDutyModerator" class="form-control" runat="server" style="height:48px;font-size:18px;border:1px solid #e5e6e9;">
                                                         <asp:ListItem Value="Select Moderator" Text="Select Moderator"></asp:ListItem>
                                                     </asp:DropDownList>  

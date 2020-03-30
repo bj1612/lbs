@@ -56,17 +56,17 @@ public partial class Register_subadmin : System.Web.UI.Page
             {
                 if (complaint_level.Equals("university"))
                 {
-                    selectquery = "select * from university_category where university_category_id not in (select university_category_id from university_subadmin where university_admin_email=@admin_email) and university_id=(select university_id from university_admin where university_admin_email=@admin_email)";
+                    selectquery = "select * from university_category where university_category_id not in (select university_category_id from university_subadmin where university_admin_email=@admin_email) and university_id in (select university_id from university_admin where university_admin_email=@admin_email)";
                     insertquery = "insert into university_subadmin values(@first,@last,@email,@pass,@admin_email,@category_id)";
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    selectquery = "select * from institute_category where institute_category_id not in (select institute_category_id from institute_subadmin where institute_admin_email=@admin_email) and institute_id=(select institute_id from university_admin where institute_admin_email=@admin_email)";
+                    selectquery = "select * from institute_category where institute_category_id not in (select institute_category_id from institute_subadmin where institute_admin_email=@admin_email) and institute_id in (select institute_id from university_admin where institute_admin_email=@admin_email)";
                     insertquery = "insert into institute_subadmin values(@first,@last,@email,@pass,@admin_email,@category_id)";
                 }
                 if (complaint_level.Equals("department"))
                 {
-                    selectquery = "select * from department_category where department_category_id not in (select department_category_id from department_subadmin where department_admin_email=@admin_email) and department_id=(select department_id from department_admin where department_admin_email=@admin_email)";
+                    selectquery = "select * from department_category where department_category_id not in (select department_category_id from department_subadmin where department_admin_email=@admin_email) and department_id in (select department_id from department_admin where department_admin_email=@admin_email)";
                     insertquery = "insert into department_subadmin values(@first,@last,@email,@pass,@admin_email,@category_id)";
                 }
                 if (!IsPostBack)
@@ -100,6 +100,10 @@ public partial class Register_subadmin : System.Web.UI.Page
                         }
                     }
                 }
+            }
+            else
+            {
+                Response.Redirect(@"/lbs/admin/Admin_View.aspx");
             }
         }
         catch (Exception e1)

@@ -346,7 +346,7 @@ public partial class login : System.Web.UI.Page
                 {
                     Session["username"] = first+" "+last;
                 }
-                Response.Redirect(@"/lbs/systemAdmin/Register_admin.aspx");
+                Response.Redirect(@"/lbs/systemAdmin/Register_systemAdmin.aspx");
             }
             if (uniadmin == true)
             {

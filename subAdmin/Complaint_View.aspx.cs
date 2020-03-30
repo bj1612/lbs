@@ -752,6 +752,7 @@ public partial class Complaint_View : System.Web.UI.Page
         //int totalcount = 0;
         int total_no_of_complaint = 0;
         bool shouldupdatenext = true;
+        bool nomodeavail = true;
 
         using (SqlConnection connection = new SqlConnection(connStr))
         {
@@ -779,6 +780,7 @@ public partial class Complaint_View : System.Web.UI.Page
                 {
                     if (reader.HasRows)
                     {
+                        nomodeavail = false;
                         bool firsttry = true;
                         while (reader.Read())
                         {
@@ -830,63 +832,109 @@ public partial class Complaint_View : System.Web.UI.Page
                 }
             }
         }
-        
-        if (shouldupdatenext == false)
+
+        if (nomodeavail == false)
         {
-            if (assign_same_moderator_email.Equals("") == false)
+            if (shouldupdatenext == false)
             {
-                //update same moderator assign status as assign in mode assign
-                string moderatorupdatesamequery = "";
-                if (complaint_level.Equals("university"))
+                if (assign_same_moderator_email.Equals("") == false)
                 {
-                    if (request_type.Equals("Reassign"))
+                    //update same moderator assign status as assign in mode assign
+                    string moderatorupdatesamequery = "";
+                    if (complaint_level.Equals("university"))
                     {
-                        moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign',reassign_status='No' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                        if (request_type.Equals("Reassign"))
+                        {
+                            moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign',reassign_status='No' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                        }
+                        if (request_type.Equals("Reappeal"))
+                        {
+                            moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                        }
                     }
-                    if (request_type.Equals("Reappeal"))
+                    if (complaint_level.Equals("institute"))
                     {
-                        moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                        if (request_type.Equals("Reassign"))
+                        {
+                            moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign',reassign_status='No' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
+                        }
+                        if (request_type.Equals("Reappeal"))
+                        {
+                            moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
+                        }
+                    }
+                    if (complaint_level.Equals("department"))
+                    {
+                        if (request_type.Equals("Reassign"))
+                        {
+                            moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign',reassign_status='No' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
+                        }
+                        if (request_type.Equals("Reappeal"))
+                        {
+                            moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
+                        }
+                    }
+
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(moderatorupdatesamequery, connection))
+                        {
+                            connection.Open();
+
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                            command.Parameters.AddWithValue("@mode_email", assign_same_moderator_email);
+
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
-                if (complaint_level.Equals("institute"))
+                else
                 {
-                    if (request_type.Equals("Reassign"))
+                    //insert new assign moderator in mode assign and update total no of complaint in mode table
+                    using (SqlConnection connection = new SqlConnection(connStr))
                     {
-                        moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign',reassign_status='No' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
-                    }
-                    if (request_type.Equals("Reappeal"))
-                    {
-                        moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
-                    }
-                }
-                if (complaint_level.Equals("department"))
-                {
-                    if (request_type.Equals("Reassign"))
-                    {
-                        moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign',reassign_status='No' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
-                    }
-                    if (request_type.Equals("Reappeal"))
-                    {
-                        moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
-                    }
-                }
+                        using (SqlCommand command = new SqlCommand(moderatorinsertquery, connection))
+                        {
+                            connection.Open();
 
-                using (SqlConnection connection = new SqlConnection(connStr))
-                {
-                    using (SqlCommand command = new SqlCommand(moderatorupdatesamequery, connection))
+                            command.Parameters.AddWithValue("@complaint_id", complaint_id);
+                            command.Parameters.AddWithValue("@mode_email", assign_moderator_email);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    //updatemoderatorassignquery
+                    string moderatorupdateassigndiffquery = "";
+                    if (complaint_level.Equals("university"))
                     {
-                        connection.Open();
+                        moderatorupdateassigndiffquery = "update university_mode set total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
+                    }
+                    if (complaint_level.Equals("institute"))
+                    {
+                        moderatorupdateassigndiffquery = "update institute_mode set total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
+                    }
+                    if (complaint_level.Equals("department"))
+                    {
+                        moderatorupdateassigndiffquery = "update department_mode set total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
+                    }
 
-                        command.Parameters.AddWithValue("@complaint_id", complaint_id);
-                        command.Parameters.AddWithValue("@mode_email", assign_same_moderator_email);
+                    using (SqlConnection connection = new SqlConnection(connStr))
+                    {
+                        using (SqlCommand command = new SqlCommand(moderatorupdateassigndiffquery, connection))
+                        {
+                            connection.Open();
 
-                        command.ExecuteNonQuery();
+                            total_no_of_complaint++;
+                            command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
+                            command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
+
+                            command.ExecuteNonQuery();
+                        }
                     }
                 }
             }
             else
             {
-                //insert new assign moderator in mode assign and update total no of complaint in mode table
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
                     using (SqlCommand command = new SqlCommand(moderatorinsertquery, connection))
@@ -899,30 +947,31 @@ public partial class Complaint_View : System.Web.UI.Page
                         command.ExecuteNonQuery();
                     }
                 }
-                //updatemoderatorassignquery
-                string moderatorupdateassigndiffquery = "";
-                if (complaint_level.Equals("university"))
-                {
-                    moderatorupdateassigndiffquery = "update university_mode set total_no_of_complaint=@total_no_of_complaint where university_mode_email=@assign_moderator_email";
-                }
-                if (complaint_level.Equals("institute"))
-                {
-                    moderatorupdateassigndiffquery = "update institute_mode set total_no_of_complaint=@total_no_of_complaint where institute_mode_email=@assign_moderator_email";
-                }
-                if (complaint_level.Equals("department"))
-                {
-                    moderatorupdateassigndiffquery = "update department_mode set total_no_of_complaint=@total_no_of_complaint where department_mode_email=@assign_moderator_email";
-                }
 
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
-                    using (SqlCommand command = new SqlCommand(moderatorupdateassigndiffquery, connection))
+                    using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
                     {
                         connection.Open();
 
                         total_no_of_complaint++;
+                        command.Parameters.AddWithValue("@no", "No");
                         command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
                         command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+
+                using (SqlConnection connection = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
+                    {
+                        connection.Open();
+
+                        command.Parameters.AddWithValue("@yes", "Yes");
+                        command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
 
                         command.ExecuteNonQuery();
                     }
@@ -931,43 +980,49 @@ public partial class Complaint_View : System.Web.UI.Page
         }
         else
         {
+            string moderatorupdatesamequery = "";
+            if (complaint_level.Equals("university"))
+            {
+                if (request_type.Equals("Reassign"))
+                {
+                    moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign',reassign_status='No' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                }
+                if (request_type.Equals("Reappeal"))
+                {
+                    moderatorupdatesamequery = "update university_mode_assign set assign_status='Assign' where university_complaint_id=@complaint_id and university_mode_email=@mode_email";
+                }
+            }
+            if (complaint_level.Equals("institute"))
+            {
+                if (request_type.Equals("Reassign"))
+                {
+                    moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign',reassign_status='No' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
+                }
+                if (request_type.Equals("Reappeal"))
+                {
+                    moderatorupdatesamequery = "update institute_mode_assign set assign_status='Assign' where institute_complaint_id=@complaint_id and institute_mode_email=@mode_email";
+                }
+            }
+            if (complaint_level.Equals("department"))
+            {
+                if (request_type.Equals("Reassign"))
+                {
+                    moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign',reassign_status='No' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
+                }
+                if (request_type.Equals("Reappeal"))
+                {
+                    moderatorupdatesamequery = "update department_mode_assign set assign_status='Assign' where department_complaint_id=@complaint_id and department_mode_email=@mode_email";
+                }
+            }
+
             using (SqlConnection connection = new SqlConnection(connStr))
             {
-                using (SqlCommand command = new SqlCommand(moderatorinsertquery, connection))
+                using (SqlCommand command = new SqlCommand(moderatorupdatesamequery, connection))
                 {
                     connection.Open();
 
                     command.Parameters.AddWithValue("@complaint_id", complaint_id);
-                    command.Parameters.AddWithValue("@mode_email", assign_moderator_email);
-
-                    command.ExecuteNonQuery();
-                }
-            }
-
-            using (SqlConnection connection = new SqlConnection(connStr))
-            {
-                using (SqlCommand command = new SqlCommand(moderatorupdateassignquery, connection))
-                {
-                    connection.Open();
-
-                    total_no_of_complaint++;
-                    command.Parameters.AddWithValue("@no", "No");
-                    command.Parameters.AddWithValue("@total_no_of_complaint", total_no_of_complaint);
-                    command.Parameters.AddWithValue("@assign_moderator_email", assign_moderator_email);
-
-                    command.ExecuteNonQuery();
-                }
-            }
-
-
-            using (SqlConnection connection = new SqlConnection(connStr))
-            {
-                using (SqlCommand command = new SqlCommand(moderatorupdatenextquery, connection))
-                {
-                    connection.Open();
-
-                    command.Parameters.AddWithValue("@yes", "Yes");
-                    command.Parameters.AddWithValue("@update_moderator_email", update_moderator_email);
+                    command.Parameters.AddWithValue("@mode_email", mode_email);
 
                     command.ExecuteNonQuery();
                 }

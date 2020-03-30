@@ -37,27 +37,27 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">
-                                        <label for="First">First Name</label>
+                                        <label for="First" style="font-weight:bold;padding-left:10px;">First Name</label>
                                         <asp:TextBox ID="First" class="form-control" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                                         </div>
                                     <div class="col">
-                                    <label for="First">Last Name</label>
+                                    <label for="Last" style="font-weight:bold;padding-left:10px;">Last Name</label>
                                         <asp:TextBox ID="Last" class="form-control"  runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row mt-3 ">
                                     <div class="col">  
-                                    <label for="First">Email Address</label>              
+                                    <label for="Email" style="font-weight:bold;padding-left:10px;">Email Address</label>              
                                         <asp:TextBox ID="Email" class="form-control"  runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col">
-                                    <label for="First">Contact Number</label>
+                                    <label for="Contact" style="font-weight:bold;padding-left:10px;">Contact Number</label>
                                         <asp:TextBox ID="Contact" class="form-control"  runat="server" pattern="[0-9]{10}" required="true" title="Enter 10 digit contact number" Enabled="false" CssClass="form-control"></asp:TextBox>
                                         </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">
-                                    <label for="First">University Name</label>
+                                    <label for="DropDownList2" style="font-weight:bold;padding-left:10px;">University Name</label>
                                         <asp:DropDownList ID="DropDownList2" class="form-control"  runat="server" 
                                             Enabled="false" CssClass="form-control" 
                                             onselectedindexchanged="DropDownList2_SelectedIndexChanged" AutoPostBack="true">
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">       
-                                    <label for="First">Institute Name</label>                                 
+                                    <label for="DropDownList3" style="font-weight:bold;padding-left:10px;">Institute Name</label>                                 
                                         <asp:DropDownList ID="DropDownList3" class="form-control" runat="server" 
                                             Enabled="false" CssClass="form-control" 
                                             onselectedindexchanged="DropDownList3_SelectedIndexChanged" AutoPostBack="true">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">
-                                    <label for="First">Department Name</label>
+                                    <label for="DropDownList1" style="font-weight:bold;padding-left:10px;">Department Name</label>
                                         <asp:DropDownList ID="DropDownList1" class="form-control" runat="server" 
                                             Enabled="false" CssClass="form-control" 
                                             onselectedindexchanged="DropDownList1_SelectedIndexChanged" AutoPostBack="true">
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="row mt-3 ">
                                     <div class="col">
-                                    <label for="First">Admission Year</label>
+                                    <label for="DropDownList4" style="font-weight:bold;padding-left:10px;">Admission Year</label>
                                         <asp:DropDownList ID="DropDownList4" class="form-control"  runat="server" 
                                             Enabled="false" CssClass="form-control" 
                                             onselectedindexchanged="DropDownList4_SelectedIndexChanged" AutoPostBack="true">
@@ -96,7 +96,7 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col">
-                                    <label for="First">Current Year</label>
+                                    <label for="DropDownList5" style="font-weight:bold;padding-left:10px;">Current Year</label>
                                         <asp:DropDownList ID="DropDownList5" class="form-control"  runat="server" 
                                             Enabled="false" CssClass="form-control" >
                                                   
@@ -106,18 +106,18 @@
 
                                 <div class="row mt-3 ">
                                     <div class="col">
-                                        <label for="First">Shift</label>
+                                        <label for="Shift" style="font-weight:bold;padding-left:10px;">Shift</label>
                                         <asp:DropDownList ID="Shift" class="form-control" runat="server" 
                                             Enabled="false" CssClass="form-control">  
                                                
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col">
-                                        <label for="First">Roll Number</label>
+                                        <label for="Roll" style="font-weight:bold;padding-left:10px;">Roll Number</label>
                                         <asp:TextBox ID="Roll"  class="form-control"  runat="server" pattern="[0-9]+" required="true" title="Numbers only" Enabled="false" CssClass="form-control"></asp:TextBox>
                                     </div>                                                            
                                     <div class="col">
-                                    <label for="First">PNR Number</label>
+                                    <label for="PNR" style="font-weight:bold;padding-left:10px;">PNR Number</label>
                                         <asp:TextBox ID="PNR" class="form-control"  runat="server" pattern="[0-9]+" required="true" title="Numbers only" Enabled="false" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>

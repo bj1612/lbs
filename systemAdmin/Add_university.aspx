@@ -25,7 +25,7 @@
                                 <ContentTemplate>
                                     <div class="row">
                                         <div class="col">
-                                            <label for="University">Available Universities</label>
+                                            <label for="University" style="font-weight:bold;padding-left:10px;">Available Universities</label>
                                             <asp:DropDownList ID="University" class="form-control" runat="server">
                                             </asp:DropDownList>  
                                         </div>

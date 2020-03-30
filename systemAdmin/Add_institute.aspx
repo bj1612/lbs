@@ -25,7 +25,7 @@
                                 <ContentTemplate>
                                     <div class="row">
                                         <div class="col">
-                                            <label for="AvailableUniversity">Available Universities</label>
+                                            <label for="AvailableUniversity" style="font-weight:bold;padding-left:10px;">Available Universities</label>
                                             <asp:DropDownList ID="AvailableUniversity" class="form-control" runat="server" 
                                                 onselectedindexchanged="AvailableUniversity_SelectedIndexChanged" AutoPostBack="True">
                                             </asp:DropDownList>  
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <label for="AvailableInstitute">Available Institutes</label>
+                                            <label for="AvailableInstitute" style="font-weight:bold;padding-left:10px;">Available Institutes</label>
                                             <asp:DropDownList ID="AvailableInstitute" class="form-control" runat="server">
                                             </asp:DropDownList>  
                                         </div>

@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 public partial class student_viewProfile : System.Web.UI.Page
 {
-    static bool edit = false;
+    //static bool edit = false;
     string connStr,current_user="";
     string student_email = "";
     int academic_id = 0;
@@ -224,6 +224,7 @@ public partial class student_viewProfile : System.Web.UI.Page
                 DropDownList1.Items.Add(new ListItem(department_name, department_id.ToString()));
                 DropDownList3.Items.Add(new ListItem(institute_name, institute_id.ToString()));
                 DropDownList2.Items.Add(new ListItem(university_name, university_id.ToString()));
+                Session["edit"] = "false";
             }
         }
         catch (Exception e1)
@@ -234,7 +235,12 @@ public partial class student_viewProfile : System.Web.UI.Page
     }
     protected void EditButton_Click(object sender, EventArgs e)
     {
-        if (edit == false)
+        string edit = "";
+        if (Session["edit"] != null)
+        {
+            edit = Session["edit"].ToString();
+        }
+        if (edit.Equals("false"))
         {
             Contact.Enabled = true;
             DropDownList2.Enabled = true;
@@ -246,7 +252,7 @@ public partial class student_viewProfile : System.Web.UI.Page
             Roll.Enabled = true;
             PNR.Enabled = true;
             UpdateButton.Style["display"] = "block";
-            edit = true;
+            edit = "true";
             LoadUniversityDropdown();
             Shift.Items.Clear();
             Shift.Items.Add(new ListItem("First Shift", "First Shift"));
@@ -268,7 +274,7 @@ public partial class student_viewProfile : System.Web.UI.Page
                 year--;
             }
         }
-        else if(edit==true)
+        else if(edit.Equals("true"))
         {
             Contact.Enabled = false;
             DropDownList2.Enabled = false;
@@ -280,7 +286,7 @@ public partial class student_viewProfile : System.Web.UI.Page
             Roll.Enabled = false;
             PNR.Enabled = false;
             UpdateButton.Style["display"] = "none";
-            edit = false;
+            edit = "false";
             Contact.Text = "" + contact;
             DropDownList4.Items.Clear();
             DropDownList4.Items.Add(new ListItem(admission_year.ToString(), admission_year.ToString()));
@@ -297,6 +303,7 @@ public partial class student_viewProfile : System.Web.UI.Page
             DropDownList2.Items.Clear();
             DropDownList2.Items.Add(new ListItem(university_name, university_id.ToString()));
         }
+        Session["edit"] = edit;
     }
     protected void UpdateButton_Click(object sender, EventArgs e)
     {
@@ -492,7 +499,7 @@ public partial class student_viewProfile : System.Web.UI.Page
             Roll.Enabled = false;
             PNR.Enabled = false;
             UpdateButton.Style["display"] = "none";
-            edit = false;
+            Session["edit"] = "false";
         }
         catch (Exception e1)
         {
