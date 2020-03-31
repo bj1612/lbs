@@ -150,10 +150,18 @@
                                 </ul>
                             </div>
                             <div>
-                                <div class="title_head">
-                                    <span><strong>Page Hit</strong>:</span>
+                                <div class="row mt-3">
+                                    <div class="title_head">
+                                        <span style="margin-right:5px;"><strong style="margin-right:5px;">Page Visitors</strong>:</span>
+                                    </div>
+                                    <span id="CountPageHit" runat="server">2000</span>
                                 </div>
-                                <span id="CountPageHit" runat="server">2000</span>
+                                <div class="row mt-3">
+                                    <div class="title_head">
+                                        <span style="margin-right:5px;"><strong style="margin-right:5px;">Online User</strong>:</span>
+                                    </div>
+                                    <span id="CountOnlineUser" runat="server">2000</span>
+                                </div>
                             </div>
                         </div>
                     </div>

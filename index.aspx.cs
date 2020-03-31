@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 public partial class index : System.Web.UI.Page
 {
@@ -38,5 +39,15 @@ public partial class index : System.Web.UI.Page
                 }
             }
         }
+        //Another Code for page hit, to store value to xml
+        /*DataSet tmpDs = new DataSet();
+        tmpDs.ReadXml(Server.MapPath("/lbs/hitcounter.xml"));
+        int hits = Int32.Parse(tmpDs.Tables[0].Rows[0]["hits"].ToString());
+        hits += 1;
+        tmpDs.Tables[0].Rows[0]["hits"] = hits.ToString();
+        tmpDs.WriteXml(Server.MapPath("/lbs/hitcounter.xml"));*/
+        Application.Lock();
+        Application["SiteVisitedCounter"] = Convert.ToInt32(Application["SiteVisitedCounter"]) + 1;
+        Application.UnLock();
     }
 }

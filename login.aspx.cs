@@ -469,6 +469,9 @@ public partial class login : System.Web.UI.Page
                     {
                         Session["username"] = first + " " + last;
                     }
+                    Application.Lock();
+                    Application["OnlineUserCounter"] = Convert.ToInt32(Application["OnlineUserCounter"]) + 1;
+                    Application.UnLock();
                     Response.Redirect(@"/lbs/index.aspx");
                 }
             }
@@ -601,6 +604,10 @@ public partial class login : System.Web.UI.Page
                     if ((first.Equals("") == false) && (last.Equals("") == false))
                     {
                         Session["username"] = first + " " + last;
+                    }
+                    if (typeofuser.Equals("student"))
+                    {
+                        Application["OnlineUserCounter"] = Convert.ToInt32(Application["OnlineUserCounter"]) + 1;
                     }
                     //System.Diagnostics.Debug.WriteLine("Email: " + email+" Password: "+pass+" Type of User: "+typeofuser+" First: "+first+" Last: "+last+" URL: "+urltogo);
                     Response.Redirect(urltogo);

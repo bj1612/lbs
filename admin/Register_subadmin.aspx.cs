@@ -141,6 +141,12 @@ public partial class Register_subadmin : System.Web.UI.Page
                        .ToArray()
                ));
             checkdrop = false;
+            string message = "Select Category";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
         }
         if (password.Equals(confirmpassword))
         {
@@ -177,6 +183,12 @@ public partial class Register_subadmin : System.Web.UI.Page
                        .ToArray()
                ));
             checkdrop = false;
+            string message = "Password doesn't match confirm password";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
         }
         if (checkdrop == true)
         {
@@ -200,6 +212,13 @@ public partial class Register_subadmin : System.Web.UI.Page
                         Response.Redirect(@"/lbs/Admin/Admin_View.aspx");
                     }
                 }
+                string message = "Added Subadmin Successfully";
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append("alert('");
+                sb.Append(message);
+                sb.Append("');");
+                sb.Append("window.location ='/lbs/admin/Register_subadmin.aspx';");
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
             }
             catch (Exception e1)
             {

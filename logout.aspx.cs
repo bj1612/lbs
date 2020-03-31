@@ -10,6 +10,14 @@ public partial class logout : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Session.RemoveAll();
+        Session.Abandon();
+        Application.Lock();
+        Application["OnlineUserCounter"] = Convert.ToInt32(Application["OnlineUserCounter"]) - 1;
+        if (Convert.ToInt32(Application["OnlineUserCounter"]) < 0)
+        {
+            Application["OnlineUserCounter"] = 0;
+        }
+        Application.UnLock();
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
         Response.Cache.SetNoStore();

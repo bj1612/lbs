@@ -97,15 +97,15 @@ public partial class register_complaint : System.Web.UI.Page
             {
                 if (type_of_complaint.Equals("university") == true)
                 {
-                    fetchcategory = "select * from university_category where university_id=@id and university_category_id in (select distinct university_category_id from university_subadmin where university_subadmin_email in (select university_subadmin_email from university_mode where status<>'Off Duty'))";
+                    fetchcategory = "select * from university_category where university_id=@id and status='Available' and university_category_id in (select distinct university_category_id from university_subadmin where university_subadmin_email in (select university_subadmin_email from university_mode where status<>'Off Duty'))";
                 }
                 if (type_of_complaint.Equals("institute") == true)
                 {
-                    fetchcategory = "select * from institute_category where institute_id=@id and institute_category_id in (select distinct institute_category_id from institute_subadmin where institute_subadmin_email in (select institute_subadmin_email from institute_mode where status<>'Off Duty'))";
+                    fetchcategory = "select * from institute_category where institute_id=@id and status='Available' and institute_category_id in (select distinct institute_category_id from institute_subadmin where institute_subadmin_email in (select institute_subadmin_email from institute_mode where status<>'Off Duty'))";
                 }
                 if (type_of_complaint.Equals("department") == true)
                 {
-                    fetchcategory = "select * from department_category where department_id=@id and department_category_id in (select distinct department_category_id from department_subadmin where department_subadmin_email in (select department_subadmin_email from department_mode where status<>'Off Duty'))";
+                    fetchcategory = "select * from department_category where department_id=@id and status='Available' and department_category_id in (select distinct department_category_id from department_subadmin where department_subadmin_email in (select department_subadmin_email from department_mode where status<>'Off Duty'))";
                 }
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
