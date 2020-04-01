@@ -38,7 +38,7 @@
                                             <asp:TextBox ID="Contact" class="form-control" placeholder="Contact Number " runat="server" pattern="[0-9]{10}" required="true" title="Enter 10 digit contact number"></asp:TextBox>
                                          </div>                                                            
                                         <div class="col">                
-                                            <asp:TextBox ID="Email" class="form-control" placeholder="Email Address" runat="server" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required="true" title="Enter valid email address"></asp:TextBox>
+                                            <asp:TextBox ID="Email" class="form-control" placeholder="Personal Email Address" runat="server" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required="true" title="Enter valid email address"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row mt-3 ">

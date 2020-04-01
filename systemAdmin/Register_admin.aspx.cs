@@ -38,7 +38,7 @@ public partial class Register_admin : System.Web.UI.Page
             {
                 using (SqlConnection connection = new SqlConnection(connStr))
                 {
-                    using (SqlCommand command = new SqlCommand("SELECT university_id,university_name FROM university where university_id not in (select university_id from university_admin)", connection))
+                    using (SqlCommand command = new SqlCommand("SELECT university_id,university_name FROM university", connection))
                     {
                         connection.Open();
 
@@ -254,7 +254,7 @@ public partial class Register_admin : System.Web.UI.Page
                     university_id_param.SqlDbType = SqlDbType.Int;
                     university_id_param.Value = Convert.ToInt32(university_selected);
 
-                    using (SqlCommand command = new SqlCommand("SELECT institute_id,institute_name FROM institute where university_id=@uni_id and institute_id not in (select institute_id from institute_admin)", connection))
+                    using (SqlCommand command = new SqlCommand("SELECT institute_id,institute_name FROM institute where university_id=@uni_id ", connection))
                     {
                         connection.Open();
                         command.Parameters.Add(university_id_param);

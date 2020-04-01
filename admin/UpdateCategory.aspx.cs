@@ -65,7 +65,7 @@ public partial class admin_UpdateCategory : System.Web.UI.Page
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    loadavailablecategoryquery = "select * from institute_category where status='Available' and institute_id in (select institute_id from university_admin where institute_admin_email=@admin_email)";
+                    loadavailablecategoryquery = "select * from institute_category where status='Available' and institute_id in (select institute_id from institute_admin where institute_admin_email=@admin_email)";
                     loadremovedcategoryquery = "select * from institute_category where status='Unavailable' and institute_id in (select institute_id from institute_admin where institute_admin_email=@admin_email)";
 
                     changefromavailable = "update institute_category set status='Unavailable' where institute_category_id=@category_id";

@@ -65,7 +65,7 @@ public partial class admin_ChangeCategory : System.Web.UI.Page
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    selectavailablecategoryquery = "select * from institute_category where status='Available' and institute_id in (select institute_id from university_admin where institute_admin_email=@admin_email)";
+                    selectavailablecategoryquery = "select * from institute_category where status='Available' and institute_id in (select institute_id from institute_admin where institute_admin_email=@admin_email)";
 
                     selectsubadminquery = "select * from institute_subadmin where institute_category_id=@category_id and institute_admin_email=@admin_email";
 

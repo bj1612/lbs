@@ -424,10 +424,11 @@ public partial class student_viewProfile : System.Web.UI.Page
                         DropDownList3.Items.Add(new ListItem(institute_name, institute_id.ToString()));
                         DropDownList2.Items.Clear();
                         DropDownList2.Items.Add(new ListItem(university_name, university_id.ToString()));
-                        DropDownList4.Items.Clear();
-                        DropDownList4.Items.Add(new ListItem(admission_year.ToString(), admission_year.ToString()));
+                        DropDownList4.ClearSelection();
+                        //DropDownList4.Items.Add(new ListItem(admission_year.ToString(), admission_year.ToString()));
                         DropDownList4.Items.FindByValue(admission_year.ToString()).Selected = true;
                         DropDownList5.Items.Clear();
+                        DropDownList5.ClearSelection();
                         DropDownList5.Items.Add(new ListItem(current_year, current_year));
                         DropDownList5.Items.FindByValue(current_year).Selected = true;
                     }
@@ -502,10 +503,10 @@ public partial class student_viewProfile : System.Web.UI.Page
                         }
                     }
                 }
-                DropDownList4.Items.Clear();
-                DropDownList4.Items.Add(new ListItem(admissionyear_det.ToString(), admissionyear_det.ToString()));
-                DropDownList5.Items.Clear();
-                DropDownList5.Items.Add(new ListItem(currentyear_det, currentyear_det));
+                //DropDownList4.Items.Clear();
+                //DropDownList4.Items.Add(new ListItem(admissionyear_det.ToString(), admissionyear_det.ToString()));
+                //DropDownList5.Items.Clear();
+                //DropDownList5.Items.Add(new ListItem(currentyear_det, currentyear_det));
                 Shift.Items.Clear();
                 Shift.Items.Add(new ListItem(shift_det, shift_det));
                 Roll.Text = "" + roll_det;

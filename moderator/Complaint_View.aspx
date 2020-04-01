@@ -195,7 +195,7 @@
                             <!--</form>-->
                         </div>
                         <div class="modal-footer">
-                            <button id="Button1" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Reassign_Click">Reappeal</button>
+                            <button id="Button1" type="button" class="btn btn-primary" data-dismiss="modal" runat="server" onserverclick="Reassign_Click">Reassign</button>
                         </div>
                     </div>
                 </div>

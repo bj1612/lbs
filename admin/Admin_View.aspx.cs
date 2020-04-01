@@ -283,7 +283,7 @@ public partial class Admin_View : System.Web.UI.Page
                                                             }
                                                             else
                                                             {
-                                                                moderatortabContent.InnerHtml += @"<a class='list-group-item list-group-item-action' disabled style=' background-color: #000066;color: white;'>No Moderator Assigned</a>";
+                                                                moderatortabContent.InnerHtml += @"<a class='list-group-item list-group-item-action' disabled >No Moderator Assigned</a>";
                                                             }
                                                         }
                                                     }

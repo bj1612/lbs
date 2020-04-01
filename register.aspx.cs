@@ -63,6 +63,12 @@ public partial class Register : System.Web.UI.Page
                 admission_year.Items.Add(new ListItem(year.ToString(),year.ToString()));
                 year--;
             }
+            string message = "Please provide correct details.Detail once submitted can not be updated.";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "alert", sb.ToString(), true);
         }
         if (this.IsPostBack)
         {

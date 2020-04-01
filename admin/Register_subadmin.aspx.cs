@@ -61,7 +61,7 @@ public partial class Register_subadmin : System.Web.UI.Page
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    selectquery = "select * from institute_category where institute_category_id not in (select institute_category_id from institute_subadmin where institute_admin_email=@admin_email) and institute_id in (select institute_id from university_admin where institute_admin_email=@admin_email)";
+                    selectquery = "select * from institute_category where institute_category_id not in (select institute_category_id from institute_subadmin where institute_admin_email=@admin_email) and institute_id in (select institute_id from institute_admin where institute_admin_email=@admin_email)";
                     insertquery = "insert into institute_subadmin values(@first,@last,@email,@pass,@admin_email,@category_id)";
                 }
                 if (complaint_level.Equals("department"))

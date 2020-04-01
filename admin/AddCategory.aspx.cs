@@ -62,8 +62,8 @@ public partial class admin_AddCategory : System.Web.UI.Page
                 }
                 if (complaint_level.Equals("institute"))
                 {
-                    selectquery = "select * from institute_category where institute_id in (select institute_id from university_admin where institute_admin_email=@admin_email)";
-                    selectidquery = "select institute_id from uinstitute_admin where institute_admin_email=@admin_email";
+                    selectquery = "select * from institute_category where institute_id in (select institute_id from institute_admin where institute_admin_email=@admin_email)";
+                    selectidquery = "select institute_id from institute_admin where institute_admin_email=@admin_email";
                     insertquery = "insert into institute_category(institute_category_name,institute_id,status) values(@category_name,@id,'Available')";
                 }
                 if (complaint_level.Equals("department"))
